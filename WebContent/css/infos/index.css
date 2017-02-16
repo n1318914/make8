@@ -1,0 +1,154 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+body{
+	font-family: "微软雅黑";
+	background: white;
+}
+
+a{
+	text-decoration: none;
+}
+
+.introduce{
+	width: 550px;
+	float: left;
+}
+
+.banner{
+	background: #68a9ff;
+	margin-top: 80px;
+	height: 300px;
+}
+
+.banner_img{
+	background: url(../../img/infos/banner_img.jpg) no-repeat;
+	background-size: cover;
+	width: 1200px;
+	height: 300px;
+	margin: 0 auto;
+}
+
+.body{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.BreadcrumbNavigation{
+	margin: 20px auto 0px auto;
+}
+
+.productType{
+	margin:20px auto 0px auto;
+}
+
+.productType ul{
+	width: 1200px;
+	overflow: hidden;
+	list-style: none;
+}
+
+.region{
+	margin-top: 70px;
+}
+
+.region ul{
+	width: 1148px;
+	overflow: hidden;
+	list-style: none;
+}
+
+.productType ul li,.region ul li{
+	float: left;
+	padding: 10px;
+}
+
+.region div{
+	padding: 10px 10px 10px 0px;
+	color: #3498BD;
+	float: left;
+}
+
+.region a{
+	text-decoration: none;
+	color: black;
+}
+
+.region a:hover{
+	color: #3498DB;
+}
+
+.productType ul li:first-of-type{
+	padding: 10px 10px 10px 0px;
+	color: blue;
+}
+
+.item{
+	margin-top: 50px;
+}
+
+.item ul{
+	width: 1200px;
+	min-height: 380px;
+	list-style: none;
+}
+
+.item ul li{
+	float: left;
+	width: 1200px;
+	margin-bottom: 29px;
+	height: 200px;
+	background: #e7f1ff;
+	padding:30px 50px 20px 114px;
+	border-radius: 10px;
+}
+
+.item-title{
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.item-content{
+	margin-top: 30px;
+}
+
+.item-content p{
+	width: 110px;
+	float: left;
+	font-size: 8px;
+}
+
+.item-logo,.item-info{
+	float: left;
+}
+
+.item-logo{
+	width: 103px;
+	margin-right: 78px;
+}
+
+.item-info{
+	width: 855px;
+	line-height: 32px;
+}
+
+.item-img{
+	width: 50px;
+	height: 50px;
+	margin: 0px 10px 0px 15px;
+	float: left;
+}
+
+.item-img img{
+	width: 100%;
+	height: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+	.banner{
+		width: 1200px;
+	}
+}

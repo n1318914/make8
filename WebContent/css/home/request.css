@@ -1,0 +1,136 @@
+/* 发布需求 */
+.wbm-state {
+	padding: 30px auto;
+}
+
+.wbm-eo {
+	float: left;
+	font-size: 22px;
+	font-family:"微软雅黑"; 
+	width: 100px;
+	height: 30px;
+	margin-top:5px;
+}
+
+.wbm-lig {
+	margin-left:340px; 
+} 
+
+.wbm-state-tit {
+	font-family: "微软雅黑";
+	padding: 20px 0;	
+}
+
+.wbm-stata-main {
+	font-family: "微软雅黑";
+	font-size:16px;	
+}
+
+.wbm-tell-name {
+	padding: 30px 0;
+	/*margin-left:-100px;*/
+}
+
+.wbm-tleft {
+	margin-left:-40px; 
+}
+
+.wbm-lottic{
+	margin: 30px 0 0 350px; 
+}
+
+
+.form-group-a{
+	height:80px;
+}
+
+.form-group-4-textarea{
+	/*height:150px;*/
+}
+
+.form-textarea{
+	resize:none;
+}
+
+.attachment-desc{
+	margin-left:-15px;
+	color:#b1b0b0;
+}
+
+.btn-lg{
+	width:110px;
+}
+
+.btn-primary {
+    background: #3498DB;
+    border-color: #3498DB;
+    height: 35px;
+    margin-left: 85px;
+    line-height: 10px;
+}
+
+.form-control-a{
+	height:40px;
+}
+
+.btn-default{
+    height: 35px;
+    line-height: 10px;
+}
+
+.oper-div{
+	margin-top:30px;
+}
+
+.progress{
+	display: none;
+}
+
+.error-message{
+	margin-left:-15px;
+}
+
+.checkbox-img{
+	width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 5px;
+    border: solid 2px #ccc;
+    background: #f7f7f7;
+    border-radius: 5px;
+}
+
+.checkbox-img img{
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.checkbox-display{
+	display: none;
+}
+
+.checkbox-padding{
+	padding-left: 0px;
+}
+
+.checkbox-warning{
+	color: red;
+}
+
+.agree{
+	float: left;
+	width: 30px;
+	height: 30px;
+	border:solid 1px #a5a5a5;
+	background:#ededed;
+	border-radius: 3px;
+	box-shadow: 0px 1px 5px #ccc;
+	background-size: cover !important;
+	margin-top:6px;
+}
+
+.wbm-ep {
+	float: left;
+	display: none;
+}

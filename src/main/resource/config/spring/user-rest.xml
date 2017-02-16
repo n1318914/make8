@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+        <bean id="accountsRest" class="com.yundaren.api.rest.AccountsRest">
+        	<property name="ssoService" ref="ssoService"/>
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="userService" ref="userService"/>
+        	<property name="publicConfig" ref="publicConfig"/>
+        	<property name="yunConnectService" ref="yunConnectService"/>
+        	<property name="identifyService" ref="identifyService"/>
+        </bean>
+        
+        <bean id="userRest" class="com.yundaren.api.rest.UserInfoRest">
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="ssoService" ref="ssoService"/>
+        	<property name="userService" ref="userService"/>
+        	<property name="identifyService" ref="identifyService"/>
+        	<property name="projectMailService" ref="projectMailService"/>
+        	<property name="userExperienceService" ref="userExperienceService"/>
+        	<property name="examService" ref="examService"/>
+        </bean>
+        
+        <bean id="accountsController" class="com.yundaren.controller.AccountsController">
+        	<property name="ssoService" ref="ssoService"/>
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="userService" ref="userService"/>
+        </bean>
+        
+         <bean id="userController" class="com.yundaren.controller.UserInfoController">
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="userService" ref="userService"/>
+        	<property name="identifyService" ref="identifyService"/>
+        	<property name="dictService" ref="dictService"/>
+        	<property name="userExperienceService" ref="userExperienceService"/>
+        </bean>
+</beans>

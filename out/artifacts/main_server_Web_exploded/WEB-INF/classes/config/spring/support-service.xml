@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+        <bean id="yunConnectConfig" class="com.yundaren.support.config.YunConnectConfig">
+        	<property name="remoteURL" value="${yunzhixun.remote.url}"/>
+        	<property name="appId" value="${yunzhixun.appId}"/>
+        	<property name="accountSid" value="${yunzhixun.accountSid}"/>
+        	<property name="token" value="${yunzhixun.token}"/>
+        	<property name="templateSMSId" value="${yunzhixun.templateSMSId}"/>
+        	<property name="reserveAppId" value="${yunzhixun.reserve.appId}"/>
+        	<property name="reserveTempSMSId" value="${yunzhixun.reserve.templateSMSId}"/>
+       	    <property name="checkPassAppId" value="${yunzhixun.project.pass.appId}"/>
+        	<property name="checkPassTempSMSId" value="${yunzhixun.project.pass.templateSMSId}"/>
+    	    <property name="checkRejectAppId" value="${yunzhixun.project.reject.appId}"/>
+        	<property name="checkRejectTempSMSId" value="${yunzhixun.project.reject.templateSMSId}"/>
+        	<property name="applyVerifyAppId" value="${yunzhixun.project.verify.apply.appId}"/>
+        	<property name="applyVerifyTempSMSId" value="${yunzhixun.project.verify.apply.templateSMSId}"/>
+        	<property name="veridatePassAppId" value="${yunzhixun.project.verify.pass.appId}"/>
+        	<property name="veridatePassTempSMSId" value="${yunzhixun.project.verify.pass.templateSMSId}"/>
+        	<property name="veridateRejectAppId" value="${yunzhixun.project.verify.reject.appId}"/>
+        	<property name="veridateRejectTempSMSId" value="${yunzhixun.project.verify.reject.templateSMSId}"/>
+        </bean>
+        
+         <bean id="upyun" class="com.yundaren.support.config.UpYun">
+        	<property name="bucketName" value="${upyun.bucketName}"/>
+        	<property name="userName" value="${upyun.userName}"/>
+        	<property name="password" value="${upyun.password}"/>
+        	<property name="apiDomain" value="${upyun.apiDomain}"/>
+        	<property name="quality" value="${upyun.quality}"/>
+        </bean>
+
+	<bean id="emailSendConfig" class="com.yundaren.support.config.EmailSendConfig">
+		<property name="host" value="${mail.smtp.host}" />
+		<property name="userName" value="${mail.smtp.username}" />
+		<property name="password" value="${mail.smtp.password}" />
+		<property name="port" value="${mail.smtp.port}" />
+		<property name="receiver" value="${mail.smtp.receiver}" />
+		<property name="nick" value="${mail.smtp.nick}" />
+		<property name="interval" value="${mail.smtp.group.interval}" />
+		<property name="copies" value="${mail.smtp.group.copies}" />
+	</bean>
+	
+	  <bean id="edaiceUtil" class="com.yundaren.common.util.EdaiceUtil">
+        	<property name="host" value="${edaice.host}"/>
+        	<property name="loginName" value="${edaice.userName}"/>
+        	<property name="loginPwd" value="${edaice.password}"/>
+        	<property name="isCameraMonitor" value="${edaice.isCameraMonitor}"/>
+        </bean>
+        
+        <bean id="domainConfig" class="com.yundaren.support.config.DomainConfig">
+        	<property name="host" value="${domain.name}"/>
+        	<property name="isProduceEnvironment" value="${environment.isProduce}"/>
+        	<property name="bindDomain" value="${upyun.bindDomain}"/>
+        	<property name="uploadImgRoot" value="${upyun.uploadImgRoot}"/>
+        	<property name="gogsBaseUrl" value="${gogs.baseUrl}"/>
+        	<property name="gogsAdmin" value="${gogs.admin}"/>
+        	<property name="gogsAdminPwd" value="${gogs.adminPwd}"/>
+        </bean>
+        
+        <bean id="yunConnectService" class="com.yundaren.support.service.impl.YunConnectServiceImpl">
+        	<property name="yunConnectConfig" ref="yunConnectConfig"/>
+        </bean>
+        
+        <bean id="upyunService" class="com.yundaren.support.service.impl.UpyunServiceImpl">
+        	<property name="upyun" ref="upyun"/>
+        	<property name="domainConfig" ref="domainConfig"/>
+        </bean>
+        
+        <bean id="trusteeBiz" class="com.yundaren.support.biz.TrusteeBiz">
+			<property name="trusteeDao" ref="trusteeDao"/>
+		</bean>
+		
+		 <bean id="tradeBiz" class="com.yundaren.support.biz.TradeBiz">
+			<property name="tradeDao" ref="tradeDao"/>
+		</bean>
+        
+        <bean id="projectEvaluateBiz" class="com.yundaren.support.biz.ProjectEvaluateBiz">
+			<property name="projectEvaluateDao" ref="projectEvaluateDao"/>
+		</bean>
+        
+        <bean id="projectBiz" class="com.yundaren.support.biz.ProjectBiz">
+			<property name="projectDao" ref="projectDao"/>
+		</bean>
+		
+		 <bean id="identifyBiz" class="com.yundaren.support.biz.IdentifyBiz">
+			<property name="identifyDao" ref="identifyDao"/>
+		</bean>
+		
+		<bean id="projectMailService" class="com.yundaren.support.service.impl.ProjectMailServiceImpl">
+        	<property name="projectBiz" ref="projectBiz"/>
+        	<property name="userBiz" ref="userBiz"/>
+        	<property name="projectEvaluateBiz" ref="projectEvaluateBiz"/>
+        	<property name="trusteeBiz" ref="trusteeBiz"/>
+        	<property name="emailSendConfig" ref="emailSendConfig"/>
+        	<property name="identifyBiz" ref="identifyBiz"/>
+        	<property name="projectInSelfRunBiz" ref="projectInSelfRunBiz"/>
+        </bean>
+        
+        <bean id="projectEvaluateService" class="com.yundaren.support.service.impl.ProjectEvaluateServiceImpl">
+        	<property name="projectEvaluateBiz" ref="projectEvaluateBiz"/>
+        	<property name="projectBiz" ref="projectBiz"/>
+        	<property name="projectMailService" ref="projectMailService"/>
+        </bean>
+
+        <bean id="projectService" class="com.yundaren.support.service.impl.ProjectServiceImpl">
+        	<property name="projectBiz" ref="projectBiz"/>
+        	<property name="ssoBiz" ref="ssoBiz"/>
+        	<property name="userBiz" ref="userBiz"/>
+        	<property name="trusteeBiz" ref="trusteeBiz"/>
+        	<property name="tradeBiz" ref="tradeBiz"/>
+        	<property name="projectMailService" ref="projectMailService"/>
+        	<property name="projectEvaluateBiz" ref="projectEvaluateBiz"/>
+        	<property name="projectInSelfRunBiz" ref="projectInSelfRunBiz"/>
+        </bean>
+        
+         <bean id="identifyService" class="com.yundaren.support.service.impl.IdentifyServiceImpl">
+        	<property name="identifyBiz" ref="identifyBiz"/>
+        	<property name="projectBiz" ref="projectBiz"/>
+        	<property name="domainConfig" ref="domainConfig"/>
+        </bean>
+        
+        <bean id="publicConfig" class="com.yundaren.support.config.PublicConfig">
+        	<property name="userLoginLimitedTimes" value="${user.login.times}"/>
+        	<property name="publishProxyAccount" value="${publish.proxy.account}"/>
+        	<property name="customerServiceNumber" value="${customer.service.number}"/>
+        	<property name="startRegisterNum" value="${start.register.num}"/>
+        	<property name="startDeveloperNum" value="${start.developer.num}"/>
+        	<property name="startProjectNum" value="${start.project.num}"/>
+        	<property name="newsSource" value="${news.source}"/>
+        	<property name="newsRefreshRate" value="${news.refreshRate}"/>
+        	<property name="newsDisplayItemCount" value="${news.displayItemCount}"/>
+        </bean>
+        
+        <bean id="projectInSelfRunBiz" class="com.yundaren.support.biz.ProjectInSelfRunBiz">
+        	<property name="projectInSelfRunDao" ref="projectInSelfRunDao"/>
+        </bean>
+        
+        <bean id="projectInSelfRunService" class="com.yundaren.support.service.impl.ProjectInSelfRunServiceImpl">
+       		<property name="projectInSelfRunBiz" ref="projectInSelfRunBiz"/>
+       		<property name="projectMailService" ref="projectMailService"/>
+       		<property name="dictService" ref="dictService"/>
+       		<property name="userService" ref="userService"/>
+        </bean>
+	
+	    <bean id="projectInSelfRunPlanBiz" class="com.yundaren.support.biz.ProjectInSelfRunPlanBiz">
+        	<property name="projectInSelfRunPlanDao" ref="projectInSelfRunPlanDao"/>
+        </bean>
+        
+        <bean id="projectInSelfRunPlanService" class="com.yundaren.support.service.impl.ProjectInSelfRunPlanServiceImpl">
+       		<property name="projectInSelfRunPlanBiz" ref="projectInSelfRunPlanBiz"/>
+        </bean>   
+        
+        <bean id="examBiz" class="com.yundaren.support.biz.ExamBiz">
+        	<property name="examDao" ref="examDao"/>
+        </bean>
+        
+        <bean id="examService" class="com.yundaren.support.service.impl.ExamServiceImpl">
+       		<property name="examBiz" ref="examBiz"/>
+        </bean>   
+        
+        <bean id="projectOperationLogBiz" class="com.yundaren.support.biz.ProjectOperationLogBiz">
+       		<property name="projectOperationLogDao" ref="projectOperationLogDao"/>
+        </bean> 
+        
+        <bean id="projectOperationLogService" class="com.yundaren.support.service.impl.ProjectOperationLogServiceImpl">
+       		<property name="projectOperationLogBiz" ref="projectOperationLogBiz"/>
+       		<property name="userBiz" ref="userBiz"/>
+       		<property name="projectInSelfRunBiz" ref="projectInSelfRunBiz"/>
+        </bean>  
+        
+         <bean id="evaluateBiz" class="com.yundaren.support.biz.EvaluateBiz">
+        	<property name="evaluateDao" ref="evaluateDao"/>
+        </bean> 
+        
+         <bean id="evaluateService" class="com.yundaren.support.service.impl.EvaluateServiceImpl">
+       		<property name="evaluateBiz" ref="evaluateBiz"/>
+        </bean>   
+        
+</beans>

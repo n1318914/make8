@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.user.dao.InvitationDao">
+	
+	<select id="getInvitationCode" parameterType="java.util.Map" resultType="com.yundaren.user.po.InvitationPo">
+		SELECT invitation_code as invitationCode,
+			is_used as isUsed,
+			used_time as usedTime
+		FROM invitation 
+		where invitation_code = #{invitationCode}
+	</select>
+	
+	<update id="updateInvitation2Used" parameterType="java.util.Map">
+		UPDATE invitation
+		SET
+		    sso_id = #{ssoId},
+			is_used = 1,
+			used_time = now()
+		WHERE
+			invitation_code = #{invitationCode}
+	</update>
+	
+</mapper>

@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.user.dao.UserDao">
+	
+	<insert id="createUser" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.yundaren.user.po.UserInfoPo">
+		<selectKey resultType="long" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>  
+          INSERT INTO user_info
+            (
+               weixin,
+               qq,
+               name,
+               email,
+               mobile,
+               region_id,               
+               user_type,
+               remark,
+               file_secret_key,
+               company_size,
+               main_ability,
+               other_ability,
+               case_type,
+               other_case_type,               
+               cando,
+               freelance_type,
+               introduction,
+               com_pic_list,
+               is_disply,
+               is_approve
+            )
+          VALUES
+            (
+              #{weixin},
+              #{qq},
+              #{name},
+              #{email},
+              #{mobile},
+              #{regionId},
+              #{userType},
+              #{remark},
+              #{fileSecretKey},
+              #{companySize},
+              #{mainAbility},
+              #{otherAbility},
+              #{caseType},
+              #{otherCaseType},
+              #{cando},
+              #{freelanceType},
+              #{introduction},
+			  #{comPicList},
+              #{isDisply},
+              #{isApprove}
+            )
+	</insert>
+	
+	<update id="updateUserByID" parameterType="com.yundaren.user.po.UserInfoPo">
+		UPDATE 
+			user_info
+		SET
+		    <if test="email!= null and email!=''">
+		        email = #{email},
+		    </if>
+			<if test="name!=null and name!=''">
+				name = #{name},
+			</if>
+			<if test="sex!=null and sex!=''">
+				sex = #{sex},
+			</if>
+			<if test="mobile!=null and mobile!=''">
+				mobile = #{mobile},
+			</if>
+			<if test="qq!=null and qq!=''">
+				qq = #{qq},
+			</if>
+			<if test="weixin!=null and weixin!=''">
+				weixin = #{weixin},
+			</if>
+			<if test="birthday!=null and birthday!=''">
+				birthday = #{birthday},
+			</if>
+			<if test="industry!=null and industry!=''">
+				industry = #{industry},
+			</if>
+			<if test="regionId!=0">
+				region_id = #{regionId},
+			</if>
+			<if test="headPortrait!=null and headPortrait!=''">
+				head_portrait = #{headPortrait},
+			</if>
+			<if test="isApprove!=null and isApprove!=''">
+				is_approve = #{isApprove},
+			</if>
+			<if test="introduction!=null and introduction!=''">
+				introduction = #{introduction},
+			</if>
+			other_ability = #{otherAbility},
+			<if test="bankAccount!=null and bankAccount!=''">
+				bank_account = #{bankAccount},
+			</if>
+			<if test="mainAbility!=null and mainAbility!=''">
+				main_ability = #{mainAbility},
+			</if>
+			<if test="remark!=null and remark!=''">
+				remark = #{remark},
+			</if>
+			<if test="companySize!=null and companySize!=''">
+				company_size = #{companySize},
+			</if>
+			<if test="cando!=null and cando!=''">
+				cando = #{cando},
+			</if>
+			case_type = #{caseType},
+			<if test="otherCaseType!=null and otherCaseType!=''">
+				other_case_type = #{otherCaseType},
+			</if>
+			<if test="isDisply!=null and isDisply!=''">
+				is_disply = #{isDisply},
+			</if>
+			<if test="freelanceType!=-1">
+				freelance_type = #{freelanceType},
+			</if>
+			<if test="resumeUrl!=null and resumeUrl!=''">
+				resume_url = #{resumeUrl},
+			</if>
+			<if test="resumeType!=null and resumeType!=''">
+				resume_type = #{resumeType},
+			</if>
+			<if test="comPicList!=null">
+				com_pic_list = #{comPicList},
+			</if>
+			<if test="accountId!=-1">
+				account_id = #{accountId},
+			</if>
+			<if test="isGogs!=0">
+				is_gogs = #{isGogs},
+			</if>
+			identify_step = #{identifyStep},
+			update_time = now()
+		WHERE
+			id =  #{id}
+	</update>
+	
+	<update id="updateProviderDisplayByID" parameterType="com.yundaren.user.po.UserInfoPo">
+		UPDATE 
+			user_info
+		SET
+		    is_disply = #{isDisply},			
+			update_time = now()
+		WHERE
+			id =  #{id}
+	</update>
+	
+	<update id="updateProviderDeleteStatusByID" parameterType="com.yundaren.user.po.UserInfoPo">
+		UPDATE 
+			user_info
+		SET
+		    is_delete = #{isDelete},			
+			update_time = now()
+		WHERE
+			id =  #{id}
+	</update>
+	<sql id="selectUserColumnSql">
+		id as id,
+		name as name,
+		sex as sex ,
+		birthday as birthday,
+		industry as industry,
+		region_id as regionId,
+		(select parent_id from region where id=region_id) as provinceId,
+		CONCAT((select name from region where id = provinceId),
+		if((select name from region where id = provinceId)=(select name from region where
+		id=region_id),'',(select name from region where id=region_id))) as
+		region,
+		mobile as mobile,
+		email as email,
+		qq as qq,
+		weixin as weixin,
+		head_portrait as headPortrait,
+		introduction as introduction,
+		update_time as updateTime,
+		main_ability as mainAbility,
+		other_ability as otherAbility,
+		bank_account as bankAccount,
+		file_secret_key as fileSecretKey,
+		user_type as userType,
+		remark remark,
+		company_size as companySize,
+		main_ability as mainAbility,
+		other_ability as otherAbility,
+		case_type as caseType,
+		other_case_type as otherCaseType,
+		cando as cando,		
+		is_disply as isDisply,
+		(SELECT status from identify where user_id = id) as identifyStatus,
+		(SELECT category from identify where user_id = id) as identifyCategory,
+		is_approve as isApprove,
+		freelance_type as freelanceType,
+		com_pic_list as comPicList,
+		resume_url as resumeUrl,
+		resume_type as resumeType,
+		is_delete as isDelete,
+		identify_step as identifyStep,
+		is_gogs as isGogs,
+		(SELECT count(1) from project_self_run_push where developer_id = id) as joinCount,
+		account_id as accountId,
+		(SELECT account_num FROM user_account as p WHERE p.id = account_id) as accountNum,
+		(SELECT count(1) from project_self_run_handler where developer_id = id) as choosedCount
+	</sql>
+	
+	<select id="getUserInfoByID" parameterType="java.lang.Long"
+		resultType="com.yundaren.user.po.UserInfoPo">
+	SELECT
+	<include refid="selectUserColumnSql" />
+	FROM user_info
+	WHERE
+	id = #{userId}
+	</select>
+	
+	<select id="getUserInfoByNickname" parameterType="java.lang.String"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+           <include refid="selectUserColumnSql" />
+          FROM user_info
+          WHERE
+            name = #{nickname} and user_type != 3  AND is_delete != 1
+	</select>
+	
+	<select id="getUserInfoByMobile" parameterType="java.lang.String"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+            <include refid="selectUserColumnSql" />
+          FROM user_info
+          WHERE
+            mobile = #{mobile} and user_type != 3  AND is_delete != 1
+	</select>
+	
+	<select id="getUserInfoByEmail" parameterType="java.lang.String"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+            <include refid="selectUserColumnSql" />
+          FROM user_info
+          WHERE
+            email = #{email} and user_type != 3  AND is_delete != 1
+	</select>
+	
+	<select id="getListAllUserInfo" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+            id as id,
+			name as name,
+			sex as sex ,
+			birthday as birthday,
+			industry as industry,
+			mobile as mobile,
+			email as email,
+			user_type as userType,
+			remark as remark,
+			(select parent_id from region where id=region_id) as provinceId,
+			CONCAT((select name from region where id = provinceId),
+				if((select name from region where id = provinceId)=(select name from region where
+				id=region_id),'',(select name from region where id=region_id))) as
+				region,
+			(SELECT create_time from sso_user where user_id = u.id  LIMIT 1) as createTime,
+			(SELECT pass_time from identify where user_id = id) as identifyTime,
+			(SELECT last_login_time from sso_user where user_id = u.id ORDER BY last_login_time DESC LIMIT 1) as lastLoginTime,
+			(SELECT status from identify where user_id = id) as identifyStatus,
+			(SELECT category from identify where user_id = id) as identifyCategory
+          FROM user_info u
+            WHERE user_type != -1
+             AND is_delete != 1
+             <if test="type != -2 ">
+     	        and user_type = #{type}
+	         </if>
+	         <if test="status == -1 ">
+     	       	 and id not in (select user_id from identify)
+     	     </if>
+     	    <if test="status >= 0">
+     	       	and id in (select user_id from identify where status = #{status})
+     	    </if>
+     	     <if test="category != null and category != '' and status >= 0">
+     	       	and id in (select user_id from identify where category = #{category})
+     	    </if>
+     	    ORDER BY createTime DESC
+	        LIMIT #{beginPage},#{pageSize}
+	</select>
+	
+	<select id="getDisplayProviderListP" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+            id as id,
+            name as name,
+            email as email,
+            mobile as mobile,
+            remark as remark,
+			introduction as introduction,
+			main_ability as mainAbility,
+			other_ability as otherAbility,
+			com_pic_list as comPicList,
+			company_size as companySize,
+			cando as cando,
+			case_type as caseType,
+			other_case_type as otherCaseType,
+			is_disply as isDisply,
+			(SELECT create_time from sso_user where user_id = u.id  LIMIT 1) as createTime,
+		    (SELECT company_name from identify where user_id = u.id) as companyName,	
+		    (SELECT company_addr from identify where user_id = u.id) as companyAddr,	
+		    (SELECT site_link from identify where user_id = id) as siteLink,
+		    (SELECT category from identify where user_id = u.id) as category
+          FROM user_info u
+          WHERE user_type = 1           
+				<if test="userType != -1">
+					and is_disply =1
+				</if>
+				and id in (select user_id from identify where status = 1 and (category
+                <if test="userType != -1 ">
+     	            =1
+	         	</if>
+	         	<if test="userType == -1 ">
+	         		<if test="category==2">
+	         			=0 or category=1
+	         		</if>
+	         		<if test="category==0||category==1">
+	         			=#{category}
+	         		</if> 	            
+	         	</if>
+                 ))
+                 and is_delete!=1  
+                 <if test='regionId!=null'> 
+                 	and region_id = #{regionId}
+                 </if>
+          HAVING(name like #{matchAllQuery} or mobile like #{query} or email like #{query} or companyName like #{matchAllQuery} or #{query}="%")               
+          LIMIT #{beginPage},#{pageSize}
+	</select>
+	
+	<select id="getAllUserInfoCount" parameterType="java.util.Map" resultType="int">
+          SELECT
+            count(1)
+          FROM user_info
+             WHERE user_type != -1
+             AND is_delete != 1
+             <if test="type != -2 ">
+     	        and user_type = #{type}
+	         </if>
+	        <if test="status == -1 ">
+     	       	 and id not in (select user_id from identify)
+     	     </if>
+     	    <if test="status >= 0">
+     	       	and id in (select user_id from identify where status = #{status})
+     	    </if>
+     	    <if test="category != null and category != '' and status >= 0">
+     	       	and id in (select user_id from identify where category = #{category})
+     	    </if>
+	</select>
+	
+	<select id="getDisplayProviderListCount" parameterType="java.util.Map" resultType="int">
+          SELECT
+            count(1)
+          FROM(
+          	SELECT
+	            id as id,
+	            name as name,
+	            email as email,
+	            mobile as mobile,
+	            remark as remark,
+				introduction as introduction,
+				main_ability as mainAbility,
+				other_ability as otherAbility,
+				com_pic_list as comPicList,
+				company_size as companySize,
+				cando as cando,
+				case_type as caseType,
+				other_case_type as otherCaseType,
+				is_disply as isDisply,
+				(SELECT create_time from sso_user where user_id = u.id  LIMIT 1) as createTime,
+			    (SELECT company_name from identify where user_id = u.id) as companyName,	
+			    (SELECT company_addr from identify where user_id = u.id) as companyAddr,	
+			    (SELECT category from identify where user_id = u.id) as category,
+			    (SELECT site_link from identify where user_id = id) as siteLink		    
+	          FROM user_info u
+	          WHERE user_type = 1  
+				<if test="userType != -1">
+					and is_disply =1
+				</if>
+				and id in (select user_id from identify where status = 1 and (category
+                <if test="userType != -1 ">
+     	            =1
+	         	</if>
+	         	<if test="userType == -1 ">
+     	           <if test="category==2">
+	         			=0 or category=1
+	         		</if>
+	         		<if test="category==0||category==1">
+	         			=#{category}
+	         		</if>
+	         	</if>
+                 ))
+                 and is_delete!=1 
+                 <if test='regionId!=null'> 
+                 	and region_id = #{regionId}
+                 </if>
+         		  HAVING(name like #{matchAllQuery} or mobile like #{query} or email like #{query} or companyName like #{matchAllQuery} or #{query}="%")		          	     
+          )t                               
+	</select>		
+	
+	<select id="getAllMembersEmail" resultType="java.lang.String">
+          	SELECT
+            email
+          FROM user_info u
+             WHERE user_type = 1
+			 AND email IS NOT NULL
+             AND (select is_active from sso_user where user_id = u.id LIMIT 1) = 0
+             AND is_delete != 1
+	</select>
+	
+	<select id="getJoinersEmailByPID" parameterType="java.lang.String" resultType="java.lang.String">
+		select email from user_info 
+		where id in ( select user_id from project_join where project_id = #{projectId});
+	</select>
+	
+	<select id="getRecommendMemberList" resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+        	id as id,
+            name as name,
+            main_ability as mainAbility,
+            (select avg(average_score) from project_evaluate where employee_id = id) as avgScore
+          FROM user_info
+             WHERE (select user_id from identify where user_id = id ) IS NOT NULL 
+             AND is_delete != 1
+	</select>
+	
+	<select id="getAllUserCount" resultType="java.lang.Integer">
+          SELECT
+             count(1)
+          FROM user_info 
+          WHERE is_delete != 1
+	</select>
+	
+	<select id="getAllDeveloperCount" resultType="java.lang.Integer">
+          SELECT
+             count(1)
+          FROM identify 
+          WHERE category = 0
+	</select>
+	
+	<select id="getAllCompanyCount" resultType="java.lang.Integer">
+          SELECT
+             count(1)
+          FROM identify 
+          WHERE category = 1
+	</select>
+	
+	<select id="getAllIdentifyCount" resultType="java.lang.Integer">
+          SELECT
+             count(1)
+          FROM identify 
+	</select>
+	
+	<select id="queryUsers" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+            id as id,
+			name as name,
+			sex as sex ,
+			birthday as birthday,
+			industry as industry,
+			mobile as mobile,
+			email as email,
+			user_type as userType,
+			remark as remark,
+			(select parent_id from region where id=region_id) as provinceId,
+			CONCAT((select name from region where id = provinceId),
+				if((select name from region where id = provinceId)=(select name from region where
+				id=region_id),'',(select name from region where id=region_id))) as
+				region,
+			(SELECT create_time from sso_user where user_id = u.id  LIMIT 1) as createTime,
+			(SELECT last_login_time from sso_user where user_id = u.id ORDER BY last_login_time DESC LIMIT 1) as lastLoginTime,
+			(SELECT create_time from identify where user_id = id) as identifyTime,
+			(SELECT status from identify where user_id = id) as identifyStatus,
+			(SELECT category from identify where user_id = id) as identifyCategory
+          FROM user_info u WHERE is_delete != 1
+            HAVING(name like #{matchAllQuery} or mobile like #{query} or email like #{query} or remark like #{matchAllQuery}
+            or region like #{matchAllQuery}) ORDER BY createTime DESC
+	        LIMIT #{beginPage},#{pageSize}
+	</select>
+	
+	<select id="queryUsers4Consultant" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+            id as id,
+			name as name,
+			sex as sex ,
+			birthday as birthday,
+			industry as industry,
+			mobile as mobile,
+			email as email,
+			user_type as userType,
+			remark as remark,
+			(select parent_id from region where id=region_id) as provinceId,
+			CONCAT((select name from region where id = provinceId),
+				if((select name from region where id = provinceId)=(select name from region where
+				id=region_id),'',(select name from region where id=region_id))) as
+				region,
+			(SELECT create_time from sso_user where user_id = u.id  LIMIT 1) as createTime,
+			(SELECT last_login_time from sso_user where user_id = u.id ORDER BY last_login_time DESC LIMIT 1) as lastLoginTime,
+			i.create_time as identifyTime,
+			i.status as identifyStatus,
+			i.category as identifyCategory
+          FROM user_info u,identify i WHERE is_delete != 1 and i.status = 1 and i.user_id = u.id 
+            HAVING(name like #{matchAllQuery} or mobile like #{query} or email like #{query} or remark like #{matchAllQuery}
+            or region like #{matchAllQuery}) ORDER BY createTime DESC
+	        LIMIT #{beginPage},#{pageSize}
+	</select>
+	
+	<select id="queryUsersCount" parameterType="java.util.Map" resultType="int">
+           select count(*) from (SELECT
+            id as id,
+			name as name,
+			mobile as mobile,
+			email as email,
+			remark as remark,
+			(select parent_id from region where id=region_id) as provinceId,
+			CONCAT((select name from region where id = provinceId),
+				if((select name from region where id = provinceId)=(select name from region where
+				id=region_id),'',(select name from region where id=region_id))) as
+				region
+          FROM user_info u WHERE is_delete != 1
+            HAVING(name like #{matchAllQuery} or mobile like #{query} or email like #{query} or remark like #{matchAllQuery}
+            or region like #{matchAllQuery})) t
+	</select>
+	
+	<select id="queryUsersCount4Consultant" parameterType="java.util.Map" resultType="int">
+           select count(*) from (SELECT
+            id as id,
+			name as name,
+			mobile as mobile,
+			email as email,
+			remark as remark,
+			(select parent_id from region where id=region_id) as provinceId,
+			CONCAT((select name from region where id = provinceId),
+				if((select name from region where id = provinceId)=(select name from region where
+				id=region_id),'',(select name from region where id=region_id))) as
+				region
+          FROM user_info u, identify i WHERE is_delete != 1 and i.status = 1 and i.user_id = u.id 
+            HAVING(name like #{matchAllQuery} or mobile like #{query} or email like #{query} or remark like #{matchAllQuery}
+            or region like #{matchAllQuery})) t
+	</select>
+	
+	<select id="getAllConsultants" resultType="com.yundaren.user.po.UserInfoPo">
+	      SELECT
+            id as id,
+			name as name,
+			mobile as mobile,
+			email as email,
+			qq as qq,
+			weixin as weixin
+		   FROM user_info
+		   WHERE user_type = 2 AND is_delete != 1
+	</select>
+	
+	<select id="getInviteServicerFuzzList" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+            id as id,
+            name as name,
+            email as email,
+            mobile as mobile,     
+            introduction as introduction,       
+			is_disply as isDisply,
+			case_type as caseType,
+			(SELECT create_time from sso_user where user_id = u.id  LIMIT 1) as createTime,
+		    (SELECT company_name from identify where user_id = u.id) as companyName,	
+		    (SELECT company_addr from identify where user_id = u.id) as companyAddr,
+		    (SELECT category from identify where user_id = u.id) as category		
+          FROM user_info u
+          WHERE user_type = 1           
+				and id in (select user_id from identify  where status = 1 or status = 4)
+				and id not in (select developer_id from project_self_run_handler where project_id = #{projectId})
+                and is_delete!=1
+                and is_gogs!=0
+          <if test='regionId!=null'>
+          		and region_id = #{regionId}
+          </if>                        
+          HAVING(name like #{matchAllQuery} or mobile like #{query} or email like #{query} or companyName like #{matchAllQuery} or #{query}="%")               
+	</select>
+	
+	<select id="getInviteServicerFuzzCount" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoPo">
+		SELECT COUNT(1)
+		FROM
+          (SELECT
+            id as id,
+            name as name,
+            email as email,
+            mobile as mobile,            
+			is_disply as isDisply,
+			(SELECT create_time from sso_user where user_id = u.id  LIMIT 1) as createTime,
+		    (SELECT company_name from identify where user_id = u.id) as companyName,	
+		    (SELECT company_addr from identify where user_id = u.id) as companyAddr,	
+		    (SELECT site_link from identify where user_id = id) as siteLink,
+		    (SELECT category from identify where user_id = u.id) as category		    
+          FROM user_info u
+          WHERE user_type = 1           
+				and id in (select user_id from identify  where status = 1 or status = 4 and category=0)
+				and id not in (select developer_id from project_self_run_handler where project_id = #{projectId})
+                and is_delete!=1  
+          <if test='regionId!=null'>
+          		and region_id = #{regionId}
+          </if>  
+          HAVING(name like #{matchAllQuery} or mobile like #{query} or email like #{query} or companyName like #{matchAllQuery} or #{query}="%")
+          )t               
+	</select>
+	
+	<select id="getsProjSelfRunServicerList" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+            id as id,
+            name as name,
+            email as email,
+            mobile as mobile,            
+			is_disply as isDisply,
+			(SELECT role from project_self_run_handler where developer_id = u.id  LIMIT 1) as role,
+			(SELECT create_time from sso_user where user_id = u.id  LIMIT 1) as createTime,
+		    (SELECT company_name from identify where user_id = u.id) as companyName,	
+		    (SELECT company_addr from identify where user_id = u.id) as companyAddr,	
+		   	(SELECT category from identify where user_id = u.id) as category
+          FROM user_info u
+          WHERE user_type = 1           
+				and id in (select user_id from identify where status = 1 or status = 4)
+				and id in (select developer_id from project_self_run_handler where project_id = #{projectId})
+                and is_delete!=1                
+	</select>
+	
+	<select id="getUserImportList" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoImportPo">
+          SELECT
+           	id as id,
+           	name as name,
+           	location as location,
+           	mobile as mobile,
+           	weixin as weixin,
+           	weibo as weibo,
+           	mail as mail,
+           	qq as qq,
+           	exp as exp,
+           	skill as skill,
+           	job as job,
+           	git as git,
+           	zhihu as zhihu,
+           	stackoverflow as stackoverflow,
+           	work as work,
+           	introduction as introduction,
+           	status as status,
+           	`from` as `from`,
+           	create_time as createTime
+          FROM user_info_import u
+          HAVING((name like #{matchAllQuery} or mobile like #{query} or weixin like #{query} or qq like #{query} or mail like #{query} or weibo like #{matchAllQuery} or location like #{matchAllQuery} or introduction like #{matchAllQuery}  or  '%'=#{query}) and (upper(work) like #{skillQuery} or #{skillQuery}='')) 
+          ORDER BY createTime DESC
+	      LIMIT #{beginPage},#{pageSize}            
+	</select>
+	
+	<select id="getUserImportCount" parameterType="java.util.Map"
+		resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM(
+          SELECT
+           	id as id,
+           	name as name,
+           	location as location,
+           	mobile as mobile,
+           	weixin as weixin,
+           	weibo as weibo,
+           	mail as mail,
+           	qq as qq,
+           	exp as exp,
+           	skill as skill,
+           	job as job,
+           	git as git,
+           	zhihu as zhihu,
+           	stackoverflow as stackoverflow,
+           	work as work,
+           	introduction as introduction,
+           	status as status,
+           	`from` as `from`,
+           	create_time as createTime
+          FROM user_info_import u
+          HAVING((name like #{matchAllQuery} or mobile like #{query} or weixin like #{query} or qq like #{query} or mail like #{query} or weibo like #{matchAllQuery} or location like #{matchAllQuery} or introduction like #{matchAllQuery}  or  '%'=#{query}) and (upper(work) = #{skillQuery} or #{skillQuery}=''))
+      )t                
+	</select>
+	
+	<select id="getUserImportInfo" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoImportPo">
+          SELECT
+           	id as id,
+           	name as name,
+           	location as location,
+           	mobile as mobile,
+           	weixin as weixin,
+           	weibo as weibo,
+           	mail as mail,
+           	qq as qq,
+           	exp as exp,
+           	skill as skill,
+           	job as job,
+           	git as git,
+           	zhihu as zhihu,
+           	stackoverflow as stackoverflow,
+           	work as work,
+           	introduction as introduction,
+           	status as status,
+           	`from` as `from`,
+           	create_time as createTime
+          FROM user_info_import u        
+          WHERE id = #{uid}          
+	      LIMIT 1           
+	</select>
+	
+	<select id="getNewUserCount" parameterType="java.util.Map"
+		resultType="int">		
+		SELECT 
+			COUNT(1)
+		FROM(
+          SELECT t.* FROM (SELECT * FROM `sso_user` WHERE create_time>=#{startQueryTime}
+          <if test='endQueryTime!=null'>
+          	AND create_time<![CDATA[<=]]>#{endQueryTime} 
+          </if>
+         ORDER BY create_time) t 
+          GROUP BY user_id                   
+      )t                
+	</select>
+	
+	<select id="getNewApprovedUserCount" parameterType="java.util.Map"
+		resultType="int">		
+		SELECT 
+			COUNT(1)
+		FROM
+          identify
+        WHERE status = 1
+        AND pass_time>=#{startQueryTime}
+		<if test='endQueryTime!=null'>
+          	AND pass_time<![CDATA[<=]]>#{endQueryTime} 
+        </if>
+        AND category = #{category}                
+	</select>
+	
+	<select id="queryDevelopers" parameterType="java.util.Map"
+		resultType="com.yundaren.user.po.UserInfoPo">
+          SELECT
+            id as id,
+			name as name,
+			sex as sex ,
+			mobile as mobile,
+			email as email,
+			user_type as userType,
+			(select parent_id from region where id=region_id) as provinceId,
+			(select category from identify where user_id = id) as category,
+			CONCAT((select name from region where id = provinceId),
+				if((select name from region where id = provinceId)=(select name from region where
+				id=region_id),'',(select name from region where id=region_id))) as
+				region,
+		 	introduction as introduction,
+		 	main_ability as mainAbility,
+			other_ability as otherAbility,
+			cando as cando
+          FROM user_info u
+            WHERE id in (select user_id from identify where status = 1) and is_gogs = 1
+             <if test="provinceId != null and provinceId != ''">
+     	        and region_id in (select id from region where parent_id = #{provinceId})
+	         </if>
+	         <if test="cityId != null and cityId != ''">
+     	        and region_id = #{cityId}
+	         </if>
+	         <if test="cando != null and cando != ''">
+     	       	and cando like #{cando}
+     	     </if>
+     	      <if test="ability != null and ability != ''">
+     	        and main_ability like #{ability}
+     	     </if>
+     	     <if test="otherAbility != null and otherAbility != ''">
+     	        and (UPPER(other_ability) like #{otherAbility} or mobile like #{otherAbility} or name like #{otherAbility} or email like #{otherAbility})
+     	     </if>
+	        LIMIT #{beginPage},#{pageSize}
+	</select>
+	
+	<select id="queryDevelopersTotalCount" parameterType="java.util.Map" resultType="int">
+          SELECT
+           count(1)
+          FROM user_info u
+            WHERE id in (select user_id from identify where status = 1) and is_gogs = 1
+             <if test="provinceId != null and provinceId != ''">
+     	        and region_id in (select id from region where parent_id = #{provinceId})
+	         </if>
+	         <if test="cityId != null and cityId != ''">
+     	        and region_id = #{cityId}
+	         </if>
+	         <if test="cando != null and cando != ''">
+     	       	and cando like #{cando}
+     	     </if>
+     	      <if test="ability != null and ability != ''">
+     	        and main_ability like #{ability}
+     	     </if>
+     	     <if test="otherAbility != null and otherAbility != ''">
+     	       and (UPPER(other_ability) like #{otherAbility} or mobile like #{otherAbility} or name like #{otherAbility} or email like #{otherAbility})
+     	     </if>
+	</select>
+	
+	<insert id="addUserPayAccount" parameterType="com.yundaren.user.po.UserAccountPo" useGeneratedKeys="true" keyProperty="id"> 
+		 INSERT INTO user_account
+			(
+				user_id,
+				account_num,
+				account_type			
+			)
+		VALUES
+			(
+				#{userId},
+				#{accountNum},
+				#{accountType}
+			)
+	</insert>
+	
+	<update id="editUserPayAccount" parameterType="com.yundaren.user.po.UserAccountPo">
+		UPDATE user_account
+		SET 
+			<if test="userId!= null and userId!=''">
+		        user_id = #{userId},
+		    </if>
+		    <if test="accountNum!= null and accountNum!=''">
+		        account_num = #{accountNum},
+		    </if>
+		    <if test="accountType!=0">
+		        account_type = #{accountType},
+		    </if>
+		   id=id
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="deleteUserpayAccount" parameterType="com.yundaren.user.po.UserAccountPo"></delete>
+	
+	<select id="selectUserPayAccount" parameterType="int">
+		SELECT 
+			id as id,
+			user_id as userId,
+			account_num as accountNum,
+			account_type as accountType
+		WHERE
+			id = #{id}
+	</select>
+	
+	<insert id="addAccountInDetail" parameterType="com.yundaren.user.po.UserAccountInDetailPo">
+	<selectKey resultType="int" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID()
+	</selectKey>  
+		INSERT INTO
+			user_account_in_detail
+			(
+				user_id,
+				date,
+				project_id,
+				step_id,
+				amount,
+				account_id,
+				comment
+			)
+		VALUES
+			(
+				#{userId},
+				#{date},
+				#{projectId},
+				#{stepId},
+				#{amount},
+				#{accountId},
+				#{comment}
+			)
+	</insert>
+	
+	<select id="getAccountInDetail" parameterType="java.util.Map" resultType="com.yundaren.user.po.UserAccountInDetailPo">
+		SELECT 
+			id as id,
+			user_id as userId,
+			date as date,
+			project_id as projectId,
+			step_id as stepId,
+			amount as amount,
+			account_id as accountId,
+			comment as comment
+		FROM 
+			user_account_in_detail
+		WHERE user_id = #{userId}
+   	    ORDER BY date DESC
+        LIMIT #{beginPage},#{pageSize}
+	</select>
+	
+	<select id="getAccountInDetailCount" parameterType="int" resultType="int">
+		SELECT 
+			count(id) as count
+		FROM
+			user_account_in_detail
+		WHERE 
+			user_id = #{userId}
+	</select>
+	<insert id="addAccountOutDetail" parameterType="com.yundaren.user.po.UserAccountOutDetailPo">
+		<selectKey resultType="int" keyProperty="id">
+				SELECT
+				LAST_INSERT_ID()
+		</selectKey>  
+		INSERT INTO
+			user_account_out_detail
+			(
+				user_id,
+				date,
+				amount,
+				account_id,
+				comment
+			)
+		VALUES
+			(
+				#{userId},
+				#{date},
+				#{amount},
+				#{accountId},
+				#{comment}
+			)
+	</insert>
+	
+	<select id="getAccountOutDetail" parameterType="java.util.Map" resultType="com.yundaren.user.po.UserAccountOutDetailPo">
+		SELECT 
+			id as id,
+			user_id as userId,
+			date as date,
+			amount as amount,
+			account_id as accountId,
+			comment as comment,
+			confirm_time as confirmTime,
+			status as status
+		FROM 
+			user_account_out_detail
+		WHERE user_id = #{userId}
+   	    ORDER BY date DESC
+        LIMIT #{beginPage},#{pageSize}
+	</select>
+	
+	<select id="getAccountOutDetailCount" parameterType="int" resultType="int">
+		SELECT 
+			count(id) as count
+		FROM
+			user_account_out_detail
+		WHERE 
+			user_id = #{userId}
+	</select>
+	
+	<select id="getUseraccountById" parameterType="int" resultType="com.yundaren.user.po.UserAccountPo">
+		SELECT
+			id as id,
+			user_id as userId,
+			account_num as accountNum,
+			(select name from dict_item where dict_group_id =11 and value = p.account_type) as accountName,
+			account_type as accountType
+		FROM 
+			user_account as p
+		WHERE
+			id = #{id}
+	</select>
+	
+	<select id="getUserTotalIncome" parameterType="int" resultType="double">
+		SELECT 
+			CASE 
+			WHEN sum(amount) is null THEN 0
+			ELSE sum(amount)
+			END as total
+	 	FROM 
+	 		user_account_in_detail 
+	 	WHERE 
+	 		user_id = #{userId}
+	</select>
+	
+	<select id="getUserTotalOutcome" parameterType="int" resultType="double">
+		SELECT 
+			CASE 
+			WHEN sum(amount) is null THEN 0
+			ELSE sum(amount)
+			END as total
+	 	FROM 
+	 		user_account_out_detail 
+	 	WHERE 
+	 		user_id = #{userId} and status != 2
+	</select>
+</mapper>

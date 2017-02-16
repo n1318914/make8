@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.support.dao.TradeDao">
+	
+	<insert id="addTradeInfo" parameterType="com.yundaren.support.po.TradeInfoPo">
+		 INSERT INTO trade_info
+            (
+             project_id,
+			 project_amount,
+			 project_period,
+			 create_time
+            )
+          VALUES
+            (
+             #{projectId},
+             #{projectAmount},
+             #{projectPeriod},
+             now()
+            )
+	</insert>
+
+	<select id="getTradeInfoByPID" parameterType="java.lang.String" resultType="com.yundaren.support.po.TradeInfoPo">
+		SELECT project_id as projectId,
+				 project_amount as projectAmount,
+				 actually_payment as actuallyPayment,
+				 project_period as projectPeriod,
+				 actually_period as actuallyPeriod,
+				 is_refund as isRefund,
+			 	 create_time as createTime,
+			 	 (select sum(amount) from trustee_info where project_id = #{projectId}) as trusteeMoney,
+			 	 (select create_time from trustee_info where project_id = #{projectId} limit 0,1) as trusteeTime
+		FROM trade_info
+		where project_id = #{projectId}
+	</select>
+	
+	<select id="getTotalProjectAmount" resultType="double">
+		SELECT 
+			IFNULL(sum(price),0) as totalAmount
+		FROM project_join
+		WHERE choosed = 1
+	</select>
+	
+	<update id="updateTradeInfo" parameterType="com.yundaren.support.po.TradeInfoPo">
+	 	 UPDATE
+            trade_info
+         SET
+       		 <if test="actuallyPayment!=0">
+				 actually_payment = #{actuallyPayment},
+			</if>
+         	<if test="actuallyPeriod!=0">
+				 actually_period = #{actuallyPeriod},
+			</if>
+			<if test="isRefund!=-1">
+				 is_refund = #{isRefund},
+			</if>
+			project_id = #{projectId}
+         WHERE
+           project_id = #{projectId}
+	</update>
+	
+	<select id="getTransactionAmountList" resultType="java.lang.String">
+		select price_range from project WHERE backgroud_status != -1 and backgroud_status != 0
+	</select>
+</mapper>

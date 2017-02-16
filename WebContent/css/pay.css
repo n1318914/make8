@@ -1,0 +1,57 @@
+body {
+    left:50px;
+    
+}
+.banner{
+	background: url(/img/banner_pay_bgimg.jpg);
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    height: 200px;
+}
+.banner-left{
+	float:left;
+	width:50%;
+}
+.banner-right{
+	float:right;
+	width:50%;
+	overflow-x:hidden;
+}
+.head-title{
+	height: 2em;
+	font-height:2em;
+}
+
+.pay-card{
+	min-width: 400px;
+	/*margin-bottom: 30px;*/
+	/*float:left;*/
+}
+.body-card{
+	border-radius:5px;
+	cursor:default;
+	overflow-x:hidden;
+	padding-left:50px;
+	padding-top:20px;
+	background-color:#ffffff;
+	height:250px;
+}
+.body-card img{
+	padding-bottom:20px;
+}
+.body-card div{
+	height:2em;
+	line-height:2em;
+}
+.body-strong{
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+.cmd-pay-card{
+	/*margin-left:5%;*/
+}
+.alipay-pay-card{
+	/*margin-right:5%;
+	margin-left:5%;*/
+}

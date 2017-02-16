@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"
+      id="viewport"/>
+<title>对不起, 访问过于频繁</title>
+<style>
+	*{
+		padding: 0px;
+		margin: 0px;
+		font-family: "微软雅黑";
+	}
+
+	body{
+		background: url(http://static.make8.com/img/bg_404.jpg);
+		background-position: center;
+	}
+
+	.title{
+		height: 597px;
+		margin:0px auto;
+		padding-bottom: 80px;
+		text-align: center;
+	}
+
+	.title img{
+		width: 951px;
+	}
+
+	.sorry{
+		text-align: center;
+		margin:0px auto;
+		padding-bottom: 80px;
+		color: white;
+	}
+
+	.callBack{
+		text-align: center;
+		background: #3280b2;
+		box-shadow: 2px 2px 1px #00578e;
+		color: white;
+		width: 250px;
+		padding: 10px 0px;
+		margin: 0 auto;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	.callBack:hover{
+		background:#3688bd;
+	}
+
+	@media screen and (max-width:951px){
+		.title img{
+			width: 95%;
+			display: block;
+			margin: 0 auto;
+		}
+
+		.title{
+			height: 300px;
+			padding-bottom: 0px;
+		}
+	}
+
+	@media only screen and (max-width:768px){
+		.title{
+			height: 500px;
+			padding-bottom: 0px;
+		}
+	}
+</style>
+</head>
+<body>
+	<div id="content">
+		<div class="title">
+			<img src="http://static.make8.com/img/yixiu_logo.png"/>
+		</div>
+		<div class="sorry">很抱歉！访问过于频繁</div>
+		<div class="callBack" onclick="window.location.href='http://www.make8.com'">返回首页</div>
+	</div>
+	<script>
+		function rePostion(){
+			var window_height = document.documentElement.clientHeight;
+			var content = document.getElementById("content");
+			var top = (window_height - content.offsetHeight)/2;
+			content.style.marginTop = top + "px";
+		}
+		window.addEventListener("load",rePostion);
+		window.addEventListener("resize",rePostion);
+	</script>
+<!--<script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homePageUrl="/" homePageName="回到首页"></script>
+<input type=hidden value="IE Chorme FireFox Safari Opera 360SE UCWEB weixin">-->
+</body>
+</html>

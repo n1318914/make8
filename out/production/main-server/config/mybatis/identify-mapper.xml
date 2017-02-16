@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.support.dao.IdentifyDao">
+	
+	<insert id="addIdentify" parameterType="com.yundaren.support.po.IdentifyPo">
+		INSERT INTO identify
+		(
+			user_id,
+			real_name,
+			id_card,
+			id_card_img,
+			company_name,
+			company_addr,
+			company_phone,
+			organization,
+			organization_img,
+			tax,
+			tax_img,
+			business_license,
+			business_license_img,
+			legal_represent,
+			category,
+			status,
+			site_link,
+			create_time
+		)
+			VALUES
+		(
+			#{userId},
+			#{realName},
+			#{idCard},
+			#{idCardImg},
+			#{companyName},
+			#{companyAddr},
+			#{companyPhone},
+			#{organization},
+			#{organizationImg},
+			#{tax},
+			#{taxImg},
+			#{businessLicense},
+			#{businessLicenseImg},
+			#{legalRepresent},
+			#{category},
+			#{status},
+			#{siteLink},
+			now()
+		)
+	</insert>
+
+	<select id="getAcceptIdentifyList" resultType="com.yundaren.support.po.IdentifyPo">
+		SELECT user_id as userId,
+			real_name as realName,
+			id_card as idCard,
+			company_name as companyName,
+			company_addr as companyAddr,
+			company_phone as companyPhone,
+			organization as organization,
+			tax as tax,
+			business_license as businessLicense,
+			legal_represent as legalRepresent,
+			category as category,
+			status as status,
+			site_link as siteLink,
+			fail_reason as failReason,
+			create_time as createTime
+		FROM identify
+		where status = 0
+	</select>
+	
+	<update id="updateIdentifyByUID" parameterType="com.yundaren.support.po.IdentifyPo">
+		UPDATE identify
+		SET
+			<if test="realName!=null and realName!=''">
+				real_name = #{realName},
+			</if>
+			<if test="idCard!=null and idCard!=''">
+				id_card = #{idCard},
+			</if>
+			<if test="idCardImg!=null and idCardImg!=''">
+				id_card_img = #{idCardImg},
+			</if>
+			<if test="companyName!=null and companyName!=''">
+				company_name = #{companyName},
+			</if>
+			<if test="companyAddr!=null and companyAddr!=''">
+				company_addr = #{companyAddr},
+			</if>
+			<if test="companyPhone!=null and companyPhone!=''">
+				company_phone = #{companyPhone},
+			</if>
+			<if test="organization!=null and organization!=''">
+				organization = #{organization},
+			</if>
+			<if test="organizationImg!=null and organizationImg!=''">
+				organization_img = #{organizationImg},
+			</if>
+			<if test="tax!=null and tax!=''">
+				tax = #{tax},
+			</if>
+			<if test="taxImg!=null and taxImg!=''">
+				tax_img = #{taxImg},
+			</if>
+			<if test="businessLicense!=null and businessLicense!=''">
+				business_license = #{businessLicense},
+			</if>
+			<if test="businessLicenseImg!=null and businessLicenseImg!=''">
+				business_license_img = #{businessLicenseImg},
+			</if>
+			<if test="legalRepresent!=null and legalRepresent!=''">
+				legal_represent = #{legalRepresent},
+			</if>
+			<if test="category!=-1">
+				category = #{category},
+			</if>
+			<if test="status!=-1">
+				status = #{status},
+			</if>
+			<if test="siteLink!=null and siteLink!=''">
+				site_link = #{siteLink},
+			</if>
+			<if test="passTime!=null and passTime!=''">
+				pass_time = #{passTime},
+			</if>
+			<if test="failReason!=null and failReason!=''">
+				fail_reason = #{failReason},
+			</if>
+			user_id = #{userId}
+		WHERE
+			user_id = #{userId}
+	</update>
+	
+	<select id="getIdentifyByUID" parameterType="java.lang.Long" resultType="com.yundaren.support.po.IdentifyPo">
+		SELECT user_id as userId,
+			real_name as realName,
+			id_card as idCard,
+			id_card_img as idCardImg,
+			company_name as companyName,
+			company_addr as companyAddr,
+			company_phone as companyPhone,
+			organization as organization,
+			organization_img as organizationImg,
+			tax as tax,
+			tax_img as taxImg,
+			business_license as businessLicense,
+			business_license_img as businessLicenseImg,
+			legal_represent as legalRepresent,
+			category as category,
+			site_link as siteLink,
+			status as status,
+			fail_reason as failReason,
+			create_time as createTime,
+			pass_time as passTime,
+			(select account_id from user_info p where p.id = #{uid}) as accountId,
+			(select file_secret_key from user_info where id = user_id) as fileSecretKey
+		FROM identify
+		where user_id = #{uid}
+	</select>
+	
+	<select id="getIdentifyListByUIDs" parameterType="java.lang.Long" resultType="com.yundaren.support.po.IdentifyPo">
+		SELECT user_id as userId,
+			company_name as companyName,
+			company_addr as companyAddr,
+			site_link as siteLink,
+			create_time as createTime,
+			(select file_secret_key from user_info where id = user_id) as fileSecretKey
+		FROM identify
+		WHERE user_id in (select id from user_info as u where user_type=1 and is_disply=1)
+	</select>
+	
+	<select id="getIdentifyByIDCard" parameterType="java.lang.String" resultType="com.yundaren.support.po.IdentifyPo">
+		SELECT user_id as userId,
+			real_name as realName,
+			id_card as idCard,
+			id_card_img as idCardImg,
+			company_name as companyName,
+			company_addr as companyAddr,
+			company_phone as companyPhone,
+			organization as organization,
+			organization_img as organizationImg,
+			tax as tax,
+			tax_img as taxImg,
+			business_license as businessLicense,
+			business_license_img as businessLicenseImg,
+			legal_represent as legalRepresent,
+			category as category,
+			site_link as siteLink,
+			status as status,
+			fail_reason as failReason,
+			create_time as createTime,
+			pass_time as passTime,
+			(select file_secret_key from user_info where id = user_id) as fileSecretKey
+		FROM identify
+		where id_card = #{idCard}
+	</select>
+	
+	<select id="getIdentifyByCName" parameterType="java.lang.String" resultType="com.yundaren.support.po.IdentifyPo">
+		SELECT user_id as userId,
+			real_name as realName,
+			id_card as idCard,
+			id_card_img as idCardImg,
+			company_name as companyName,
+			company_addr as companyAddr,
+			company_phone as companyPhone,
+			organization as organization,
+			organization_img as organizationImg,
+			tax as tax,
+			tax_img as taxImg,
+			business_license as businessLicense,
+			business_license_img as businessLicenseImg,
+			legal_represent as legalRepresent,
+			category as category,
+			status as status,
+			site_link as siteLink,
+			fail_reason as failReason,
+			create_time as createTime,
+			pass_time as passTime,
+			(select file_secret_key from user_info where id = user_id) as fileSecretKey
+		FROM identify
+		where company_name = #{companyName}
+	</select>
+</mapper>

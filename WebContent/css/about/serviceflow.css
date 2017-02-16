@@ -1,0 +1,37 @@
+.banner{
+	margin-top: 80px;
+	background: #a9dad9;
+}
+
+.padding-left{
+	padding-left: 0px;
+}
+
+.padding-right{
+	padding-right: 0px;
+}
+
+.step2{
+	background: white;
+}
+
+.active{
+	display: block;
+}
+
+.active_m{
+	display: none;
+}
+
+@media screen and (max-width:782px ) {
+	.active_m{
+		display: block;
+	}	
+	.active{
+		display: none;
+	}
+}
+
+.banner img,.step1 img,.step2 img,.step3 img{
+	width: 100%;
+}

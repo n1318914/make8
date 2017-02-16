@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance http://www.springmodules.org/schema/cache/springmodules-cache.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>api-service</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/all.xml</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>local</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 登录拦截器 -->
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>com.yundaren.filter.handler.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- URL Rewrite-->  
+	<filter>  
+		 <filter-name>UrlRewriteFilter</filter-name>  
+		 <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>  
+	</filter>  
+	<filter-mapping>  
+		 <filter-name>UrlRewriteFilter</filter-name>  
+		 <url-pattern>/home/*</url-pattern>
+		  <url-pattern>/public/*</url-pattern>
+		 <url-pattern>/mobile</url-pattern>
+		 <url-pattern>/mobile/</url-pattern>  
+		 <url-pattern>/infos/*</url-pattern>  
+	</filter-mapping>  
+
+	<!-- XSS过滤 -->
+	<filter>
+		<filter-name>XSSFiler</filter-name>
+		<filter-class>com.yundaren.filter.handler.XSSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>XSSFiler</filter-name>
+		<url-pattern>/api/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>HttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HttpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 静态文件处理 -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.txt</url-pattern>
+		<url-pattern>*.ico</url-pattern>
+		<url-pattern>*.ttf</url-pattern>
+		<url-pattern>*.woff</url-pattern>
+		<url-pattern>*.woff2</url-pattern>
+		<url-pattern>*.svg</url-pattern>
+		<url-pattern>*.otf</url-pattern>
+		<url-pattern>*.map</url-pattern>
+		<url-pattern>*.gif</url-pattern>
+		<url-pattern>*.json</url-pattern>
+		<url-pattern>*.swf</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 错误页处理 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/public/error/404.html</location>
+	</error-page>
+ 	<error-page>
+		<error-code>500</error-code>
+		<location>/public/error/500.html</location>
+	</error-page>
+	
+	<!-- 文件上传 -->
+	<servlet>
+		<servlet-name>UploadifySerlet</servlet-name>
+		<servlet-class>
+			com.yundaren.common.upload.UploadifyServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadifySerlet</servlet-name>
+		<url-pattern>/uploadify</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>Homepage.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.seo.dao.SeoDao">
+	
+	<select id="getSeoItemById" resultType="com.yundaren.seo.po.SeoItemPo">
+		SELECT id id,
+		       title title,
+		       content content
+		FROM seo_app_contents 
+		WHERE id = #{id}
+	</select>
+	<select id="getSeoItemByRangId" parameterType="java.util.Map" resultType="com.yundaren.seo.po.SeoItemPo">
+		SELECT id id,
+		       title title,
+		       content content
+		FROM seo_app_contents 
+		WHERE id BETWEEN #{startId} AND #{endId}
+	</select>
+	<select id="getAllSeoItemCount" resultType="int">
+		SELECT count(*) 
+		FROM seo_app_contents
+	</select>
+	<select id="getAllSeoItems" resultType="com.yundaren.seo.po.SeoItemPo">
+		SELECT id id,
+		title title,
+		content content
+		FROM seo_app_contents 
+	</select>
+	<insert id="addSeoItem" parameterType="com.yundaren.seo.po.SeoItemPo">
+          INSERT INTO seo_app_contents_2
+            (
+              id,
+              title,
+              content
+            )
+          VALUES
+            (
+              #{id},
+              #{title},
+              #{content}
+            )
+	</insert>
+	
+</mapper>

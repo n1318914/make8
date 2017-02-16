@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+        <bean id="projectRest" class="com.yundaren.api.rest.ProjectRest">
+        	<property name="yunConnectService" ref="yunConnectService"/>
+        	<property name="projectService" ref="projectService"/>
+        	<property name="userService" ref="userService"/>
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="projectMailService" ref="projectMailService"/>
+        </bean>
+        
+         <bean id="projectEvaluateRest" class="com.yundaren.api.rest.ProjectEvaluateRest">
+        	<property name="projectEvaluateService" ref="projectEvaluateService"/>
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="userService" ref="userService"/>
+        	<property name="projectService" ref="projectService"/>
+       		<property name="evaluateService" ref="evaluateService"/>
+        </bean>
+        
+         <bean id="projectController" class="com.yundaren.controller.ProjectController">
+	        <property name="yunConnectService" ref="yunConnectService"/>
+        	<property name="projectService" ref="projectService"/>
+        	<property name="userService" ref="userService"/>
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="dictService" ref="dictService"/>
+        </bean>
+        
+         <!-- <bean id="mobileController" class="com.yundaren.controller.MobileController">
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="projectService" ref="projectService"/>
+        	<property name="publicConfig"   ref="publicConfig"/>
+			<property name="userService" ref="userService"/>
+        </bean> -->
+        
+        <bean id="projectInSelfRunRest" class="com.yundaren.api.rest.ProjectInSelfRunRest">
+        	<property name="ssoService" ref="ssoService"/>
+        	<property name="userService" ref="userService"/>
+        	<property name="projectInSelfRunService" ref="projectInSelfRunService"/>
+        	<property name="projectInSelfRunPlanService" ref="projectInSelfRunPlanService"/>
+        	<property name="projectMailService" ref="projectMailService"/>
+        	<property name="identifyService" ref="identifyService"/>
+        	<property name="dictService" ref="dictService"/>
+        	<property name="projectOperationLogService" ref="projectOperationLogService"/>
+        	<property name="yunConnectService" ref="yunConnectService"/>
+        </bean>
+        
+         <bean id="projectInSelfRunController" class="com.yundaren.controller.ProjectInSelfRunController">
+        	<property name="userService" ref="userService"/>
+        	<property name="projectInSelfRunService" ref="projectInSelfRunService"/>
+        	<property name="dictService" ref="dictService"/>
+        	<property name="regionService" ref="regionService"/>
+        	<property name="projectOperationLogService" ref="projectOperationLogService"/>
+        </bean>
+        
+        <bean id="projectCodeController" class="com.yundaren.controller.ProjectCodeController">
+			<property name="userService" ref="userService"/>
+        </bean>
+        
+        <bean id="projectCodeRest" class="com.yundaren.api.rest.ProjectCodeRest">
+        	<property name="userService" ref="userService"/>
+        </bean>
+        
+         <bean id="evaluateController" class="com.yundaren.controller.EvaluateController">
+         	<property name="evaluateService" ref="evaluateService"/>
+        </bean>
+</beans>

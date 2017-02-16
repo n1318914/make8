@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.basedata.dao.DictDao">
+	
+	<select id="getAllDictItem" resultType="com.yundaren.basedata.po.DictItemPo">
+		SELECT value value,
+				dict_group_id dictGroupId,
+				(select flag from dict_group where id = dict_group_id) as type,
+				name name
+		FROM dict_item order by  dict_group_id
+	</select>
+	
+	<select id="getAllFlink" resultType="com.yundaren.basedata.po.FlinkPo" parameterType="java.lang.String">
+		select id,name,link,CONCAT(#{domain},logo) as logo,ranking from flink ORDER BY ranking asc
+	</select>
+	
+	<insert id="addFlink" parameterType="com.yundaren.basedata.po.FlinkPo">
+		INSERT INTO flink(name,link,logo,ranking) 
+		select
+		#{name},#{link},#{logo},(select max(ranking)+1 from flink)
+	</insert>
+	
+	<delete id="deleteFlink" parameterType="int">
+		delete from flink where id = #{id}
+	</delete>
+	
+	<update id="modifyFlink" parameterType="com.yundaren.basedata.po.FlinkPo">
+	 	UPDATE 
+	 	  flink
+		SET
+		<if test="name!=null and name!=''">
+			 name = #{name},
+		</if>
+		<if test="link!=null and link!=''">
+			  link = #{link},
+		</if>
+		 <if test="logo!=null and logo!=''">
+			 logo = #{logo},
+		</if>
+		 <if test="ranking!=-1">
+			ranking = #{ranking},
+		</if>
+		 id = #{id}
+		WHERE
+		 id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.6//EN"
+"http://tuckey.org/res/dtds/urlrewrite2.6.dtd">
+<urlrewrite>
+	<rule>
+		<from>p/([0-9]+)$</from>
+		<to>p/view?id=$1</to>
+	</rule>
+	<rule>
+		<from>m/(.*)$</from>
+		<to>member?name=$1</to>
+	</rule>
+	<rule>
+		<from>compm/(.*)$</from>
+		<to>compinfo_modify?uid=$1</to>
+	</rule>
+	<rule>
+		<from>mobile</from>
+		<to>mobile/index</to>
+	</rule>
+	<rule>
+		<from>mobile/</from>
+		<to>mobile/index</to>
+	</rule>
+	<rule>
+		<from>/c/(.*)$</from>
+		<to>/code?url=$1</to>
+	</rule>
+	<rule>
+		<from>/p/detail/(.*)$</from>
+		<to>/push_projdetail?projectId=$1</to>
+	</rule>
+	<rule>
+		<from>/case/detail/(.*)$</from>
+		<to>/case/detail?caseId=$1</to>
+	</rule>
+	<rule>
+	   <from>/infos/([0-9]+-*[0-9]*)$</from>
+	   <to>/infos/province?urlId=$1</to>
+	</rule>
+	<rule>
+	   <from>/infos/([0-9]+-*[0-9]*)/([0-9]+-*[0-9]*)$</from>
+	   <to>/infos/city?pUrlId=$1&amp;urlId=$2</to>
+	</rule>
+	<rule>
+	   <from>/infos/([0-9]+-*[0-9]*)/([0-9]+-*[0-9]*)/([0-9]+-*[0-9]*)$</from>
+	   <to>/infos/district?pUrlId=$1&amp;cUrlId=$2&amp;urlId=$3</to>
+	</rule>
+</urlrewrite>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.homepage.dao.HomePageDao">
+	<sql id="selectCustomerCaseColumnList">
+		case_id as caseId,
+		main_page_url as mainPageUrl,
+		logo_url as logoUrl,
+		devs_cycle as devsCycle,
+		roles as roles,
+		site_url as siteUrl,
+		case_name as caseName,
+		case_desc as caseDesc,
+		abbr_pic_url as abbrPicUrl,
+		case_introduction as caseIntroduction
+	</sql>
+	
+	<select id="getCustomerCases" parameterType="java.util.Map" resultType="com.yundaren.homepage.po.CustomerCasePo" >
+		SELECT 
+			<include refid="selectCustomerCaseColumnList" />
+		FROM 
+		customer_case
+		WHERE
+		type like #{type}
+		order by case_id desc;
+	</select>
+	<select id="getCustomerCaseByCaseId" resultType="com.yundaren.homepage.po.CustomerCasePo" parameterType="long" >
+		SELECT 
+			<include refid="selectCustomerCaseColumnList" />
+		FROM 
+		customer_case
+		Where case_id = #{caseId}
+	</select>
+</mapper>

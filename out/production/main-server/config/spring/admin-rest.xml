@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+        <bean id="adminRest" class="com.yundaren.api.rest.AdminManagementRest">
+        	<property name="projectService" ref="projectService"/>
+        	<property name="userService" ref="userService"/>
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="identifyService" ref="identifyService"/>
+        	<property name="projectMailService" ref="projectMailService"/>
+        	<property name="userExperienceService" ref="userExperienceService"/>
+        	<property name="dictService" ref="dictService"/>
+        	<property name="projectInSelfRunService" ref="projectInSelfRunService"/>
+            <property name="emailSendConfig" ref="emailSendConfig"/>
+            <property name="yunConnectService" ref="yunConnectService"/>
+            <property name="ssoService" ref="ssoService"/>
+            <property name="projectOperationLogService" ref="projectOperationLogService"/>
+            <property name="userBiz" ref="userBiz"/>
+        </bean>
+        
+         <bean id="adminController" class="com.yundaren.controller.AdminManagementController">
+        	 <property name="projectService" ref="projectService"/>
+        	 <property name="userService" ref="userService"/>
+        	 <property name="dictService" ref="dictService"/>
+        	 <property name="userExperienceService" ref="userExperienceService"/>
+        	 <property name="projectInSelfRunService" ref="projectInSelfRunService"/>
+        	 <property name="identifyService" ref="identifyService"/>
+        	 <property name="regionService" ref="regionService"/>
+        </bean>
+</beans>

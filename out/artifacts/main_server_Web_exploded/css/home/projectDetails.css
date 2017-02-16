@@ -1,0 +1,98 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+body{
+	font-family: "微软雅黑";
+	background:#e2e2e2;
+}
+
+.homePageView{
+	margin-bottom: 24px;
+}
+
+.projectDetails{
+	margin-top: 120px;
+	padding:50px;
+	background: white;
+}
+
+.padding{
+	padding: 0px;
+}
+
+.padding-left{
+	padding-left: 0px;
+}
+
+.padding-right{
+	padding-right: 0px;
+}
+
+.projectDetails > div:last-of-type{
+	background: #f8f8f8;
+	padding: 24px 30px;
+}
+
+.company_logo{
+	padding-bottom: 24px;
+	border-bottom: 1px solid #dbdbdb;
+	margin-bottom: 20px;
+}
+
+.label_style{
+	color: #aeaeae;
+	margin-bottom: 12px;
+}
+
+#projectCycle,#projectRole{
+	color: black;
+}
+
+.projectName{
+	color: black;
+	margin-bottom: 14px;
+}
+
+.projectContent{
+	margin-bottom: 24px;
+}
+
+.companyIntroduce{
+	color: #666666;
+	margin-bottom: 14px;
+}
+
+/*心动了就行动*/
+.just_do_it{
+	color:#4bb300;
+	font-size: 16px;
+	margin-top: 22px;
+	margin-bottom: 16px;
+}
+
+.btn-custom{
+	display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border-radius: 4px;
+    background: transparent;
+    border: 1px solid #3498DB;
+    color: #3498DB;
+    margin-top: 30px;
+}

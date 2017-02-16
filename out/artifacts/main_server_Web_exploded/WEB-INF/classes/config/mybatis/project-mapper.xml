@@ -1,0 +1,1732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.basedata.dao.ProjectDao">
+
+	<insert id="addProject" useGeneratedKeys="true"
+	keyProperty="id" parameterType="com.yundaren.support.po.ProjectPo">
+	<selectKey resultType="String" keyProperty="id">
+		SELECT
+		LAST_INSERT_ID()
+	</selectKey>
+          INSERT INTO project
+            (
+			 type,
+			 price_range,
+			 name,
+			 content,
+			 attachment,
+			 period,
+			 bid_end_time,
+			 creator_id,
+			 create_time,
+			 public_contact,
+			 is_sincerity,
+			 contact_mobile,
+			 contact_email,
+			 contact_qq,
+			 contact_weixin,
+			 ranking,
+			 remark
+            )
+          VALUES
+            (
+             #{type},
+             #{priceRange},
+             #{name},
+             #{content},
+             #{attachment},
+             #{period},
+             #{bidEndTime},
+             #{creatorId},
+             now(),
+             #{publicContact},
+             #{isSincerity},
+             #{contactMobile},
+			 #{contactEmail},
+			 #{contactQq},
+			 #{contactWeixin},
+             #{ranking},
+             #{remark}
+            )
+	</insert>
+
+	<insert id="joinProject" parameterType="com.yundaren.support.po.ProjectJoinPo">
+          INSERT INTO project_join
+            (
+              project_id,
+              user_id,
+              price,
+              period,
+              plan,
+              attachment,
+              matainance_period,
+              create_time
+            )
+          VALUES
+            (
+              #{projectId},
+              #{userId},
+              #{price},
+              #{period},
+              #{plan},
+              #{attachment},
+              #{matainancePeriod},
+              now()
+            )
+	</insert>
+
+	<select id="getAllProjectCount" resultType="java.lang.Integer">
+          SELECT
+             count(1)
+          FROM project
+          WHERE
+            backgroud_status != -1 and backgroud_status != 0
+	</select>
+
+	<!-- 首页项目个数展现 -->
+	<select id="getAllProjectSelfCount" resultType="java.lang.Integer">
+          SELECT
+             count(1)
+          FROM project_self_run
+	</select>
+
+	<select id="getProjectByID" parameterType="java.lang.String"  resultType="com.yundaren.support.po.ProjectPo">
+          SELECT
+             id as id,
+             type as type,
+			 price_range as priceRange,
+			 name as name,
+			 content as content,
+			 attachment as attachment,
+			 period as period,
+			 bid_end_time as bidEndTime,
+			 backgroud_status as backgroudStatus,
+			 creator_id as creatorId,
+			 employee_id as employeeId,
+  			 checker_id as checkerId,
+ 			 check_time as checkTime,
+ 			 check_result as checkResult,
+ 			 accept_time as acceptTime,
+ 			 accept_result as acceptResult,
+ 			 finish_time as finishTime,
+			 create_time as createTime,
+			 is_sincerity as isSincerity,
+			 public_contact as publicContact,
+			 contact_mobile as contactMobile,
+			 contact_email as contactEmail,
+			 contact_qq as contactQq,
+			 contact_weixin as contactWeixin,
+			 remark as remark,
+			 (select count(1) from project_join where project_id = id) as joinCount,
+			 (select name from user_info where id = creator_id) as userName
+          FROM project
+          WHERE
+            id = #{id}
+	</select>
+
+	<select id="getProjectList" parameterType="java.util.Map" resultType="com.yundaren.support.po.ProjectPo">
+          SELECT
+             id as id,
+             type as type,
+			 price_range as priceRange,
+			 name as name,
+			 content as content,
+			 period as period,
+			 bid_end_time as bidEndTime,
+			 backgroud_status as backgroudStatus,
+			 creator_id as creatorId,
+			 employee_id as employeeId,
+  			 checker_id as checkerId,
+ 			 check_time as checkTime,
+ 			 check_result as checkResult,
+ 			 accept_time as acceptTime,
+ 			 accept_result as acceptResult,
+ 			 finish_time as finishTime,
+			 create_time as createTime,
+			 is_sincerity as isSincerity,
+			 ranking as ranking,
+			 remark as remark,
+			 (select count(1) from project_join where project_id = id) as joinCount,
+			 (select name from user_info where id = creator_id) as userName
+          FROM project WHERE backgroud_status != -1 and backgroud_status != 0
+     	      <if test="category != null and category !='' ">
+     	       and type = #{category}
+	         </if>
+     	    <if test="status != null and status !='' ">
+	        	and backgroud_status in
+		        	<foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+						 #{item}
+					</foreach>
+	        </if>
+	         ORDER BY backgroud_status ASC,ranking DESC,create_time DESC
+	         LIMIT #{beginPage},#{pageSize}
+	</select>
+
+	<select id="getProjectListCount" parameterType="java.util.Map" resultType="int">
+          SELECT
+            count(1)
+          FROM project WHERE backgroud_status != -1 and backgroud_status != 0
+     	      <if test="category != null and category !='' ">
+     	       and type = #{category}
+	         </if>
+     	    <if test="status != null and status !='' ">
+	        	and backgroud_status in
+		        	<foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+						 #{item}
+					</foreach>
+	        </if>
+	</select>
+
+	<select id="getProjectTopIndex" parameterType="java.lang.String"  resultType="int">
+          SELECT t.rowNo from (
+	          SELECT (@rowNum:=@rowNum+1) as rowNo,id
+	          FROM project,(Select (@rowNum :=0) ) b
+	           WHERE backgroud_status != -1 and backgroud_status != 0
+	           ORDER BY backgroud_status ASC,ranking DESC,create_time DESC
+          ) as t where t.id = #{id}
+	</select>
+
+	<select id="getAllProjectList" parameterType="java.util.Map" resultType="com.yundaren.support.po.ProjectPo">
+          SELECT
+             id as id,
+             type as type,
+			 price_range as priceRange,
+			 name as name,
+			 content as content,
+			 period as period,
+			 bid_end_time as bidEndTime,
+			 backgroud_status as backgroudStatus,
+			 creator_id as creatorId,
+			 employee_id as employeeId,
+  			 checker_id as checkerId,
+ 			 check_time as checkTime,
+ 			 check_result as checkResult,
+			 create_time as createTime,
+			 accept_time as acceptTime,
+ 			 accept_result as acceptResult,
+ 			 is_sincerity as isSincerity,
+			 ranking as ranking,
+ 			 finish_time as finishTime,
+			 remark as remark,
+			 (select count(1) from project_join where project_id = id) as joinCount,
+			 (select name from user_info where id = creator_id) as userName
+          FROM project
+           WHERE 1=1
+           <if test="category != null and category !='' ">
+     	       and type = #{category}
+	         </if>
+     	     <if test="status != null and status !='' ">
+	        	and backgroud_status in
+		        	<foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+						 #{item}
+					</foreach>
+	        </if>
+	        ORDER BY FIELD(backgroud_status,-1) ASC,backgroud_status ASC,create_time DESC
+	        LIMIT #{beginPage},#{pageSize}
+	</select>
+
+	<select id="getAllProjectListCount" parameterType="java.util.Map" resultType="int">
+          SELECT
+             count(1)
+          FROM project
+           WHERE 1=1
+           <if test="category != null and category !='' ">
+     	       and type = #{category}
+	         </if>
+     	     <if test="status != null and status !='' ">
+	        	and backgroud_status in
+		        	<foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+						 #{item}
+					</foreach>
+	        </if>
+	</select>
+
+	<select id="getPublishList" parameterType="java.util.Map" resultType="com.yundaren.support.po.ProjectPo">
+          SELECT
+             id as id,
+             type as type,
+			 price_range as priceRange,
+			 name as name,
+			 content as content,
+			 period as period,
+			 bid_end_time as bidEndTime,
+			 backgroud_status as backgroudStatus,
+			 creator_id as creatorId,
+			 employee_id as employeeId,
+  			 checker_id as checkerId,
+ 			 check_time as checkTime,
+ 			 check_result as checkResult,
+ 			 is_sincerity as isSincerity,
+			 ranking as ranking,
+			 create_time as createTime,
+			 accept_time as acceptTime,
+ 			 accept_result as acceptResult,
+ 			 finish_time as finishTime,
+			 remark as remark,
+			 (select count(1) from project_join where project_id = id) as joinCount
+          FROM project
+          WHERE
+            creator_id = #{userId}
+            ORDER BY create_time DESC
+            LIMIT #{beginPage},#{pageSize}
+	</select>
+
+	<select id="getPublishListCount" parameterType="java.util.Map" resultType="int">
+          SELECT
+             count(1)
+          FROM project
+          WHERE
+            creator_id = #{userId}
+	</select>
+
+	<select id="getJoinList" parameterType="java.util.Map" resultType="com.yundaren.support.po.ProjectPo">
+          SELECT
+             id as id,
+             type as type,
+			 price_range as priceRange,
+			 name as name,
+			 content as content,
+			 period as period,
+			 bid_end_time as bidEndTime,
+			 backgroud_status as backgroudStatus,
+			 creator_id as creatorId,
+			 employee_id as employeeId,
+  			 checker_id as checkerId,
+ 			 check_time as checkTime,
+ 			 attachment as attachment,
+ 			 check_result as checkResult,
+ 			 accept_time as acceptTime,
+ 			 accept_result as acceptResult,
+ 			 is_sincerity as isSincerity,
+			 ranking as ranking,
+ 			 finish_time as finishTime,
+			 create_time as createTime,
+			 remark as remark,
+			 (select count(1) from project_join where project_id = id) as joinCount
+          FROM project
+          WHERE
+            id IN (SELECT project_id FROM project_join WHERE user_id = #{userId})
+             <if test="category != null and category !='' ">
+     	       and type = #{category}
+	         </if>
+     	    <if test="status != null and status !='' ">
+	        	and backgroud_status in
+		        	<foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+						 #{item}
+					</foreach>
+	        </if>
+            ORDER BY backgroud_status ASC,create_time DESC
+          LIMIT #{beginPage},#{pageSize}
+	</select>
+
+	<select id="getJoinListCount" parameterType="java.util.Map" resultType="int">
+          SELECT
+             count(1)
+          FROM project
+          WHERE
+            id IN (SELECT project_id FROM project_join WHERE user_id = #{userId})
+             <if test="category != null and category !='' ">
+     	       and type = #{category}
+	         </if>
+     	    <if test="status != null and status !='' ">
+	        	and backgroud_status in
+		        	<foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+						 #{item}
+					</foreach>
+	        </if>
+	</select>
+
+	<update id="updateTimeoutProject" parameterType="java.lang.String">
+	<![CDATA[
+	 	 UPDATE
+            project
+         SET
+         	 backgroud_status = 8
+         WHERE
+           bid_end_time <= #{now} and (backgroud_status = 0 || backgroud_status = 1)
+     ]]>
+	</update>
+
+	<select id="getProjectJoinListByPID" parameterType="java.lang.String" resultType="com.yundaren.support.po.ProjectJoinPo">
+          SELECT
+             project_id as projectId,
+			 user_id as userId,
+			 price as price,
+			 period as period,
+			 choosed as choosed,
+ 			 attachment as attachment,
+			 matainance_period as matainancePeriod,
+			 plan as plan,
+			 choosed_time as choosedTime,
+			 create_time as createTime,
+			 kick_time as kickTime,
+			 remark as remark
+          FROM project_join
+          WHERE
+            project_id = #{pid}
+            ORDER BY choosed DESC,IF(choosed='-1',kick_time,create_time) ASC
+	</select>
+
+	<select id="getSelectedJoinInfo" parameterType="java.lang.String" resultType="com.yundaren.support.po.ProjectJoinPo">
+          SELECT
+             project_id as projectId,
+			 user_id as userId,
+			 price as price,
+			 period as period,
+			 attachment as attachment,
+			 matainance_period as matainancePeriod,
+			 choosed as choosed,
+			 plan as plan,
+			 choosed_time as choosedTime,
+			 create_time as createTime,
+			 kick_time as kickTime,
+			 remark as remark
+          FROM project_join
+          WHERE
+            project_id = #{pid} AND choosed = 1
+	</select>
+
+	<select id="getJoinedInfo" parameterType="java.util.Map" resultType="com.yundaren.support.po.ProjectJoinPo">
+          SELECT
+             project_id as projectId,
+			 user_id as userId,
+			 price as price,
+			 period as period,
+ 			 attachment as attachment,
+			 matainance_period as matainancePeriod,
+			 plan as plan,
+			 choosed_time as choosedTime,
+			 create_time as createTime,
+			 remark as remark
+          FROM project_join
+          WHERE
+            project_id = #{pid} and user_id = #{uid}
+	</select>
+
+	<update id="updateProject" parameterType="com.yundaren.support.po.ProjectPo">
+		UPDATE
+			project
+		SET
+			<if test="priceRange!=null and priceRange!=''">
+				price_range = #{priceRange},
+			</if>
+			<if test="name!=null and name!=''">
+				name = #{name},
+			</if>
+			<if test="type!=null and type!=''">
+				type = #{type},
+			</if>
+			<if test="content!=null and content!=''">
+				content = #{content},
+			</if>
+			<if test="publicContact!=null and publicContact!=''">
+				public_contact = #{publicContact},
+			</if>
+			<if test="period!=0">
+				period = #{period},
+			</if>
+			<if test="ranking!=-1">
+				ranking = #{ranking},
+			</if>
+			<if test="isSincerity!=-1">
+				is_sincerity = #{isSincerity},
+			</if>
+			<if test="backgroudStatus!=-10">
+				backgroud_status = #{backgroudStatus},
+			</if>
+			<if test="employeeId!=-1">
+				employee_id = #{employeeId},
+			</if>
+			<if test="attachment!=null and attachment!=''">
+				attachment = #{attachment},
+			</if>
+			<if test="remark!=null and remark!=''">
+				remark = #{remark},
+			</if>
+			<if test="contactMobile!=null and contactMobile!=''">
+				contact_mobile = #{contactMobile},
+			</if>
+			<if test="contactEmail!=null and contactEmail!=''">
+				contact_email = #{contactEmail},
+			</if>
+			<if test="contactQq!=null and contactQq!=''">
+				contact_qq = #{contactQq},
+			</if>
+			<if test="contactWeixin!=null and contactWeixin!=''">
+				contact_weixin = #{contactWeixin},
+			</if>
+			<if test="bidEndTime != null  and bidEndTime!=''">
+				bid_end_time = #{bidEndTime},
+			</if>
+			<if test="finishTime != null  and finishTime!=''">
+				finish_time = #{finishTime},
+			</if>
+			<if test="createTime != null  and createTime!=''">
+				create_time = #{createTime},
+			</if>
+			id = #{id}
+		WHERE
+			id = #{id}
+	</update>
+
+	<update id="supplementProject" parameterType="java.util.Map">
+		UPDATE
+			project
+		SET
+			content = CONCAT(content,#{title},#{content})
+		WHERE
+			id = #{id}
+	</update>
+
+	<update id="updateCheckStatus" parameterType="com.yundaren.support.po.ProjectPo">
+		UPDATE
+			project
+		SET
+			<if test="backgroudStatus!=0">
+				backgroud_status = #{backgroudStatus},
+			</if>
+			<if test="checkResult!=null and checkResult!=''">
+				check_result = #{checkResult},
+			</if>
+			<if test="checkerId!=-1">
+				checker_id = #{checkerId},
+			</if>
+			check_time = now()
+		WHERE
+			id = #{id}
+	</update>
+
+	<update id="updateAcceptStatus" parameterType="com.yundaren.support.po.ProjectPo">
+		UPDATE
+			project
+		SET
+			<if test="backgroudStatus!=0">
+				backgroud_status = #{backgroudStatus},
+			</if>
+			<if test="acceptResult!=null and acceptResult!=''">
+				accept_result = #{acceptResult},
+			</if>
+			<if test="acceptTime != null  and acceptTime!=''">
+				accept_time = #{acceptTime},
+			</if>
+			id = #{id}
+		WHERE
+			id = #{id}
+	</update>
+
+	<update id="updateProjectJoin" parameterType="com.yundaren.support.po.ProjectJoinPo">
+		UPDATE
+			project_join
+		SET
+			<if test="price!=0">
+				price = #{price},
+			</if>
+			<if test="period!=0">
+				period = #{period},
+			</if>
+			<if test="matainancePeriod!=-1">
+				matainance_period = #{matainancePeriod},
+			</if>
+			<if test="plan!=null and plan!=''">
+				plan = #{plan},
+			</if>
+			<if test="attachment!=null and attachment!=''">
+				attachment = #{attachment},
+			</if>
+			<if test="choosedTime!=null and choosedTime!=''">
+				choosed_time = #{choosedTime},
+			</if>
+			<if test="choosedTime==null or choosedTime==''">
+				choosed_time = null,
+			</if>
+			<if test="remark!=null and remark!=''">
+				remark = #{remark},
+			</if>
+			<if test="choosed!=-2">
+				choosed = #{choosed},
+			</if>
+			<if test="kickTime!=null and kickTime!=''">
+				kick_time = #{kickTime},
+			</if>
+		    project_id = project_id
+		WHERE
+			project_id = #{projectId}
+	    AND
+	    	user_id = #{userId}
+	</update>
+
+	<insert id="addWeixinRequest" useGeneratedKeys="true"
+	keyProperty="id" parameterType="com.yundaren.support.po.WeixinProjectPo">
+	<selectKey resultType="long" keyProperty="id">
+		SELECT
+		LAST_INSERT_ID()
+	</selectKey>
+		INSERT INTO weixin_project
+		(
+			type,
+			content,
+			contacts_name,
+			contact_number,
+			create_time,
+			ip_address,
+			remark
+		)
+		VALUES
+		(
+			#{type},
+			#{content},
+			#{contactsName},
+			#{contactNumber},
+			now(),
+			#{ipAddress},
+			#{remark}
+		)
+	</insert>
+
+	<select id="getBidTimeoutList" parameterType="java.lang.String" resultType="com.yundaren.support.po.ProjectPo">
+          SELECT
+             id as id,
+             type as type,
+			 price_range as priceRange,
+			 name as name,
+			 bid_end_time as bidEndTime,
+			 creator_id as creatorId,
+			 employee_id as employeeId,
+			 create_time as createTime
+          FROM project WHERE backgroud_status = 1
+	 	  AND TO_DAYS(bid_end_time) - TO_DAYS(#{now}) = 2
+	</select>
+
+	<select id="getRecommendProjectList" resultType="com.yundaren.support.po.ProjectPo">
+          SELECT
+             id as id,
+             type as type,
+			 price_range as priceRange,
+			 creator_id as creatorId,
+			 name as name,
+			 bid_end_time as bidEndTime,
+			 period as period,
+			 backgroud_status as backgroudStatus,
+			 is_sincerity as isSincerity,
+			 ranking as ranking,
+			 create_time as createTime
+          FROM project WHERE backgroud_status != -1 and backgroud_status != 0
+          ORDER BY backgroud_status ASC,ranking DESC,create_time DESC LIMIT 5
+	</select>
+
+	<select id="getReserveByID" parameterType="long" resultType="com.yundaren.support.po.WeixinProjectPo">
+          SELECT
+             id as id,
+             type as type,
+             content as content,
+			 contacts_name as contactsName,
+			 contact_number as contactNumber,
+	  		 status as status,
+	  		 ip_address as ipAddress,
+	  		 project_id as projectId,
+		     remark as remark,
+		     close_reason as closeReason,
+			 create_time as createTime
+          FROM weixin_project
+           where id = #{id}
+	</select>
+
+	<select id="getReserveList" parameterType="java.util.Map" resultType="com.yundaren.support.po.WeixinProjectPo">
+          SELECT
+             id as id,
+             type as type,
+             content as content,
+			 contacts_name as contactsName,
+			 contact_number as contactNumber,
+	  		 status as status,
+	  		 ip_address as ipAddress,
+	  		 project_id as projectId,
+		     remark as remark,
+		     close_reason as closeReason,
+			 create_time as createTime
+          FROM weixin_project
+           <if test="status != -1 ">
+           		where status = #{status}
+           </if>
+          ORDER BY status ASC,create_time DESC
+          LIMIT #{beginPage},#{pageSize}
+	</select>
+
+	<!-- 后台管理预约顾问翻页条数 -->
+	<select id="getReserveListCount" parameterType="java.util.Map" resultType="int">
+         select count(1) from weixin_project
+          <if test="status != -1 ">
+           		where status = #{status}
+           </if>
+	</select>
+
+	<!-- 首页预约顾问次数展现 -->
+	<select id="getAllReserveCount" resultType="int">
+         select count(1) from weixin_project
+	</select>
+
+	<update id="updateReserveByID" parameterType="com.yundaren.support.po.WeixinProjectPo">
+	 	UPDATE
+			weixin_project
+		SET
+			<if test="closeReason!=null and closeReason!=''">
+				close_reason = #{closeReason},
+			</if>
+			<if test="projectId!=null and projectId!=''">
+				project_id = #{projectId},
+			</if>
+			<if test="status!=-1">
+				status = #{status},
+			</if>
+			id = #{id}
+		WHERE id = #{id}
+	</update>
+
+	<!-- 新增自营项目 -->
+	<insert id="addProjectInSelfRun" useGeneratedKeys="true"
+	keyProperty="id" parameterType="com.yundaren.support.po.ProjectInSelfRunPo">
+	<selectKey resultType="String" keyProperty="id">
+		SELECT
+		LAST_INSERT_ID()
+	</selectKey>
+          INSERT INTO project_self_run
+            (
+			 type,
+			 abbr_image_path,
+			 budget,
+			 name,
+			 content,
+			 attachment,
+			 creator_id,
+			 create_time,
+			 start_time,
+			 period,
+			 consultant_id,
+			 status,
+			 repo_name,
+      	     deal_cost,
+      	     check_result,
+      	     enroll_role,
+      	     faith_project,
+      	     view_count,
+      	     is_need_buy_domain,
+      	     is_need_buy_serverdb
+            )
+          VALUES
+            (
+             #{type},
+             #{abbrImagePath},
+             #{budget},
+             #{name},
+             #{content},
+             #{attachment},
+             #{creatorId},
+             now(),
+             #{startTime},
+             #{period},
+             #{consultantId},
+             #{status},
+             #{repoName},
+             #{dealCost},
+             #{checkResult},
+             #{enrollRole},
+             #{faithProject},
+             #{viewCount},
+             #{isNeedBuyDomain},
+             #{isNeedBuyServerAndDB}
+            )
+	</insert>
+
+	<select id="getProjectInSelfRunById" parameterType="java.lang.String"  resultType="com.yundaren.support.po.ProjectInSelfRunPo">
+        SELECT
+             id as id,
+             type as type,
+			 budget as budget,
+			 name as name,
+			 content as content,
+			 attachment as attachment,
+			 start_time as startTime,
+			 period as period,
+			 create_time as createTime,
+			 status as status,
+			 creator_id as creatorId,
+			 consultant_id as consultantId,
+			 repo_name as repoName,
+      	     deal_cost as dealCost,
+      	     check_result as checkResult,
+      	     checker_id as checkerId,
+      	     is_gogs_allocated as isGogsAllocated,
+      	     repo_nick as repoNick,
+      	     enroll_role as enrollRole,
+      	     view_count as viewCount,
+      	     faith_project as faithProject,
+      	     abbr_image_path as abbrImagePath,
+      	     review_time as reviewTime,
+      	     is_need_buy_domain as isNeedBuyDomain,
+      	     is_need_buy_serverdb as isNeedBuyServerAndDB
+          FROM project_self_run
+          WHERE
+            id =  #{id}
+	</select>
+
+	<insert id="insertInviteServicerBacth" parameterType="java.util.Map">
+          INSERT INTO project_self_run_handler
+            (
+              project_id,
+              developer_id,
+              role
+            )
+              VALUES
+	         <foreach collection="ProjectInSelfRunHandlerList" item="item" index="index" separator="," >
+		        (#{item.projectId},#{item.developerId},#{item.role})
+		     </foreach>
+	</insert>
+
+	<delete id="deleteInviteServicerBacth" parameterType="java.util.Map">
+	   DELETE from project_self_run_handler
+	    WHERE project_id = #{projectId}
+	</delete>
+
+	<delete id="deletePushServicerBacth" parameterType="java.util.Map">
+	   DELETE from project_self_run_push
+	    WHERE project_id = #{projectId}
+	</delete>
+
+	<insert id="addPushProjectInfo" parameterType="java.util.Map">
+          <foreach collection="projectInviteList" item="item" index="index">
+          INSERT INTO project_self_run_push
+            (
+              developer_id,
+              creator_id,
+              create_time,
+              join_time,
+              project_id,
+              status,
+              join_plan,
+              enroll_role
+            )
+              SELECT #{item.developerId},#{creatorId},now(),#{item.joinTime},#{item.projectId},#{status},#{item.joinPlan},#{item.enrollRole} FROM DUAL
+              WHERE NOT EXISTS(SELECT developer_id FROM project_self_run_push WHERE project_id = #{item.projectId} and developer_id = #{item.developerId});
+		     </foreach>
+	</insert>
+
+	<select id="getDeveloperListByPID" parameterType="String"  resultType="com.yundaren.support.po.ProjectSelfRunPushPo">
+        SELECT
+			developer_id as developerId,
+			status as status,
+			join_time as joinTime,
+			creator_id as creatorId,
+			create_time as createTime,
+			project_id as projectId,
+			remark as remark,
+			is_alternative as isAlternative,
+		    join_plan as joinPlan,
+			enroll_role as enrollRole,
+			chosen_role as chosenRole
+          FROM project_self_run_push
+          WHERE
+            project_id =  #{pid}
+	</select>
+
+	<sql id="selectPushColumnList">
+		developer_id as developerId,
+		status as status,
+		join_time as joinTime,
+		creator_id as creatorId,
+		create_time as createTime,
+		project_id as projectId,
+		(select name from project_self_run where id = project_id) as projectName,
+		(select status from project_self_run where id = project_id) as projectStatus,
+		(select name from user_info where id= developer_id) as name,
+		join_plan as joinPlan,
+		enroll_role as enrollRole,
+		chosen_role as chosenRole
+	</sql>
+
+	<select id="getInviteListByDID" parameterType="long"  resultType="com.yundaren.support.po.ProjectSelfRunPushPo">
+        SELECT
+			<include refid="selectPushColumnList" />
+          FROM project_self_run_push t
+          WHERE
+            developer_id = #{did}
+            and status != 2 and status != 4 and status != 5 and status != 6 and status != 7
+            and (select status from project_self_run where id = t.project_id) = 0
+             group by project_id order by createTime desc
+	</select>
+
+	<select id="getJoinListByDID" parameterType="long"  resultType="com.yundaren.support.po.ProjectSelfRunPushPo">
+        select b.*  from (SELECT
+			<include refid="selectPushColumnList" />
+          FROM project_self_run_push t
+          WHERE
+            developer_id =  #{did}
+            and (status = 0 or status = 1 or status = 3 or status = 2 or status = 4 or status = 5 or status = 6 or status = 7) order by create_time desc) b
+            group by b.projectId order by joinTime desc
+	</select>
+
+	<select id="getRequestList" parameterType="long"  resultType="com.yundaren.support.po.ProjectInSelfRunPo">
+        SELECT
+		     id as id,
+             type as type,
+			 budget as budget,
+			 name as name,
+			 content as content,
+			 attachment as attachment,
+			 start_time as startTime,
+			 period as period,
+			 create_time as createTime,
+			 status as status,
+			 creator_id as creatorId,
+			 consultant_id as consultantId,
+			 faith_project as faithProject
+          FROM project_self_run
+          WHERE
+            creator_id =  #{uid}
+          ORDER BY create_time DESC
+	</select>
+
+	<update id="updateProjectSelfPush" parameterType="com.yundaren.support.po.ProjectSelfRunPushPo">
+		UPDATE
+			project_self_run_push
+		SET
+			<if test="joinTime != null and joinTime != ''">
+				join_time = #{joinTime},
+			</if>
+			<if test="status != -1">
+				status = #{status},
+			</if>
+			<if test="joinPlan != null and joinPlan != ''">
+				join_plan = #{joinPlan},
+			</if>
+			<if test="enrollRole != null and enrollRole != ''">
+				enroll_role = #{enrollRole}
+			</if>
+		WHERE
+			project_id = #{projectId} and developer_id = #{developerId}
+	</update>
+
+	<delete id="deleteInviteServicerByUId" parameterType="java.util.Map">
+	   DELETE from project_self_run_handler
+	    WHERE project_id = #{projectId}
+	    and developer_id = #{uid}
+	</delete>
+
+	<delete id="deletePushProjectInfo" parameterType="java.util.Map">
+	   DELETE from project_self_run_push
+	    WHERE project_id = #{projectId}
+	    and developer_id = #{developerId}
+	</delete>
+
+	<update id="uploadProjectAttachment" parameterType="java.util.Map">
+		UPDATE
+			project_self_run
+		SET
+			attachment = #{attachment}
+		WHERE
+			id = #{projectId}
+	</update>
+
+	<insert id="saveProjectPlan"  parameterType="com.yundaren.support.po.ProjectInSelfRunPlanPo">
+          INSERT INTO project_self_run_plan
+            (
+              project_id,
+              step_id,
+              step,
+              step_desc,
+              start_time,
+              end_time,
+              creator_id,
+              executor_id,
+              price,
+              status,
+              verify_status
+            )
+          VALUES
+            (
+              #{projectId},
+              #{stepId},
+              #{step},
+              #{stepDesc},
+              #{startTime},
+              #{endTime},
+              #{creatorId},
+              #{executorId},
+              #{price},
+              #{status},
+              #{verifyStatus}
+            )
+	</insert>
+	<select id="getNewStepId" parameterType="java.lang.String"  resultType="Integer">
+        SELECT max(step_id)+1  as newStepId from project_self_run_plan where project_id = #{projectId}
+	</select>
+	<select id="getProjectPlanByPId" parameterType="java.lang.String"  resultType="com.yundaren.support.po.ProjectInSelfRunPlanPo">
+        SELECT
+	        project_id as projectId,
+	        step_id as stepId,
+	        step as step,
+	        step_desc as stepDesc,
+	        start_time as startTime,
+	        end_time as endTime,
+	        creator_id as creatorId,
+	        price as price,
+	        (SELECT category FROM identify WHERE user_id = p.creator_id)as creatorCategory,
+	        (SELECT company_name FROM identify WHERE user_id = p.creator_id)as creatorCompanyName,
+	        (SELECT name FROM user_info WHERE id = p.creator_id)as creatorName,
+	        executor_id as executorId,
+	        (SELECT category FROM identify WHERE user_id =  p.executor_id)as executorCategory,
+	        (SELECT company_name FROM identify WHERE user_id = p.executor_id)as executorCompanyName,
+	        (SELECT name FROM user_info WHERE id =  p.executor_id)as executorName,
+	        status as status,
+	        (SELECT item.name FROM dict_item as item join dict_group as g on item.dict_group_id = g.id and g.id = 8 where item.value = p.status) as statusName,
+	        is_delayed as isDelayed,
+	        verify_status as verifyStatus,
+	        (SELECT item.name FROM dict_item as item join dict_group as g on item.dict_group_id = g.id and g.id = 10 where item.value = p.verify_status) as verifyStatusName
+	        
+        FROM
+        	project_self_run_plan as p
+        WHERE
+        	project_id = #{projectId}
+        ORDER BY step_id asc
+	</select>
+	
+	<select id="getProjectPlanByProjectIdAndStepId" parameterType="java.util.Map"  resultType="com.yundaren.support.po.ProjectInSelfRunPlanPo">
+        SELECT
+	        project_id as projectId,
+	        step_id as stepId,
+	        step as step,
+	        step_desc as stepDesc,
+	        start_time as startTime,
+	        end_time as endTime,
+	        creator_id as creatorId,
+	        price as price,
+	        (SELECT category FROM identify WHERE user_id = p.creator_id)as creatorCategory,
+	        (SELECT company_name FROM identify WHERE user_id = p.creator_id)as creatorCompanyName,
+	        (SELECT name FROM user_info WHERE id = p.creator_id)as creatorName,
+	        executor_id as executorId,
+	        (SELECT category FROM identify WHERE user_id =  p.executor_id)as executorCategory,
+	        (SELECT company_name FROM identify WHERE user_id = p.executor_id)as executorCompanyName,
+	        (SELECT name FROM user_info WHERE id =  p.executor_id)as executorName,
+	        status as status,
+	        (SELECT item.name FROM dict_item as item join dict_group as g on item.dict_group_id = g.id and g.id = 8 where item.value = p.status) as statusName,
+	        is_delayed as isDelayed,
+	        verify_status as verifyStatus,
+	        (SELECT item.name FROM dict_item as item join dict_group as g on item.dict_group_id = g.id and g.id = 10 where item.value = p.verify_status) as verifyStatusName
+        FROM
+        	project_self_run_plan as p
+        WHERE
+        	project_id = #{projectId}
+        	AND step_id = #{stepId}
+        ORDER BY step_id asc
+	</select>
+
+
+	<delete id="deleteProjectPlanByStepId" parameterType="java.util.Map">
+	   DELETE from project_self_run_plan
+	    WHERE project_id = #{projectId}
+	    and step_id = #{stepId}
+	</delete>
+
+	<update id="updateProjectPlanByStepId" parameterType="com.yundaren.support.po.ProjectInSelfRunPlanPo">
+		UPDATE
+			project_self_run_plan
+		SET
+              step = #{step},
+              step_desc = #{stepDesc},
+              start_time = #{startTime},
+              end_time = #{endTime},
+              creator_id = #{creatorId},
+              executor_id = #{executorId},
+              price = #{price},
+              status = #{status},
+              is_delayed = #{isDelayed},
+              verify_status = #{verifyStatus}
+		WHERE project_id = #{projectId}
+	   	 	  and step_id = #{stepId}
+	</update>
+
+
+	<select id="getNewMonitorStepId" parameterType="java.lang.String"  resultType="Integer">
+        SELECT max(step_id)+1  as newStepId from project_self_run_monitor where project_id = #{projectId}
+	</select>
+	<insert id="saveProjectMonitor"  parameterType="com.yundaren.support.po.ProjectInSelfRunPlanPo">
+          INSERT INTO project_self_run_monitor
+            (
+              project_id,
+              creator_id,
+              step_id,
+              monitor_desc,
+              attachment,
+              create_time
+            )
+          VALUES
+            (
+              #{projectId},
+              #{creatorId},
+              #{stepId},
+              #{monitorDesc},
+              #{attachment},
+              #{createTime}
+            )
+	</insert>
+
+	<select id="getProjectMonitorByPId" parameterType="java.lang.String"  resultType="com.yundaren.support.po.ProjectInSelfRunMonitorPo">
+        SELECT
+	       project_id as projectId,
+	       creator_id as creatorId,
+	       (SELECT name FROM user_info WHERE id = creator_id) as name,
+	       (SELECT company_name FROM identify WHERE user_id = creator_id) as companyName,
+	       (SELECT category FROM identify WHERE user_id = creator_id) as category,
+	       step_id as stepId,
+	       monitor_desc as monitorDesc,
+	       attachment as attachment,
+	       create_time as createTime
+        FROM
+        	project_self_run_monitor as p
+        WHERE
+        	project_id = #{projectId}
+        ORDER BY step_id asc
+	</select>
+	
+	<select id="getProjectMonitorByPidAndStepId" parameterType="java.util.Map" resultType="com.yundaren.support.po.ProjectInSelfRunMonitorPo">
+        SELECT
+	       project_id as projectId,
+	       creator_id as creatorId,
+	       (SELECT name FROM user_info WHERE id = creator_id) as name,
+	       (SELECT company_name FROM identify WHERE user_id = creator_id) as companyName,
+	       (SELECT category FROM identify WHERE user_id = creator_id) as category,
+	       step_id as stepId,
+	       monitor_desc as monitorDesc,
+	       attachment as attachment,
+	       create_time as createTime
+        FROM
+        	project_self_run_monitor as p
+        WHERE
+        	project_id = #{projectId}
+        	And step_id = #{stepId}
+        ORDER BY step_id asc
+	</select>
+	
+	<select id="getExcutorIdByProjectIdAndStepId" parameterType="java.util.Map" resultType="java.lang.String">
+		select
+			executor_id
+		from 
+			project_self_run_plan
+		where 
+			project_id = #{projectId}
+   	 	    and step_id = #{stepId}
+	</select>
+	
+	<select id="getCreatorIdByProjectIdAndStepId" parameterType="java.util.Map" resultType="java.lang.String">
+		select creator_id from project_self_run where id=#{projectId}
+	</select>
+	
+	<delete id="deleteProjectMonitorByStepId" parameterType="java.util.Map">
+	   DELETE from project_self_run_monitor
+	    WHERE project_id = #{projectId}
+	    and step_id = #{stepId}
+	</delete>
+
+	<update id="updateProjectMonitorByStepId" parameterType="com.yundaren.support.po.ProjectInSelfRunMonitorPo">
+		UPDATE
+			project_self_run_monitor
+		SET
+              monitor_desc = #{monitorDesc},
+              attachment = #{attachment}
+		WHERE project_id = #{projectId}
+	   	 	  and step_id = #{stepId}
+	</update>
+	
+	<select id="getProjectRunHandlerCount" parameterType="java.lang.String"  resultType="java.lang.Integer">
+		SELECT
+	      	 count(1)
+        FROM
+        	project_self_run_handler as ph
+        WHERE
+        	project_id = #{projectId}
+	</select>
+	
+	<select id="getProjectRunHandlerByProjectIdAndDevId" parameterType="java.util.Map"  resultType="com.yundaren.support.po.ProjectInSelfRunHandlerPo">
+		SELECT
+	      	project_id as projectId,
+	      	developer_id as developerId,
+	      	role as role
+        FROM
+        	project_self_run_handler
+        WHERE
+        	project_id = #{projectId} 
+        	and developer_id = #{developerId}
+	</select>
+	
+	<select id="getProjectSelfRunChosenDevlopers" parameterType="java.lang.Long"  resultType="com.yundaren.support.po.ProjectInSelfRunHandlerPo">
+		SELECT
+	      	project_id as projectId,
+	      	developer_id as developerId,
+	      	role as role
+        FROM
+        	project_self_run_handler
+        WHERE
+        	project_id = #{projectId} 
+	</select>
+
+	<select id="getUserCountInProjectPlaning" parameterType="java.lang.String"  resultType="java.lang.Integer">
+		SELECT
+	      	 count(1)
+        FROM
+        	project_self_run_handler as ph
+				join project_self_run as pr on id = #{projectId}
+        WHERE
+        	project_id = #{projectId}
+      		and (developer_id = #{developerId}
+			or pr.creator_id=#{creatorId})
+	</select>
+
+	<select id="getCondulterInProjectPlaning" parameterType="java.lang.String"  resultType="java.lang.Integer">
+		SELECT
+	      	 count(1)
+        FROM
+			project_self_run
+        WHERE
+        	id = #{projectId}
+      		and consultant_id = #{consultantId}
+	</select>
+
+	<select id="getProjectPushByID" parameterType="java.util.Map"  resultType="java.lang.Integer">
+		SELECT
+	      	 count(1)
+        FROM
+			project_self_run_push
+        WHERE
+        	developer_id = #{uid}
+      		and project_id = #{pid}
+	</select>
+	
+	<select id="getProjectSelfRunPushInfoByID" parameterType="java.util.Map"  resultType="com.yundaren.support.po.ProjectSelfRunPushPo">
+		SELECT
+	      	 <include refid="selectPushColumnList" />
+        FROM
+			project_self_run_push
+        WHERE
+        	developer_id = #{uid}
+      		and project_id = #{pid}
+	</select>
+
+
+	<select id="getAttendProjSelfRunList" parameterType="java.util.Map"  resultType="com.yundaren.support.po.ProjectInSelfRunPo">
+		SELECT
+	      	 id as id,
+	      	 name as name,
+	      	 content as content,
+	      	 create_time as createTime,
+	      	 (select max(l.create_time) from project_op_log l where p.id = l.project_id) as latestUpdateTime,
+	      	 creator_id as creatorId,
+	      	 type as type,
+	      	 (SELECT name FROM user_info where id=p.creator_id)as creatorName,
+	      	 (SELECT mobile FROM user_info where id=p.creator_id)as mobile,
+	      	 (SELECT company_name FROM identify where user_id=p.creator_id)as creatorCompanyName,
+	      	 (SELECT category FROM identify WHERE user_id = p.creator_id) as creatorCategory,
+	      	 consultant_id as consultantId,
+	      	 (SELECT name FROM user_info where id=p.consultant_id)as consultantName,
+	      	 status as status,
+	      	 (SELECT name FROM dict_item WHERE dict_group_id=6 and value=p.start_time) as startTimeTag,
+	      	 period as period,
+	      	 budget as budget,
+     	     repo_name as repoName,
+      	     deal_cost as dealCost,
+      	     faith_project as faithProject
+        FROM
+			project_self_run as p
+		    WHERE 1=1
+	    	AND consultant_id = #{consultantId}			
+			<if test="projectType != null and projectType != ''">
+				AND type like #{projectType}
+			</if>
+			<if test="projectStatus != null and projectStatus != ''">
+				AND status = #{projectStatus}
+			</if>
+			<if test="projectStatus == null or projectStatus == ''">
+				AND (status = -1 or status = 0 or status = 1 or status = 2)
+			</if>
+		HAVING(name like #{matchAllQuery})
+		ORDER BY latestUpdateTime DESC,CREATE_TIME DESC
+	    LIMIT #{beginPage},#{pageSize}
+	</select>
+
+	<select id="getAttendProjSelfRunListCount" parameterType="java.util.Map"  resultType="java.lang.Integer">
+		SELECT
+			count(1)
+		FROM(
+			SELECT
+		      	 id as id,
+		      	 name as name,
+		      	 content as content,
+		      	 create_time as createTime,
+		      	 creator_id as creatorId,
+		      	 consultant_id as consultantId,
+		      	 status as status,
+		      	 budget as budget,
+		      	 repo_name as repoName,
+		      	 deal_cost as dealCost
+	        FROM
+				project_self_run as p
+		    WHERE 1=1
+			AND consultant_id = #{consultantId}
+			<if test="projectType != null and projectType != ''">
+				AND type like #{projectType}
+			</if>
+			<if test="projectStatus != null and projectStatus != ''">
+				AND status = #{projectStatus}
+			</if>
+			<if test="projectStatus == null or projectStatus == ''">
+				AND (status = -1 or status = 0 or status = 1 or status = 2)
+			</if>
+			HAVING(name like #{matchAllQuery})
+	    )t
+	</select>
+
+	<select id="getRemarkDeveloperListByPID" parameterType="String"  resultType="com.yundaren.support.po.ProjectSelfRunPushPo">
+        SELECT
+        	u.name as name,
+        	i.company_name as companyName,
+        	i.category as category,
+			p.developer_id as developerId,
+			p.status as status,
+			p.join_time as joinTime,
+			p.creator_id as creatorId,
+			p.create_time as createTime,
+			p.project_id as projectId,
+			p.remark as remark,
+			p.is_alternative as isAlternative
+          FROM project_self_run_push AS p
+          JOIN user_info AS u ON u.id = p.developer_id
+          JOIN identify AS i ON i.user_id = p.developer_id
+          WHERE p.project_id =  #{projectId}
+            	and p.status = 2
+          ORDER BY p.join_time DESC
+	</select>
+
+	<update id="updateRemarkDeveloper" parameterType="java.util.Map">
+		UPDATE
+			project_self_run_push
+		SET
+			<if test='isAlternative!=null'>
+				is_alternative = #{isAlternative},
+			</if>
+			<if test='remark!=null'>
+				remark = #{remark},
+			</if>
+			developer_id = #{id}
+		WHERE
+			developer_id = #{id}
+		  	and project_id = #{projectId}
+	</update>
+
+	<select id="getInselfRunProjectList" parameterType="java.util.Map"  resultType="com.yundaren.support.po.ProjectInSelfRunPo">
+		SELECT
+			id as id,
+			name as name,
+			type as type,
+			(SELECT name FROM dict_item WHERE dict_group_id = 6 AND value = start_time)as startTimeTag,
+			(SELECT name FROM dict_item WHERE dict_group_id = 4 AND value = type)as typeName,
+			period as period,
+		 	abbr_image_path as abbrImagePath,
+			budget as budget,
+			create_time as createTime,
+			content as content,
+			attachment as attachment,
+			status as status,
+			enroll_role as enrollRole,
+			view_count as viewCount,
+			(SELECT name FROM user_info WHERE id = creator_id LIMIT 1) as creatorName,
+			(SELECT name FROM user_info WHERE id = consultant_id LIMIT 1) as consultantName,
+			faith_project as faithProject,
+			review_time as reviewTime
+		FROM project_self_run
+		WHERE
+			1=1
+		<if test='status!=null'>
+		AND status = #{status}
+		</if>
+		AND status!=-1
+		AND status!= 3
+		HAVING(name like #{matchAllQuery} and type like #{typeAllQuery})
+		ORDER BY status ASC,CREATE_time DESC
+		LIMIT #{beginPage},#{pageSize}
+	</select>
+	<select id="getInselfRunProjectListForAdmin" parameterType="java.util.Map"  resultType="com.yundaren.support.po.ProjectInSelfRunPo">
+		SELECT
+			id as id,
+			name as name,
+			type as type,
+			(SELECT name FROM dict_item WHERE dict_group_id = 6 AND value = start_time)as startTimeTag,
+			(SELECT name FROM dict_item WHERE dict_group_id = 4 AND value = type)as typeName,
+			budget as budget,
+			period as period,
+			create_time as createTime,
+			(select max(l.create_time) from project_op_log l where p.id = l.project_id) as latestUpdateTime,
+			content as content,
+			attachment as attachment,
+			status as status,
+			enroll_role as enrollRole,
+			view_count as viewCount,
+			consultant_id as consultantId,
+			(SELECT name FROM user_info WHERE id = creator_id LIMIT 1) as creatorName,
+			(SELECT name FROM user_info WHERE id = consultant_id LIMIT 1) as consultantName,
+			faith_project as faithProject
+		FROM project_self_run p
+		WHERE
+			1=1
+		<if test='status!=null'>
+		AND status = #{status}
+		</if>
+		<if test='consultantId != null and consultantId != ""'>
+		 And consultant_id = #{consultantId}
+		</if>
+		HAVING(name like #{matchAllQuery} and type like #{typeAllQuery})
+		ORDER BY status ASC,latestUpdateTime DESC,CREATE_TIME DESC
+		LIMIT #{beginPage},#{pageSize}
+	</select>
+	<select id="getInselfRunProjectListCount" parameterType="java.util.Map"  resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM(
+			SELECT
+			id as id,
+			name as name,
+			type as type,
+			(SELECT name FROM dict_item WHERE dict_group_id = 6 AND value = start_time)as startTimeTag,
+			(SELECT name FROM dict_item WHERE dict_group_id = 4 AND value = type)as typeName,
+			period as period,
+			budget as budget,
+			create_time as createTime,
+			content as content,
+			attachment as attachment,
+			status as status,
+			(SELECT name FROM user_info WHERE id = creator_id LIMIT 1) as creatorName,
+			(SELECT name FROM user_info WHERE id = consultant_id LIMIT 1) as consultantName
+		FROM project_self_run
+		WHERE
+			1=1
+		<if test='status!=null'>
+		AND status = #{status}
+		</if>
+		AND status!=-1
+		AND status!= 3
+		HAVING(name like #{matchAllQuery} and type like #{typeAllQuery})
+		)t
+	</select>
+	<select id="getInselfRunProjectListCountForAdmin" parameterType="java.util.Map"  resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM(
+			SELECT
+			id as id,
+			name as name,
+			type as type,
+			(SELECT name FROM dict_item WHERE dict_group_id = 6 AND value = start_time)as startTimeTag,
+			(SELECT name FROM dict_item WHERE dict_group_id = 4 AND value = type)as typeName,
+			budget as budget,
+			create_time as createTime,
+			content as content,
+			attachment as attachment,
+			status as status,
+			(SELECT name FROM user_info WHERE id = creator_id LIMIT 1) as creatorName,
+			(SELECT name FROM user_info WHERE id = consultant_id LIMIT 1) as consultantName
+		FROM project_self_run
+		WHERE
+			1=1
+		<if test='status!=null'>
+		AND status = #{status}
+		</if>
+	    <if test='consultantId != null and consultantId != ""'>
+		 And consultant_id = #{consultantId}
+		</if>
+		HAVING(name like #{matchAllQuery} and type like #{typeAllQuery})
+		)t
+	</select>
+	<select id="getNewProjectsCount" parameterType="java.util.Map"  resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM
+			project_self_run
+		WHERE create_time>=#{startQueryTime}
+		<if test='endQueryTime!=null'>
+          	AND create_time<![CDATA[<=]]>#{endQueryTime}
+        </if>
+	</select>
+	<select id="getNewWeixinProjectsCount" parameterType="java.util.Map"  resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM
+			weixin_project
+		WHERE create_time>=#{startQueryTime}
+		<if test='endQueryTime!=null'>
+          	AND create_time<![CDATA[<=]]>#{endQueryTime}
+        </if>
+	</select>
+	<update id="updateProjectInSelfRun" parameterType="com.yundaren.support.po.ProjectInSelfRunPo">
+		UPDATE
+			project_self_run
+		SET
+			<if test="name!=null and name!=''">
+				name = #{name},
+			</if>
+			<if test="type!=null and type!=''">
+				type = #{type},
+			</if>
+			<if test="startTime!=null and startTime!=''">
+				start_time = #{startTime},
+			</if>
+			<if test="content!=null and content!=''">
+				content = #{content},
+			</if>
+			<if test="budget!=null and budget!=''">
+				budget = #{budget},
+			</if>
+			<if test="createTime!=null and createTime!=''">
+				create_time = #{createTime},
+			</if>
+            <if test="attachment!=null and attachment!=''">
+				attachment = #{attachment},
+			</if>
+			<if test="status!=-2">
+				status = #{status},
+			</if>
+			<if test="period!=-1">
+				period = #{period},
+			</if>
+			<if test="creatorId!=null and creatorId!=''">
+				creator_id = #{creatorId},
+			</if>
+			<if test="consultantId!=null and consultantId!=''">
+				consultant_id = #{consultantId},
+			</if>
+			<if test="dealCost!=null and dealCost!=''">
+				deal_cost = #{dealCost},
+			</if>
+			<if test="repoName!=null and repoName!=''">
+				repo_name = #{repoName},
+			</if>
+			<if test="checkResult!=null and checkResult!=''">
+				check_result = #{checkResult},
+			</if>
+			<if test="checkerId!=null and checkerId!=''">
+				checker_id = #{checkerId},
+			</if>
+			<if test="enrollRole!=null and enrollRole!=''">
+				enroll_role = #{enrollRole},
+			</if>
+		    <if test="viewCount != 0">
+				view_count = #{viewCount},
+			</if>
+			<if test="faithProject!=-1">
+				faith_project = #{faithProject},
+			</if>
+			<if test="reviewTime != null">
+				review_time = #{reviewTime},
+			</if>
+			<if test="isNeedBuyDomain != -1">
+				is_need_buy_domain = #{isNeedBuyDomain},
+			</if>
+			<if test="isNeedBuyServerAndDB != -1">
+				is_need_buy_serverdb = #{isNeedBuyServerAndDB},
+			</if>
+			id=id
+		WHERE
+			id = #{id}
+	</update>
+
+	<update id="updateRepoAllocated" parameterType="java.util.Map">
+		UPDATE
+			project_self_run
+		SET
+			repo_nick = #{repoNick}
+		,
+			is_gogs_allocated = #{isGogsAllocated}
+		WHERE
+			id = #{id}
+	</update>
+
+	<select id="getExistRepoNameCount" parameterType="java.util.Map"  resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM
+			project_self_run
+		WHERE repo_nick = #{repoNick}
+	</select>
+
+	<insert id="addProjectOperationLog"   useGeneratedKeys="true"
+	keyProperty="id"  parameterType="com.yundaren.support.po.ProjectOperationLogPo">
+	<selectKey resultType="java.lang.Long" keyProperty="id">
+		SELECT
+		LAST_INSERT_ID()
+	</selectKey>
+          INSERT INTO project_op_log
+            (
+              create_time,
+              update_time,
+              delete_time,
+              log_content,
+              log_permission,
+              creator_id,
+							project_id
+            )
+          VALUES
+            (
+              now(),
+              #{updateTime},
+              #{deleteTime},
+			  #{logContent},
+			  #{logPermission},
+              #{creatorId},
+							#{projectId}
+            )
+	</insert>
+
+	<update id="updateProjectOperationLog" parameterType="com.yundaren.support.po.ProjectOperationLogPo">
+		UPDATE
+			project_op_log
+		SET
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			<if test="deleteTime != null">
+				delete_time = #{deleteTime},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			<if test="creatorId != 0">
+				creator_id = #{creatorId},
+			</if>
+			<if test="logContent != null and logContent != ''">
+				log_content = #{logContent},
+			</if>
+			<if test="projectId != 0">
+				project_id = #{projectId},
+			</if>
+			<if test="logPermission != 0">
+				log_permission = #{logPermission},
+			</if>
+			update_time = now(),
+			id = #{id}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="deleteProjectOperationLog" parameterType="java.lang.Long">
+	   DELETE from project_op_log
+	    WHERE id = #{logId}
+	</delete>
+
+	<select id="getProjectOperationLogByProjectId" parameterType="java.lang.Long" resultType="com.yundaren.support.po.ProjectOperationLogPo">
+		 SELECT
+             id as id,
+             create_time as createTime,
+			 update_time as updateTime,
+			 delete_time as deleteTime,
+			 creator_id as creatorId,
+			 log_content as logContent,
+			 log_permission as logPermission,
+			 project_id as projectId
+		FROM
+			project_op_log
+		where project_id = #{projectId}
+		order by create_time DESC
+	</select>
+
+	<select id="getProjectOperationLogById" parameterType="java.lang.Long" resultType="com.yundaren.support.po.ProjectOperationLogPo">
+		 SELECT
+             id as id,
+             create_time as createTime,
+			 update_time as updateTime,
+			 delete_time as deleteTime,
+			 creator_id as creatorId,
+			 log_content as logContent,
+			 log_permission as logPermission,
+			 project_id as projectId
+		FROM
+			project_op_log
+		where id = #{logId}
+	</select>
+	
+	<select id="getRealProjectSelfRunPushsbyProjectId" parameterType="java.util.Map"  resultType="com.yundaren.support.po.ProjectSelfRunPushPo">
+		 SELECT
+			<include refid="selectPushColumnList" />
+          FROM project_self_run_push
+          WHERE
+            project_id =  #{projectId}
+            and status not in(5,6,7)
+            LIMIT #{beginPage},#{pageSize}
+	</select>
+	
+	<select id="getRealProjectSelfRunPushsCount" resultType="int">
+		 SELECT
+			count(*)
+		 FROM project_self_run_push
+          WHERE
+            project_id =  #{projectId}
+            and status not in(5,6,7)
+	</select>
+	
+	
+	
+	<select id="getEnrollDevlopersbyProjectId" parameterType="java.lang.Long"  resultType="com.yundaren.support.po.ProjectSelfRunPushPo">
+		 SELECT
+			<include refid="selectPushColumnList" />
+          FROM project_self_run_push
+          WHERE
+            project_id =  #{projectId}
+            and (status = 5 or status = 2 or status = 4 or status = 6 or status = 7)
+	</select>
+	
+	<update id="updateProjectInSelfRunDev" parameterType="com.yundaren.support.po.ProjectSelfRunPushPo">
+		UPDATE
+			project_self_run_push
+		SET
+			<if test="chosenRole != null and chosenRole != ''">
+				chosen_role = #{chosenRole},
+			</if>
+			<if test="status != -1">
+				status = #{status}
+			</if>
+		WHERE
+			project_id = #{projectId} and developer_id = #{developerId}
+	</update>
+	
+	<select id="getAssignRecord" resultType="com.yundaren.support.po.ProjectAssignPo">
+	SELECT 
+		project_id as project_id,
+		creator_id as creator_id,
+		assign_id as assign_id,
+		reason as reason
+		FROM project_assign;
+	</select>
+								 
+	<insert id="addAssignRecord" parameterType="com.yundaren.support.po.ProjectAssignPo">
+		INSERT INTO project_assign
+			(
+				project_id,
+				creator_id,
+				assign_id,
+				reason,
+				assign_time
+			)
+			VALUES
+			(
+				#{projectId},
+				#{creatorId},
+				#{assignId},
+				#{reason},
+				#{assignTime}
+			) 
+	</insert>
+	
+	<select id="getProjectPlanAvalibleAmount" parameterType="int" resultType="double">
+		SELECT
+			CASE 
+			WHEN sum(price) is null THEN 0
+			ELSE sum(price)
+			END as acount
+		FROM project_self_run_plan where project_id = #{projectId}
+	</select>
+</mapper>

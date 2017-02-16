@@ -1,0 +1,42 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+input[type="text"]{
+	border:solid rgb(169, 169, 169) 1px;
+}
+
+textarea{
+	padding: 10px;
+	width: 100%;
+	resize: none;
+	/*height: 250px;*/
+	border-radius: 3px;
+}
+
+#sender{
+	height: 100px;
+}
+
+.body{
+	margin-top: 100px;
+}
+
+.contentMsg-margin-top{
+	margin-top: 5px;
+}
+
+.sendMsg-margin-top{
+	margin-top: 10px;
+}
+
+.sendMsg{
+	background: white;
+	border-radius: 3px;
+	border:solid 1px rgb(169, 169, 169);
+	min-height: 250px;
+	padding:10px;
+}
+
+

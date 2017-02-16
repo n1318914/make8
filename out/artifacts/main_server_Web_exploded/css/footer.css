@@ -1,0 +1,151 @@
+.tail{background: #404040;}
+.tail-Logo>img{margin-bottom: 40px;}
+.tail-Logo div{margin-bottom: 10px;}
+.tail-Logo div a{margin-bottom: 5px;padding-left: 0px;}
+.tail-Logo div a:first-of-type{cursor: default;}
+.tail-Logo div a img{float: left;margin-right: 5px;}
+.tail-Logo div a i{float:left;color:#5e5e5e;padding-top: 8px;}
+.tail ul li{color:white;margin-bottom:10px;}
+.ul-li-Acolor{color:#b1b1b1;}
+.ul-li-Acolor:hover{color:#3a719a;text-decoration: none;}
+.connectionWe{color:white}
+.connectionWe-phone{font-size: 26px;font-weight:100;height: 85px;}
+.connectionWe-email{font-size: 20px;font-weight:100;margin-bottom:10px;}
+.connectionWe-addr{font-size: 12.8px;font-weight:100;}
+.footer-weixin-weibo{width: 226px;}
+.footer-weixin{float: left;width:113px}
+.weibo{float:left;width:113px}
+.weibo img{margin-left: 10px;}
+.pronouncements{color:#969696;padding:15px 0;}
+.erweima{display: none;position:absolute;top:-1px;}
+/*tail end*/
+
+@media screen and (max-width:1600px) {
+	.connectionWe p:first-of-type{font-size:26px;}
+	.connectionWe p:nth-of-type(2){font-size:16px;}
+	.connectionWe p:last-of-type{font-size:8px;}
+}
+
+@media only screen and (max-width:992px ) {
+	.footer-company{text-align: right;}
+	.footer-title{text-align: center;}
+	.footer-weixin-weibo{margin: 0 auto;}
+}
+
+/**new css for footer**/
+.tail {
+	background: #0e2636;
+	color: #ffffff;
+	padding: 72px 0px 20px 0px;
+}
+
+.company_brand li{
+	height:30px;
+	margin-top: 15px;
+}
+
+.pronouncements{
+	color:#838688;
+}
+
+.pronouncements a{
+	color: #838688 !important;
+}
+
+.company span:first-of-type,.service span:first-of-type,.problem span:first-of-type{
+	height: 20px;
+	float: left;
+	display: block;
+	margin-right: 10px;
+	width: 21px;
+}
+
+.company ul,.service ul,.problem ul{
+	margin-top: 15px;
+	border-left: solid 1px #6e6e6e;
+	font-size: 13px;
+	padding-left: 10px;
+}
+
+.company ul li,.service ul li,.problem ul li{
+	margin-bottom: 10px;
+}
+
+.company ul li:hover,.service ul li:hover,.problem ul li:hover{
+	color: #2e78a8;
+	cursor: pointer;
+}
+
+.problem span:first-of-type{
+	margin-right: 9px;
+}
+
+.foot_phone div:last-of-type{
+	font-size: 29px;
+}
+
+.foot_phone div:first-of-type{
+	margin-top: 5px;
+}
+
+.foot_wei div,.foot_phone div:first-of-type{
+	width: 30px;
+	height: 30px;
+	float: left;
+	margin-right: 10px;
+	position: relative;
+}
+
+.foot_right > div{
+	margin-bottom: 13px;
+}
+
+/*二维码*/
+#make8_erweima{
+	position: absolute;
+	display: none;
+	width: 158px;
+	height: 158px;
+    top: -180px;
+    left: -120px;
+}
+
+#make8_erweima:after{
+    content: '';
+    display: block;
+    width: 15px;
+    height: 15px;
+    background: white;
+    transform: rotate(45deg);
+    margin-top: -8.5px;
+    margin-left: 130px;
+}
+
+#make8_erweima img{
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+/*tail end*/
+
+@media screen and (max-width:768px) {
+	.company_brand{
+		margin-bottom: 15px;
+	}
+	
+	.foot_right > div{
+		margin-bottom: 5px;
+	}
+	
+	.company_center{
+		margin-bottom: 10px;
+	}
+	
+	#make8_erweima{
+    	left: 0px;
+	}
+	
+	#make8_erweima:after{
+	    margin-left: 15px;
+	}
+}

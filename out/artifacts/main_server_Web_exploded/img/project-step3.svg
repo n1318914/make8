@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="917px" height="170px" viewBox="0 0 917 170" enable-background="new 0 0 917 170" xml:space="preserve">
+<polygon fill="#DCDDDD" points="827.037,133.333 663.371,133.333 663.371,30 827.037,30 891.704,81.667 "/>
+<polygon fill="#DCDDDD" points="663.371,133.333 499.704,133.333 499.704,30 663.371,30 728.037,81.667 "/>
+<polygon fill="#388FCB" points="500.215,133.333 336.548,133.333 336.548,30 500.215,30 564.881,81.667 "/>
+<g>
+	<line fill="none" stroke="#C9CACA" stroke-miterlimit="10" x1="827.037" y1="30" x2="891.704" y2="81.667"/>
+	<line fill="none" stroke="#C9CACA" stroke-miterlimit="10" x1="891.704" y1="81.667" x2="827.037" y2="133.333"/>
+</g>
+<g>
+	<line fill="none" stroke="#C9CACA" stroke-miterlimit="10" x1="663.371" y1="30" x2="728.037" y2="81.667"/>
+	<line fill="none" stroke="#C9CACA" stroke-miterlimit="10" x1="728.037" y1="81.667" x2="663.371" y2="133.333"/>
+</g>
+<g>
+	<line fill="none" stroke="#00A0E9" stroke-miterlimit="10" x1="499.704" y1="30" x2="564.371" y2="81.667"/>
+	<line fill="none" stroke="#00A0E9" stroke-miterlimit="10" x1="564.371" y1="81.667" x2="499.704" y2="133.333"/>
+</g>
+<g>
+	<line fill="none" stroke="#00A0E9" stroke-miterlimit="10" x1="336.548" y1="30" x2="401.215" y2="81.667"/>
+	<line fill="none" stroke="#00A0E9" stroke-miterlimit="10" x1="401.215" y1="81.667" x2="336.548" y2="133.333"/>
+</g>
+<polygon fill="#388FCB" points="336.037,133.333 172.371,133.333 172.371,30 336.037,30 400.704,81.667 "/>
+<polygon fill="#388FCB" points="172.371,133.333 34.371,133.333 34.371,30 172.371,30 237.037,81.667 "/>
+<circle fill="#388FCB" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="36.371" cy="31" r="27"/>
+<text transform="matrix(1 0 0 1 27.4077 42.6138)" fill="#FFFFFF" font-family="'Helvetica-Narrow-Bold'" font-size="39.3067">1</text>
+<circle fill="#388FCB" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="268.037" cy="139.333" r="27"/>
+<text transform="matrix(1 0 0 1 259.0744 150.9471)" fill="#FFFFFF" font-family="'Helvetica-Narrow-Bold'" font-size="39.3067">2</text>
+<circle fill="#388FCB" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="437.204" cy="30" r="27"/>
+<text transform="matrix(1 0 0 1 428.2411 41.6138)" fill="#FFFFFF" font-family="'Helvetica-Narrow-Bold'" font-size="39.3067">3</text>
+<circle fill="#C9CACA" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="601.871" cy="139.333" r="27"/>
+<text transform="matrix(1 0 0 1 592.9077 150.9471)" fill="#FFFFFF" font-family="'Helvetica-Narrow-Bold'" font-size="39.3067">4</text>
+<circle fill="#C9CACA" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="824.037" cy="34.667" r="27"/>
+<text transform="matrix(1 0 0 1 815.0744 46.2804)" fill="#FFFFFF" font-family="'Helvetica-Narrow-Bold'" font-size="39.3067">5</text>
+<g>
+	<line fill="none" stroke="#00A0E9" stroke-miterlimit="10" x1="172.371" y1="30" x2="237.037" y2="81.667"/>
+	<line fill="none" stroke="#00A0E9" stroke-miterlimit="10" x1="237.037" y1="81.667" x2="172.371" y2="133.333"/>
+</g>
+</svg>

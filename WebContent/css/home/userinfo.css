@@ -1,0 +1,172 @@
+body{overflow-x: hidden;}
+textarea{resize: none;}
+.marginTopL{-10px}
+.sendProject{min-height: 35px;line-height: 35px;}
+.operation{min-height: 35px;cursor: pointer;}
+.smallImg{margin-top:10px;margin-right: 5px;float: left;}
+.spanTip{display:block;font-size:8px;position:absolute;background: red;color: white;border-radius: 50%;width:15px;height:15px;top:5px;right:15px;line-height:15px}
+.div-overflow{overflow: hidden;}
+/*全局css end*/
+.resume-padding{padding: 0px;}
+.resume-active{border:solid 5px #3598dc !important;font-weight: bold;}
+.resume-active p{color: #3498db;}
+.resume-yes-div{border:solid 5px #f7f7f7;background: #f7f7f7;overflow: hidden;padding: 10px;margin-bottom: 25px;}
+.resume-no-div{height: 150px;border:solid 5px #f7f7f7;background: #f7f7f7;overflow: hidden;padding: 10px;}
+.resume-font{font-size:18px;color: #878787;margin-bottom:0px;margin-top: 7px;}
+.resume-p-font{font-size: 14px;color:#878787;margin-bottom:0px;}
+.resume-margin-bottom{margin-bottom: 15px;}
+.resume-file-height{height: 74px;}
+.resume-message{color:red;}
+/*认证简历div end*/
+#baseInfo h3{padding-bottom: 20px;border-bottom: solid 1px #0071aa;}
+#vcodediv{padding-top:5px}
+#phoneNumber{padding-left: 50px;background: url(../../img/phone.png);background-position:15px center;background-repeat: no-repeat;}
+.phone{border: solid 1px #ccc;border-radius: 5px;padding: 20px 0 10px 0;margin-bottom: 20px}
+#emailDiv{border: solid 1px #ccc;border-radius: 5px;padding: 20px 0 10px 0;margin-bottom: 20px}
+#email{padding-left: 50px;background: url(../../img/email.png);background-position:15px center;background-repeat: no-repeat;}
+.qq{border: solid 1px #ccc;border-radius: 5px;padding: 20px 0 10px 0;margin-bottom: 20px}
+#qqNumber{padding-left: 50px;background: url(../../img/qq.png);background-position:15px center;background-repeat: no-repeat;}
+.weixin{border: solid 1px #ccc;border-radius: 5px;padding: 20px 0 10px 0;margin-bottom: 20px}
+#weixinNumber{padding-left: 50px;background: url(../../img/weixinlogo.png);background-position:15px center;background-repeat: no-repeat;}
+.weixinIconHidden{visibility:hidden}
+.UserBaseinfo{border: solid 1px #ccc;border-radius: 5px;padding: 20px 0 10px 0;margin-bottom: 20px}
+#userName{padding-left: 50px;background: url(../../img/username.png);background-position:15px center;background-repeat: no-repeat;}
+.LocalArea{border: solid 1px #ccc;border-radius: 5px;padding: 20px 0 10px 0}
+.pORc{border-radius: 5px;padding-bottom: 30px;}
+.pORc img{width: 40%;height: 40%;padding: 20% 0 5% 0}
+.pORc p{width: 100%;text-align: center;padding: 0 0 10% 0;font-family: "微软雅黑";}
+.unact{border: solid 3px #c6c6c6;color:#c6c6c6;}
+.act{border:solid 3px #006da4;color:#006da4}
+#atheninfoForm div h3{padding-bottom:20px;border-bottom:solid 1px #0071aa;}
+.workstatus{border: solid 1px #ccc;border-radius: 5px;margin-bottom:25px}
+.workstatus input[type="radio"]{display: none;border-radius: 5px;border: solid 1px #ccc}
+.workstatus label{overflow: hidden;padding: 2% 0}
+.workstatus label>div{width: 20px;height: 20px;background:#f7f7f7;border:solid 2px #ccc;border-radius: 50%;float: left;text-align: center;margin: 0 auto}
+.workstatus div label>div{margin-right: 5px}
+.workstatus label div div{background: white;width: 8px;height:8px;margin:4px 0px 0px 4px;border-radius: 50%;display: none;}
+.canworktype{border: solid 1px #ccc;border-radius: 5px;margin-bottom:25px}
+.canworktype input[type="checkbox"]{display:none;}
+.canworktype label{overflow: hidden;padding: 2% 0}
+.canworktype label div{width: 20px;height: 20px;float: left;margin-right: 5px;border:solid 2px #ccc;background: #f7f7f7;border-radius: 5px}
+.canworktype label div img{width: 100%;height: 100%;display: none}
+.excelstechnologies{border: solid 1px #ccc;border-radius: 5px;margin-bottom: 25px;}
+.excelstechnologies label{overflow: hidden;padding: 2% 0}
+.excelstechnologiesActive{padding:10px 0;margin-bottom: 20px;border-radius:10px;text-align: center;color:#3598dc !important;border: solid 1px #3598dc !important}
+.excelstechnologies div label{padding:10px 0;margin-bottom: 20px;border-radius:10px;text-align: center;border: solid 1px #aeaeae;color:#aeaeae;}
+.excelstechnologies div input[type="checkbox"]{display: none;}
+.excelstechnologies div input[type="text"]{padding: 8px 15px;margin-bottom: 25px}
+.workexperience{border:solid 1px #ccc;border-radius: 5px;margin-bottom: 25px;padding-bottom:10px}
+.workexperience label{overflow: hidden;padding: 2% 0}
+.workexperience>span{padding: 2% 0 2% 0;cursor: pointer;}
+.workexperience span img{width:20%;height: 20%;display: block;float: left;margin-right: 20px}
+.workexperience span p{color: #3598dc;padding-top:8%}
+.projectworks{border:solid 1px #ccc;border-radius: 5px;margin-bottom: 25px;padding-bottom:10px}
+.projectworks label{overflow: hidden;padding: 2% 0}
+.projectworks>span{padding: 2% 0 2% 0;cursor: pointer;}
+.projectworks span img{width:20%;height: 20%;display: block;float: left;margin-right: 20px}
+.projectworks span p{color: #3598dc;padding-top:8%}
+.educational{border:solid 1px #ccc;border-radius: 5px;margin-bottom: 25px;padding-bottom:10px}
+.educational label{overflow: hidden;padding: 2% 0}
+.educational>span{padding: 2% 0 2% 0;cursor: pointer;}
+.educational span img{width:20%;height: 20%;display: block;float: left;margin-right: 20px}
+.educational span p{color: #3598dc;padding-top:8%}
+#servicerPersonalDiv>div{border: solid 1px #ccc;padding: 30px 0 12px 0;margin-bottom: 40px;border-radius: 5px}
+#servicerPersonalDiv>div:first-of-type{border: none;}
+#servicerPersonalDiv>div:last-of-type{border: 0px;padding: 10px 0}
+#educational label{font-family: "微软雅黑"}
+#schoolname{padding:5px;border-radius: 5px;border-style: none;border: solid 1px #ccc;}
+#major{padding: 5px;border-radius: 5px;border-style: none;border: solid 1px #ccc;}
+#education{background: #ebebeb;padding:5px;width: 75%;}
+#graduationyears{background: #ebebeb;padding:5px;width: 75%;}
+.modal-content{border: 0px;border-radius:5px;background: white !important}
+.modal-header{border-radius: 5px 5px 0 0;}
+.modal-body{background: white;border-radius: 0 0 5px 5px}
+#addprojectworks input[type="text"]{padding:5px;border-radius: 5px;border-style: none;border: solid 1px #ccc;}
+#addworkexperience input[type="text"]{padding:5px;border-style: none;border: solid 1px #ccc;}
+#addworkexperience textarea{border: solid 1px #ccc;padding: 5px 5px;height: 210px;}
+.workinghoursend{margin-bottom: 15px}
+.input-group[class*=col-]{float: left;}
+/*公司认证css*/
+.companycanworktype{border: solid 1px #ccc;border-radius: 5px;margin-bottom:25px}
+.companycanworktype input[type="checkbox"]{display:none;}
+.companycanworktype label{overflow: hidden;padding: 2% 0}
+.companycanworktype label div{width: 20px;height: 20px;float: left;margin-right: 5px;border:solid 2px #ccc;background: #f7f7f7;border-radius: 5px}
+.companycanworktype label div img{width: 100%;height: 100%;display: none}
+.companyexcelstechnologies{border: solid 1px #ccc;border-radius: 5px;margin-bottom: 25px;}
+.companyexcelstechnologies label{overflow: hidden;padding: 2% 0}
+.companyexcelstechnologiesActive{padding:10px 0;margin-bottom: 20px;border-radius:10px;text-align: center;color:#3598dc !important;border: solid 1px #3598dc !important}
+.companyexcelstechnologies div label{padding:10px 0;margin-bottom: 20px;border-radius:10px;text-align: center;border: solid 1px #aeaeae;color:#aeaeae;}
+.companyexcelstechnologies div input[type="checkbox"]{display: none;}
+.companyexcelstechnologies div input[type="text"]{padding: 8px 15px;margin-bottom: 25px}
+.producttype{border: solid 1px #ccc;border-radius: 5px;margin-bottom:25px}
+.producttype div input[type="checkbox"]{display: none}
+.producttype div label{background:#dcdcdc;border:solid 1px #d2d2d2;text-align: center;margin-bottom: 10px}
+.producttypeActive{background:#3598db !important;color:white}
+.producttype div input[type="text"]{padding: 5px;margin-bottom: 20px}
+.companyProjectExperience{border:solid 1px #ccc;border-radius: 5px;margin-bottom: 25px;padding-bottom:10px}
+.companyProjectExperience label{overflow: hidden;padding: 2% 0}
+.companyProjectExperience>span{padding: 2% 0 2% 0;cursor: pointer;}
+.companyProjectExperience span img{width:20%;height: 20%;display: block;float: left;margin-right: 20px}
+.companyProjectExperience span p{color: #3598dc;padding-top:8%}
+.companyIntro{border:solid 1px #ccc;border-radius: 5px;margin-bottom: 25px;padding-bottom:10px}
+.companyIntro label{overflow: hidden;padding: 2% 0}
+.companyIntro>span{padding: 2% 0 2% 0;cursor: pointer;}
+.companyIntro span img{width:20%;height: 20%;display: block;float: left;margin-right: 20px}
+.companyIntro span p{color: #3598dc;padding-top:8%}
+#servicerCompanyDiv>div{border:solid 1px #ccc;border-radius: 10px;padding:20px 0px;margin-bottom:40px}
+#servicerCompanyDiv>div:first-of-type{border: none;}
+.warningDiv{color:red;height:25px;display: none;}
+/*.btn-primary{margin: 0px 0px 0px 230px !important}*/
+/*.input-group{width:33.5% !important}*/
+.addCIntro{padding:5px;}
+.AuthenticationInformation{overflow: hidden;border:solid 1px #ccc;background:#f7f7f7;border-radius: 5px;padding-top:20px;margin-bottom: 20px}
+.AuthenticationInformationDiv{border-radius:10px;border: solid 1px #3598db;padding: 5px 0;margin-bottom:10px;text-align: center;color: #3598db}
+.AuthenticationInformationInput{border-radius: 3px;border: solid 1px #3598db;padding: 5px;color: #3598db}
+.PType{background:#3498db;color: white;padding:5px 0;margin-bottom: 10px;text-align: center;}
+.PTypeInput{background:#3498db;color: white;padding:5px 10px;margin-bottom: 10px;border-radius: 3px}
+.button-style{background:#3598db;color:white}
+.fromDiv{height:60px}
+.marginTop{margin-top:-20px}
+/*工作经验等虚线*/
+.AuthenticationInformation>div{font-size:14px;margin-top:10px;border-bottom: dashed 1px #ccc;margin-bottom: 10px;padding:10px 0px}
+.AuthenticationInformation>div:last-of-type{border:none}
+.iColorNormal{color:#3598db;font-style:normal}
+/*设置界面css*/
+.titleDiv{border-left:solid 5px #3598db;font-size: 16px;color: black;margin-bottom: 10px;}
+.DivBackground{background: #f7f7f7;border-radius: 5px;border: solid 1px #ccc;padding: 10px;margin-bottom: 10px;}
+.DivmarginTop{margin-top: 20px;}
+/*能力测评*/
+#abilityContent{padding-top: 5px;}
+.abilityDivBackground{background: #f7f7f7;padding:15px 0px;overflow: hidden;border:solid 1px #e9e9e9;border-radius: 5px;}
+.skillsTests{background: white;color: #3498db;padding: 5px;margin-bottom: 10px;cursor: pointer;}
+.abilityDiv{margin-top:20px;}
+.abilityDivBorder{border-bottom:solid #dbdbdb 1px;padding-bottom: 10px;overflow: hidden;}
+.abilityDiv-warning{padding-top: 15px;}
+.abilityDiv-warning-div{border-left: solid 2px #3ba2e4;padding-left: 0px;overflow: hidden;margin-bottom: 10px;}
+.abilityDiv-warning-padding{padding-left:0px;color:#929292}
+.abilityDiv-warning-p{padding-left: 5px;margin: 0px}
+.abilityActive{color: white !important;background: #3498DB !important;}
+.historyDiv{padding: 0px;}
+.histroyContentBackground{background: #f7f7f7;padding:15px 10px;overflow: hidden;border:solid 1px #e9e9e9;border-radius: 5px;}
+.histroyTitle{background: #b8dfff;padding:10px 0px;border: solid 1px #dbdbdb;overflow: hidden;}
+.histroyContent{background: #ffffff;padding:10px 0px;border: solid 1px #dbdbdb;border-top: none;overflow: hidden;}
+/*发布需求*/
+.DivBackground p{margin: 0px;}
+/*认证信息页面title*/
+#userinfoId{padding-left: 10px;}
+/*小图标*/
+.icon-span-style{width: 21px;display: inline-block;height:23px}
+/*弹出块*/
+.reminder{transition:width 1s;position: absolute;width:0px;cursor:default;left: 135px;top: 6px;z-index: 1000;overflow: hidden;}
+.reminder_div{width:460px;}
+.reminder_before{width: 10px;height: 10px;background: #ffffcc;transform: rotate(45deg);float: left;margin-top:10px;margin-left: 3px;}
+.reminder_content{width: 426px;background:#ffffcc;float: left;color: red;margin-top: 1px;margin-left: -4px;padding:2px 5px;}
+.reminder_close{float: left;background:#ffffcc;padding:7px 5px 3px 5px;width: 26px;cursor: pointer;color: red;margin-left: -8px;}
+/*个人简介*/
+#profile{height: 150px;}
+/*间距*/
+@media screen and (max-width:992px) {
+	#province{margin-bottom: 10px;}
+}
+
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.support.dao.TrusteeDao">
+	
+	<select id="addTrusteeInfo" resultType="com.yundaren.support.po.TrusteeInfoPo">
+		 INSERT INTO trustee_info
+            (
+             project_id,
+			 amount,
+			 create_time
+            )
+          VALUES
+            (
+             #{projectId},
+             #{amount},
+             #{createTime}
+            )
+	</select>
+	
+	<select id="getTrusteeInfoListByPID" parameterType="java.lang.String" resultType="com.yundaren.support.po.TrusteeInfoPo">
+		SELECT project_id as projectId,
+				 amount as amount,
+			 	create_time as createTime
+		FROM trustee_info 
+		where project_id = #{projectId}
+	</select>
+	
+</mapper>

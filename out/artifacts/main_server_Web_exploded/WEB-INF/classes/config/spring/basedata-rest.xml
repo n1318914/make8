@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+        <bean id="baseDataRest" class="com.yundaren.api.rest.BaseDataRest">
+       		<property name="regionService" ref="regionService"/>
+       		<property name="dictService" ref="dictService"/>
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="emailSendConfig" ref="emailSendConfig"/>
+        	<property name="userExperienceService" ref="userExperienceService"/>
+        	<property name="flinkService" ref="flinkService"/>
+        </bean>
+        
+        <bean id="publicController" class="com.yundaren.controller.PublicController">
+        	<property name="domainConfig" ref="domainConfig"/>
+        	<property name="projectService" ref="projectService"/>
+        	<property name="publicConfig"   ref="publicConfig"/>
+			<property name="userService" ref="userService"/>
+			<property name="userExperienceService" ref="userExperienceService"/>
+			<property name="identifyService" ref="identifyService"/>
+			<property name="dictService" ref="dictService"/>
+			<property name="projectInSelfRunService" ref="projectInSelfRunService"/>
+			<property name="newsService" ref="newsService"/>
+			<property name="homepageService" ref="homepageService"/>
+        </bean>
+</beans>

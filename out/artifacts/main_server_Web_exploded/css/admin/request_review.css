@@ -1,0 +1,176 @@
+body{
+	background: #f4f4f4;
+	font-family: "微软雅黑";
+}
+
+.padding-left{
+	padding-left: 0px;
+}
+
+.project-right-accessories{
+	padding:15px 10px 15px 0px;
+}
+
+.banner-div{
+	background-image: url(http://static.make8.com/img/projectReview-banner.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	height:100px;
+}
+
+.project-review-title{
+	margin-top: 60px;
+	overflow: hidden;
+	font-size: 16px;
+	font-weight: bold;
+	padding:24px 15px;
+	background: #f0f5f9;
+	color: #3498db;
+	border: solid 10px white;
+	border-bottom: solid 1px white;
+}
+
+.project-review{
+	overflow: hidden;
+	background: #f0f5f9;
+	border: solid 10px white;
+	border-top: none;
+	border-bottom: solid 1px white;
+	padding-top: 15px;
+	/*padding: 60px 15px;*/
+}
+
+.project-left{
+	padding: 10px 15px;
+	font-weight: bold;
+}
+
+.project-right{
+	padding:10px 15px;
+	background: white;
+}
+
+.project-content{
+	padding:10px 15px;
+	background: white;
+	min-height:180px
+}
+
+.project-review-div{
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.project-operation{
+	height: 100px;
+	background: #f0f5f9;
+	border:solid 10px white;
+	border-top:none;
+}
+
+.project-operation button{
+	margin-top: 30px;
+}
+
+.select-enclosure{
+	color: #3498db;
+	border:solid #3498db 1px;
+	background: transparent;
+	padding: 10px;
+	width: 100px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.pass-div{
+	padding-top:12px;
+}
+
+.fail-reason{
+	display: none;
+	height: 200px;
+}
+
+.fail-textarea{
+	width: 100%;
+	resize: none;
+	height: 150px;
+	border: none;
+}
+
+.warning{
+	color: red;
+	display: none;
+}
+
+.warningMsg{
+	color: red;
+	display: none;	
+}
+
+.recruited{
+	margin-top: 10px;
+}
+
+.recruited div{
+	width: 20px;
+    height: 20px;
+    border: solid 1px #ccc;
+    float: left;
+    margin-right: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    background: white;
+}
+
+.recruited div img{
+	width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.active{
+	display: block !important;
+}
+
+@media only screen and (max-width: 991px) {
+	.project-left{
+		text-align: left;
+	}
+}
+
+/* 模态框（Modal） */
+.modal-body{
+	font-size:1.1em;
+}
+.my-body{
+	padding:0px;
+}
+.m-footer button{
+	width:90%;
+}
+
+.modal-header img{
+	margin-right:10px;
+}
+.btnstyle{
+	padding-top:50px;
+	margin-bottom: 20px;
+    overflow: hidden;
+}
+.sbtn{
+	padding-top:20px;
+	background-color:#3498DB;
+	height:34px;
+}
+.msgspan{
+	height:20px;
+}
+.form-group-height
+{
+	height: 75px;
+}
+#myModal{
+	padding-right:0px;
+}

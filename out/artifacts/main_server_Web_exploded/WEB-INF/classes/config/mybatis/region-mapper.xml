@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.basedata.dao.RegionDao">
+	
+	<select id="getAllProvinces" resultType="com.yundaren.basedata.po.RegionPo">
+		SELECT id id,
+				parent_id parentId,
+				name name
+		FROM region 
+		where parent_id = 0
+	</select>
+	
+	<select id="getCitysByProvinceId" parameterType="java.lang.Long" resultType="com.yundaren.basedata.po.RegionPo">
+		SELECT id id,
+				parent_id parentId,
+				name name
+		FROM region 
+		where parent_id = #{provinceId}
+	</select>
+	
+	<select id="getAllProvinces2" resultType="com.yundaren.basedata.po.ProvincePo">
+		SELECT id id,
+				name name
+		FROM ad_provinces
+	</select>
+	
+	<select id="getProviceById" parameterType="java.lang.Long" resultType="com.yundaren.basedata.po.ProvincePo">
+		SELECT id id,
+				name name
+		FROM ad_provinces 
+		WHERE id = #{provinceId}
+	</select>
+	
+	<select id="getCityById" parameterType="java.lang.Long" resultType="com.yundaren.basedata.po.CityPo">
+		SELECT id id,
+				name name,
+				province_id provinceId 
+		FROM ad_cities
+		WHERE id = #{cityId}
+	</select>
+	<select id="getCitiesByProvinceId" parameterType="java.lang.Long" resultType="com.yundaren.basedata.po.CityPo">
+		SELECT id id,
+				name name,
+				province_id provinceId 
+		FROM ad_cities
+		WHERE province_id = #{provinceId}
+	</select>
+	<select id="getAllCities" resultType="com.yundaren.basedata.po.CityPo">
+		SELECT id id,
+				name name,
+				province_id provinceId 
+		FROM ad_cities
+	</select>
+	<select id="getDistrictById" parameterType="java.lang.Long" resultType="com.yundaren.basedata.po.DistrictPo">
+		SELECT id id,
+				name name,
+				city_id cityId 
+		FROM ad_districts
+		WHERE province_id = #{districtId}
+	</select>
+	<select id="getDistrictsByCityId" parameterType="java.lang.Long" resultType="com.yundaren.basedata.po.DistrictPo">
+		SELECT id id,
+				name name,
+				city_id cityId 
+		FROM ad_districts
+		WHERE city_id = #{cityId}
+	</select>
+	<select id="getAllDistricts" resultType="com.yundaren.basedata.po.DistrictPo">
+		SELECT id id,
+				name name,
+				city_id cityId 
+		FROM ad_districts
+	</select>
+	<select id="getProvinceByCityId" parameterType="java.lang.Long" resultType="com.yundaren.basedata.po.ProvincePo">
+			SELECT p.id id,p.name name
+			FROM ad_provinces p,ad_cities c 
+			WHERE p.id = c.province_id and c.id = #{cityId}
+	</select>
+	<select id="getCityByDistrictId" parameterType="java.lang.Long" resultType="com.yundaren.basedata.po.CityPo">
+			SELECT c.id,c.name,c.province_id 
+			FROM ad_cities c,ad_districts d 
+			WHERE c.id = d.city_id AND d.id = #{districtId}
+	</select>
+
+	<select id="getListAll" resultType="com.yundaren.basedata.po.RegionPo">
+		SELECT id id,
+				parent_id parentId,
+				name name
+		FROM region 
+	</select>
+</mapper>

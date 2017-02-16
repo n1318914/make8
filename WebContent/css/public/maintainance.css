@@ -1,0 +1,63 @@
+body{
+    background: #f2f5f7
+}
+
+.col-padding{
+    padding: 0px
+}
+
+.col-padding-left{
+    padding-left: 0px
+}
+
+.col-padding-right{
+    padding-right: 0px
+}
+
+.banner{
+    margin-top: 80px;
+}
+
+.banner > img{
+    width: 100%
+}
+
+.os-title{
+    font-size: 18px;
+    color:#4a77ff;
+    margin-top: 10px
+}
+
+.os-content{
+    fontt-size:15px;
+    margin-top:14px
+}
+
+.btn-os{
+    background: #4a77ff;
+    font-size: 15px;
+    padding:8.5px 0px;
+    width: 300px;
+    color: white;
+    margin-top: 60px
+}
+
+.btn-os:hover{
+    color: white !important
+}
+
+.yunweipai{
+    margin-top:50px;
+    padding:48px 0px;
+    background: white
+}
+
+@media screen and (max-width:414px){
+    .btn-os{
+        width: 100%
+    }
+
+    .yunweipai-title{
+        margin-bottom: 10px
+    }
+}

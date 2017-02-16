@@ -1,0 +1,588 @@
+/*网页基本样式 */
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-size: 1.6rem;
+}
+
+body {
+	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
+}
+
+
+/*首页样式*/
+
+body {
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.main {
+	float: right;
+	width: 70%;
+}
+
+.leftBar {
+	float: left;
+	width: 25%;
+}
+
+.wbm-slog {
+	letter-spacing: 5px;
+}
+
+.main-imgs {
+	background-size: auto 100%;
+}
+
+.custom {
+	width: 100%;
+	height: 167px;
+	background: #48A2DF;
+	border: 1px solid transparent;
+}
+
+.custom-text {
+	font-size: 2rem;
+	font-family: "微软雅黑";
+	color: white;
+	padding-left: 50px;
+	margin-top: 40px;
+}
+
+.main-title {
+	color: white;
+}
+
+.wbm-background {
+	width: 100%;
+	height: 100%;
+	background: url(https://static.make8.com/img/mobile/banner.png) no-repeat;
+	/*background-size: 100%;*/
+	background-size:cover;
+}
+
+.connected {
+	font-size: 1.3em;
+	color: white;
+}
+
+.logos {
+	text-align: left;
+	width: 100%;
+	border: 1px solid transparent;
+}
+
+.logos img {
+	display: inline-block;
+	vertical-align: middle;
+	height: 38px;
+	padding-left: 12px;
+	padding-top: 12px;
+}
+
+.wbm-slogan {
+	height: 100%;
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 40px;
+	border: 1px solid transparent;
+}
+
+.am-g h1 {
+	font-size: 100%;
+	color: white;
+	text-align: center;
+}
+
+.am-g p {
+	color: white;
+	font-size: 13px;
+	text-align: center;
+}
+
+.slogan-text2 {
+	text-align: center;
+	margin: 0 auto;
+	font-size: 1.5em;
+	color: white;
+}
+
+.wbm-needName {
+	width: 100%;
+}
+
+.wbm-needName-w {
+	width: 98%;
+	margin: 0 auto;
+}
+
+.wbm-needName .am-gallery-default .am-gallery-item img{
+	height:50px;
+	width:50px;
+}
+
+.demand-icon {
+	background: url(../../img/mobile/tubiao.png) no-repeat;
+	background-position: 0px 0px;
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+}
+
+.demand{
+	margin-left: 0px;
+	text-align: center;
+    width:100px;
+    height:100px;
+}
+
+.adviser {
+	background: url(../../img/mobile/tubiao.png) no-repeat;
+	background-position: -50px 0px;
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	margin-left: 60px;
+	text-align: center;
+}
+
+.market {
+	background: url(../../img/mobile/tubiao.png) no-repeat;
+	background-position: -105px 0px;
+	width: 40px;
+	height: 44px;
+	display: inline-block;
+	margin-left: 60px;
+	text-align: center;
+}
+
+.use {
+	background: url(../../img/mobile/tubiao.png) no-repeat;
+	background-position: -155px 0px;
+	width: 40px;
+	height: 45px;
+	display: inline-block;
+	margin-left: 60px;
+	text-align: center;
+}
+
+.show-me {
+	width: 100%;
+	height: 100%;
+	margin-bottom: 20px;
+}
+
+.about-me {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.abouts {
+	padding-top: 35px;
+	color: #7092B3;
+	font-size: 1.3em;
+	font-family: "微软雅黑";
+}
+
+.abouts-show {
+	color: #7092B3;
+	font-size: 1em;
+	font-family: "微软雅黑";
+}
+
+.aqkit {
+	text-align: center;
+	margin: 0 auto;
+	width:100px;
+	height:100px;
+    margin-top:20px;
+}
+
+.market-pit {
+	font-size: 1em;
+	margin-top: 15px;
+	font-family: "微软雅黑";
+	color: #7092B3;
+	text-align: center;
+}
+
+.wbm-connect {
+	width: 100%;
+	height: 140px;
+	background: #3498DB;
+}
+
+.wbm-connects {
+	width: 80%;
+	margin: 0 auto;
+	padding-top: 15px;
+	height: 100px;
+}
+
+.wbm-connects p {
+	font-size: 1em;
+	line-height: 16px;
+	color: white;
+}
+
+.bitar1 {
+	border-bottom: 1px solid #E9E9E9;
+	border-right: 1px solid #E9E9E9;
+}
+
+.bitar2 {
+	border-bottom: 1px solid #E9E9E9;
+}
+
+.bikar {
+	border-right: 1px solid #E9E9E9;
+}
+
+.wbm-pep {
+	width:80px;
+	height: 80px;
+	border: 2px solid white;
+	border-radius: 50%;
+	padding-top:10px;
+	
+}
+
+.wbm-pep p {
+	text-align: center;
+	color: white;
+	font-family: "微软雅黑";
+}
+
+.wbm-mun {
+	width:80px;
+	height: 80px;
+	border: 2px solid white;
+	border-radius: 50%;
+	padding-top:10px;
+}
+
+.wbm-mun p {
+	text-align: center;
+	color: white;
+	font-family: "微软雅黑";
+}
+
+.wbm-mon {
+	width:80px;
+	height:80px;
+	border: 2px solid white;
+	border-radius: 50%;
+	z-index: 10;
+	padding-top:10px;
+}
+
+.wbm-mon {
+	text-align: center;
+	color: white;
+	font-family: "微软雅黑";
+}
+
+.wbm-pt {
+	padding-top: 10px;
+}
+
+.wbm-mb {
+	margin-top:-15px;
+}
+
+.wbm-munbg {
+	/*background: white;
+	opacity:0.2;
+	position:absolute;
+	z-index: 100;*/
+	margin-bottom: 20px;
+	padding-left:20px;
+}
+
+
+
+
+/*服务流程样式*/
+
+.wbm-service {
+	width: 100%;
+	height: 100%;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.wbm-services {
+	width: 95%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.item-style {
+	border-bottom: 1px solid #E9E9E9;
+}
+
+.wbm-item-style {
+	/*font-weight: bold;*/
+	color: #666;
+}
+
+.am-active {
+	height: 50px;
+}
+
+.am-nav li a {
+	color: #666;
+	font-size: 12px;
+	padding-top: 10px;
+}
+
+.am-nav li a:hover {
+	color: #79b5e4;
+}
+
+.am-list-thumb img {
+	padding-left: 20px;
+}
+
+.am-list li {
+	margin-top: 10px;
+}
+
+.item-shows {
+	font-size: 12px;
+	font-family: "微软雅黑";
+	color: #b6b6b6;
+	margin-left: -10px;
+}
+
+.am-list-item-hd {
+	width: 100%;
+	height: 55px;
+	border-bottom: 1px solid #f5f5f5;
+}
+
+.project-status-img {
+	float: right;
+	line-height: 55px;
+	margin-right: 30px;
+}
+
+.item-name-kit {
+	line-height: 55px;
+	font-size: 1em;
+	color: #747474;
+}
+
+.wbm-items {
+	width: 100%;
+	height: auto;
+}
+
+.wbm-item-style {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.item-title1 {
+	font-size: 0.8em;
+	color: #747474;
+}
+
+.wbm-item-style a {
+	font-size: 0.8em;
+	font-family: "微软雅黑";
+	padding-left: 15px;
+	color: #c1c1c1;
+}
+
+.wbm-item-style a.selected {
+	color: #79b5e4;
+}
+
+.search-type-panel{
+	/*margin-top:11px;*/
+	background:#fff;
+	height:60px;
+	/*border-bottom: 1px solid #c1c1c1;*/
+}
+
+.search-type-panel .search-type-content{
+	margin-left:-10px;
+}
+
+.search-status-panel{
+	/*margin-top:11px;*/
+	background:#fff;
+	height:50px;
+}
+
+.search-type-panel a,.search-status-panel  a{
+	padding-left:0px;
+}
+
+.project-view{
+	width:100%;
+	margin-left:0px;
+}
+
+.project-view .am-list>li{
+	border:0px;
+    background-color:#fff;
+}
+
+.am-list-news-default{
+	/*margin-left:0px;*/
+}
+
+.project-item{
+	margin-left:-5px;
+}
+
+.project-view .am-list-news-default .am-g{
+	margin-left:0px;
+}
+
+.project-view .am-list-thumb{
+	margin-top:-7px;
+}
+
+.request-view,.reservation-view{
+	padding-top: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+			
+.request-view .form-control,
+.reservation-view .form-control{
+	font-size: 17px;
+	margin-top:15px;
+}
+
+.request-view .form-input,.request-view .form-select,
+.reservation-view .form-input,.reservation-view .form-select{
+	height : 38px;
+}
+
+.request-view .form-textarea,
+.reservation-view .form-textarea{
+    resize:none;
+}
+
+.request-view .form-group,
+.reservation-view .form-group{
+	height:60px;
+}
+
+.wbm-item-show .am-form-group,{
+	height: 50px;
+}
+
+.request-view .form-group-4-textarea,
+.reservation-view .form-group-4-textarea{
+	height:130px;
+}
+
+.request-view .btn,
+.reservation-view .btn{
+	margin-top:30px;
+	margin-bottom:30px;
+}
+
+.reservation-view .main-header{
+	text-align: center; 
+	margin-top: 15px; 
+	margin-bottom: 0px; 
+    color: #3498BD;
+    font-size: 25px;
+}
+
+.reservation-view .secondary-header{
+	text-align: center; 
+	color: #6F6F6F;
+	margin-top:-5px;
+}
+
+.wbm-footer {
+    height: 30px;
+    width: 100%;
+    background:#3498DB;
+   
+}
+
+.wbm-footer p {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+
+/*改动css*/
+
+.wbm-item-name {
+    padding-top:20px;
+}
+
+.am-form-field {
+    border-radius: 10px;
+}
+
+.wbm-item-select {
+    padding-top: 20px;
+}
+
+.wbm-item-show {
+    padding-top: 20px;
+}
+
+.wbm-ure-tel {
+    padding-top: 20px;
+}
+
+.wbm-advisor-tit {
+    color: #3498DB;
+    font-size: 1.5em;
+}
+
+.wbm-advisor-need {
+    color: #BFBFBF;
+    font-size: 1em;
+    margin-top: -10px;
+}
+
+.wbm-reserve-main {
+	width: 100%;
+}
+
+.wbm-item-price {
+	width: 93%;
+	margin: 0 auto;
+}
+
+.item-tijiao {
+	margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

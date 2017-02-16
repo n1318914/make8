@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.support.dao.ExamDao">
+	
+	<select id="getExamPaperById" parameterType="java.lang.String" resultType="com.yundaren.support.po.ExamPaperPo">
+		SELECT id as id,
+		name as name,
+		skill as skill,
+		grade as grade,
+		status as status,
+		create_time as createTime
+		from exam_paper
+		WHERE id = paperId
+	</select>
+	
+	<insert id="addBatchExamPaper" parameterType="java.util.Map">
+		<foreach collection="listExamPaper" item="item" index="index">
+	       INSERT INTO exam_paper
+	       (
+	        id,
+	        name,
+	        skill,
+	        grade,
+	        status,
+	        create_time
+	       ) 
+		   SELECT #{item.id},#{item.name},#{item.skill},#{item.grade},#{item.status},now() FROM DUAL
+             WHERE NOT EXISTS(SELECT id FROM exam_paper WHERE id = #{item.id});
+	    </foreach>                  
+	</insert>
+	
+	<select id="getExamPaperBySkillAndGrade" parameterType="java.util.Map" resultType="com.yundaren.support.po.ExamPaperPo">
+		SELECT id as id,
+		name as name,
+		skill as skill,
+		grade as grade,
+		status as status,
+		create_time as createTime
+		from exam_paper
+		WHERE skill = #{skill} and grade = #{grade}
+	</select>
+	
+	<select id="getExamStatusListByUID" parameterType="java.lang.Long" resultType="com.yundaren.support.po.ExamAblityPo">
+		SELECT id as id,
+		paper_id as paperId,
+		(SELECT name from exam_paper where id = paper_id) as paperName,
+		user_id as userId,
+		start_time as startTime,
+		end_time as endTime,
+		score as score,
+		status as status
+		from exam_ablity
+		WHERE user_id = #{userId} 
+		ORDER BY start_time DESC
+	</select>
+	
+	<insert id="addExamAblity" parameterType="com.yundaren.support.po.ExamAblityPo">
+	       INSERT INTO exam_ablity
+	       (
+	        id,
+	        paper_id,
+	        user_id,
+	        start_time,
+	        status
+	       ) 
+		   values
+		   (
+		    #{id},
+		    #{paperId},
+		    #{userId},
+		    now(),
+		    #{status}
+		   )
+	</insert>
+	
+	<update id="updateExamAblityStatus" parameterType="java.util.Map">
+		<foreach collection="examList" item="item" index="index">
+	       UPDATE 
+	       	exam_ablity
+	       SET
+			score = #{item.score},
+			status = #{item.status},
+			end_time = #{item.endTime}
+		   WHERE 
+			id = #{item.id};
+	   </foreach>          
+	</update>
+</mapper>

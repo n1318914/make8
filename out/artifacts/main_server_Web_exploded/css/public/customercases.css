@@ -1,0 +1,86 @@
+body{
+	background: #eef4f9;
+}
+
+.banner{
+	margin-top: 80px;
+	height: 240px;
+}
+
+.padding{
+	padding: 0px;
+}
+
+.padding-left{
+	padding-left: 0px;
+}
+
+.padding-right{
+	padding-right: 0px;
+}
+
+.case{
+	width: 370px;
+	height: 369px;
+	display: block;
+	overflow: hidden;
+	background-size: cover !important;
+	transition: all .5s;
+}
+
+.case_list{
+	overflow: hidden;
+	padding-top: 41px;
+}
+
+.case_list > div{
+	height: 369px;
+	overflow: hidden;
+	margin-bottom: 40px;
+}
+
+.case_list > div:nth-of-type(3n-2){
+	padding-right: 10px;
+}
+
+.case_list > div:nth-of-type(3n-1){
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.case_list > div:nth-of-type(3n){
+	padding-left: 10px;
+}
+
+.item {
+	background:white;
+	height: 80px;
+	padding:18px 11px;
+}
+
+.item-name {
+	font-size: 14px;
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+@media screen and (max-width:1200px ) {
+	.case{
+		width: 100%;
+	}
+}
+
+@media screen and (max-width:768px ) {
+	.case_list > div:nth-of-type(3n-2){
+		padding-right: 0px;
+	}
+	
+	.case_list > div:nth-of-type(3n-1){
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	
+	.case_list > div:nth-of-type(3n){
+		padding-left: 0px;
+	}
+}

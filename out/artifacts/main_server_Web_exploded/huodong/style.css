@@ -1,0 +1,55 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+body{
+	font-family: "微软雅黑";
+	background: #f1f1f1;
+}
+
+.btn{
+	border-style: none;
+	color: white;
+	padding: 12px 34px;
+	font-size: 16px;
+	font-family: "微软雅黑";
+	width: 250px;
+	border-radius: 10px;
+}
+
+.btn-primary{
+	background:rgb(67, 149, 255);
+}
+
+.btn-success{
+	background: #c4e24c;
+}
+
+.activityTitle{
+	font-size: 30px;
+	text-align: center;
+	margin-top: 140px;
+}
+
+.activityBtnDiv{
+	font-size: 14px;
+	color:#3c3c3c;
+	text-align: center;
+	margin-top: 40px;
+}
+
+.activityFooter{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	font-size: 14px;
+	color:#3c3c3c;
+	text-align: center;
+	width: 100%;
+}
+
+.activityFooter p{
+	text-align: center;
+	margin-bottom: 5px;
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+	   xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
+
+
+	<bean id="tokenStore"
+		class="org.springframework.security.oauth2.provider.token.store.JdbcTokenStore">
+		<constructor-arg name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="tokenStoreDao" class="com.yundaren.security.dao.TokenStoreDao">
+		<property name="tokenStore" ref="tokenStore" />
+	</bean>
+
+
+	<!-- <bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore" 
+		/> -->
+
+	<bean id="tokenServices"
+		class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
+		<property name="tokenStore" ref="tokenStoreDao" />
+		<property name="supportRefreshToken" value="true" />
+	</bean>
+
+
+	<bean id="clientDetailsService"
+		class="org.springframework.security.oauth2.provider.client.JdbcClientDetailsService">
+		<constructor-arg name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="clientDetailsUserDetailsService"
+		class="org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService">
+		<constructor-arg name="clientDetailsService" ref="clientDetailsService" />
+	</bean>
+
+	<bean id="tokenStoreUserApprovalHandler"
+		class="org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler">
+		<property name="tokenStore" ref="tokenStoreDao" />
+		<property name="requestFactory" ref="oauthRequestFactory" />
+	</bean>
+
+	<oauth:authorization-server
+		client-details-service-ref="clientDetailsService" token-services-ref="tokenServices"
+		user-approval-handler-ref="tokenStoreUserApprovalHandler">
+		<oauth:authorization-code disabled="true" />
+		<oauth:implicit disabled="true" />
+		<oauth:refresh-token />
+		<oauth:client-credentials />
+		<oauth:password authentication-manager-ref="userAuthenticationManager" />
+	</oauth:authorization-server>
+
+	<bean id="oauthAccessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+		<constructor-arg>
+			<list>
+				<bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter" />
+				<bean class="org.springframework.security.access.vote.RoleVoter" />
+				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="oauthAuthenticationEntryPoint"
+		class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint" />
+
+	<bean id="clientCredentialsTokenEndpointFilter"
+		class="org.springframework.security.oauth2.provider.client.ClientCredentialsTokenEndpointFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+	</bean>
+
+	<bean id="oauthAccessDeniedHandler"
+		class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler" />
+
+	<bean id="oauthRequestFactory"
+		class="org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory">
+		<constructor-arg name="clientDetailsService" ref="clientDetailsService" />
+	</bean>
+
+	<sec:authentication-manager id="userAuthenticationManager">
+		<sec:authentication-provider
+			user-service-ref="oauthBiz">
+			<sec:password-encoder hash="md5" />
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider
+			user-service-ref="clientDetailsUserDetailsService">
+			<!-- 
+			<sec:password-encoder hash="md5"/>
+			 -->
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+	<oauth:resource-server id="openApiResourceServer"
+		resource-id="openApi" token-services-ref="tokenServices" />
+</beans>

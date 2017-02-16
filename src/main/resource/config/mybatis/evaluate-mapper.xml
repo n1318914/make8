@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.support.dao.ProjectEvaluateDao">
+	
+	<insert id="addProjectEvaluate" parameterType="com.yundaren.support.po.ProjectEvaluatePo">
+		INSERT INTO project_evaluate
+		(
+			project_id,
+			employee_id,
+			quality_score,
+			speed_score,
+			attitude_score,
+			average_score,
+			description,
+			create_time
+		)
+			VALUES
+		(
+			#{projectId},
+			#{employeeId},
+			#{qualityScore},
+			#{speedScore},
+			#{attitudeScore},
+			#{averageScore},
+			#{description},
+			now()
+		)
+	</insert>
+
+	<select id="getEvaluateListByUID" parameterType="java.lang.Long" resultType="com.yundaren.support.po.ProjectEvaluatePo">
+		SELECT project_id as projectId,
+				employee_id as employeeId,
+				quality_score as qualityScore,
+				speed_score as speedScore,
+				attitude_score as attitudeScore,
+				average_score as averageScore,
+				description as description,
+				create_time as createTime
+		FROM project_evaluate
+		where employee_id = #{uid}
+		ORDER BY create_time DESC
+	</select>
+	
+	<select id="getEvaluateByPID" parameterType="java.lang.String" resultType="com.yundaren.support.po.ProjectEvaluatePo">
+		SELECT project_id as projectId,
+				employee_id as employeeId,
+				quality_score as qualityScore,
+				speed_score as speedScore,
+				attitude_score as attitudeScore,
+				average_score as averageScore,
+				description as description,
+				create_time as createTime
+		FROM project_evaluate
+		where project_id = #{pid}
+	</select>
+	
+	<select id="getAllModule" resultType="com.yundaren.support.po.evaluate.EvaluateModulePo">
+		SELECT id as id,
+				name as name,
+				is_dock as isDock
+		FROM evaluate_module
+	</select>
+	
+	<select id="getAllGroup" resultType="com.yundaren.support.po.evaluate.EvaluateGroupPo">
+		SELECT id as id,
+				name as name,
+				module_id as moduleId,
+				show_on as showOn,
+				is_radio as isRadio
+		FROM evaluate_group
+	</select>
+	
+	<select id="getAllItem" resultType="com.yundaren.support.po.evaluate.EvaluateItemPo">
+		SELECT id as id,
+				name as name,
+				group_id as groupId,
+				show_on as showOn,
+				default_price as defaultPrice,
+				default_period as defaultPeroid,
+				android_rate as androidRate,
+				ios_rate as iosRate,
+				web_rate as webRate,
+				weixin_rate as weixinRate,
+				remark as remark
+		FROM evaluate_item
+	</select>
+	
+	<select id="getAllEvaluateSimilar" resultType="com.yundaren.support.po.evaluate.EvaluateSimilarPo" parameterType="java.lang.String" >
+		SELECT id as id,
+				name as name,
+				description as description,
+				CONCAT(#{host},front_img) as frontImg,
+				link as link,
+				type as type,
+				price as price,
+				peroid as peroid,
+				industry as industry,
+				case price
+					when 0 then '小于1000元'
+					when 1 then '1000-3000元'
+					when 2 then '3000-5000元'
+					when 3 then '5,000-10,000元'
+					when 4 then '10,000-20,000元'
+					when 5 then '20,000-30,000元'
+					when 6 then '30,000-50,000元'
+					when 7 then '50,000-100,000元'
+					when 8 then '100,000-200,000元'
+					when 9 then '200,000-500,000元'
+					when 10 then '大于500,000元'
+				end as descPrice
+		FROM evaluate_similar
+	</select>
+</mapper>

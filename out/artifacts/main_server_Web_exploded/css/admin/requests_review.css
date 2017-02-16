@@ -1,0 +1,159 @@
+.breadcrumb-container-margin{
+    margin-left:0px;
+}
+
+.project-screen{
+	margin-bottom: 20px;
+  margin-top:190px;
+}
+
+.breadcrumb li a{
+	color: #bfbfbf;
+	text-decoration:none;
+}
+
+.breadcrumb li a:hover{
+	color: #337ab7;
+}
+
+.btn-padding{
+	padding:10px 0px;
+	width: 100%;
+}
+
+.padding-left{
+	padding-left:0px;
+}
+
+.padding-right{
+	padding-right: 0px;
+}
+
+.padding{
+	padding: 0px;
+}
+
+.projectLeft{
+	padding: 0px;
+}
+
+.projectRight{
+	padding:0px
+}
+
+.project-type{
+	color: #727272;
+	background-color: #fbfbfb;
+	margin: 0 auto;
+	padding: 10px 0px;
+	border:solid 1px #e9e9e9;
+	border-bottom: none;
+}
+
+.project-hr{
+	height: 3px;
+	background-color: #fbfbfb;
+	margin-left: 0px;
+}
+
+.div-hr{
+	/*margin: 0 15px;*/
+	height: 1px;
+	background: #e9e9e9;
+}
+
+.project-state{
+	color: #727272;
+	background-color: #fbfbfb;
+	margin: 0 auto;
+	padding: 10px 0px;
+	border:solid 1px #e9e9e9;
+	/*border-top: none;*/
+}
+
+.project-number-div{
+	height: 60px;
+	line-height: 40px;
+}
+
+.project-number{
+	color: red;
+}
+
+.span-project-number{
+	color: black;
+}
+
+.project-bottom{
+	margin-bottom: 5px;
+}
+
+.project-view{
+	background: #fbfbfb;
+	overflow: hidden;
+	min-height: 90px;
+	border:solid 1px #e9e9e9;
+	border-bottom: 0px;
+}
+
+.project-view:hover{
+	background: #e7e7e7;
+}
+
+.project-view:last-of-type{
+	border-bottom:solid 1px #e9e9e9;
+}
+
+.project-view-pic{
+	margin-top: 15px;
+	border-right: dashed 1px #e9e9e9;
+}
+
+.project-view-pic i{
+	margin-top:6px;
+}
+
+.project-view-title{
+	margin-top: 20px;
+}
+
+.project-view-details{
+	min-height: 42px;
+	line-height: 42px;
+}
+
+.project-view-details p{
+	margin: 0px;
+}
+
+.project-view-btn{
+	margin: 0px 0px 10px 0px;
+}
+
+#paginationView{
+	overflow: hidden;
+	margin-left: 0px;
+	padding:0;
+}
+
+.banner-div{
+	background-image: url(http://static.make8.com/img/projectReview-banner.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	height:100px;
+}
+
+@media only screen and (max-width:768px) {
+	.project-view-details{
+		padding-left: 0px;
+	}
+	.project-view-title{
+		padding-left: 0px;
+	}
+}
+
+.faith-project{
+	position:absolute;
+	top:0;
+	right:0;
+}

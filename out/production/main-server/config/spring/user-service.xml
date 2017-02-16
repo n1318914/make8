@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+        <bean id="userBiz" class="com.yundaren.user.biz.UserBiz">
+       		<property name="userDao" ref="userDao"/>
+       </bean>
+       
+        <bean id="userService" class="com.yundaren.user.service.impl.UserServiceImpl">
+       		<property name="userBiz" ref="userBiz"/>
+       		<property name="identifyBiz" ref="identifyBiz"/>
+       		<property name="projectInSelfRunBiz" ref="projectInSelfRunBiz"/>
+       		<property name="userExperienceBiz" ref="userExperienceBiz"/>
+       </bean>
+       
+        <bean id="userExperienceBiz" class="com.yundaren.user.biz.UserExperienceBiz">
+       		<property name="userExperienceDao" ref="userExperienceDao"/>
+       </bean>
+       
+        <bean id="userExperienceService" class="com.yundaren.user.service.impl.UserExperienceServiceImpl">
+       		<property name="userExperienceBiz" ref="userExperienceBiz"/>
+       </bean>
+       
+       <bean id="invitationBiz" class="com.yundaren.user.biz.InvitationBiz">
+       		<property name="invitationDao" ref="invitationDao"/>
+       </bean>
+       
+        <bean id="ssoBiz" class="com.yundaren.user.biz.SsoBiz">
+       		<property name="ssoDao" ref="ssoDao"/>
+       </bean>
+       
+        <bean id="ssoService" class="com.yundaren.user.service.impl.SsoServiceImpl">
+       		<property name="userService" ref="userService"/>
+       		<property name="ssoBiz" ref="ssoBiz"/>
+       		<property name="emailSendConfig" ref="emailSendConfig"/>
+       		<property name="domainConfig" ref="domainConfig"/>
+       		<property name="invitationBiz" ref="invitationBiz"/>
+       </bean>
+       
+       <bean id="oauthBiz" class="com.yundaren.security.biz.OauthBiz">
+       		<property name="oauthDao" ref="oauthDao"/>
+       		<property name="ssoBiz" ref="ssoBiz"/>
+       </bean>
+</beans>

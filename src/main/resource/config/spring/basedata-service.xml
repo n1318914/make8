@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+        <bean id="regionBiz" class="com.yundaren.basedata.biz.RegionBiz">
+       		<property name="regionDao" ref="regionDao"/>
+       </bean>
+       
+        <bean id="regionService" class="com.yundaren.basedata.service.impl.RegionServiceImpl">
+       		<property name="regionBiz" ref="regionBiz"/>
+       </bean>
+       
+        <bean id="dictBiz" class="com.yundaren.basedata.biz.DictBiz">
+       		<property name="dictDao" ref="dictDao"/>
+       </bean>
+       
+        <bean id="dictService" class="com.yundaren.basedata.service.impl.DictServiceImpl">
+       		<property name="dictBiz" ref="dictBiz"/>
+       </bean>
+       
+        <bean id="flinkBiz" class="com.yundaren.basedata.biz.FlinkBiz">
+       		<property name="flinkDao" ref="flinkDao"/>
+       </bean>
+       
+        <bean id="flinkService" class="com.yundaren.basedata.service.impl.FlinkServiceImpl">
+       		<property name="flinkBiz" ref="flinkBiz"/>
+       </bean>
+</beans>

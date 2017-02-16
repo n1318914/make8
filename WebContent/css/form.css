@@ -1,0 +1,654 @@
+body {
+	background-color:#979797;
+	background-image:url(https://static.make8.com/img/form-bg.png);
+	background-repeat: no-repeat;
+}
+
+.btn-primary {
+	border-color: #3498DB;
+	color: #fff;
+	background-color:#3498DB;
+}
+
+/*.btn-primary:hover,.btn-primary:focus,.btn-primary.focus,
+.btn-primary:active,.btn-primary.active {
+    border-color: #3c8ec5;
+    color: #fff;
+    background-color:#3c8ec5;
+}*/
+
+
+.form-signin,.commform,.form-register,.form-findpassword,.form-resetpassword{
+  margin: 0 auto;
+  font-family: "微软雅黑";
+}
+
+@media (min-width:768px ) {
+	.commform{
+	 	 width:340px;
+	 }
+	 
+	.form-register{
+	 	width:380px;
+	 	padding:0px 10px;
+	 }
+	 
+	 .form-signin{
+	  	width:380px;
+	  	/*margin-left:20px;*/
+	  	padding: 15px;
+	  }
+	  
+	  .form-resetpassword{
+	  	width:380px;
+	  	padding: 15px;
+	  }
+	  
+    .form-findpassword{
+    	width:380px;
+	  	padding: 15px;
+    }
+}
+
+
+.form-signin .checkbox,.form-register .form-register-heading,.commform .form-heading {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+}
+
+.form-signin .checkbox {
+  font-weight: normal;
+}
+
+.form-signin .form-control,.form-register .form-control,
+.form-findpassword .form-control,.form-resetpassword .form-control{
+	  height: 45px;
+	  width:90%;
+	  padding: 10px;
+	  font-size: 16px;
+}
+
+.form-register .form-btn,.form-findpassword .form-btn{
+	height: 40px;
+	padding-top:8px;
+	font-size:16px;
+	margin-left:-70px;
+	color: #3498DB;
+	background-color:#fff;
+	border:0px;
+	width:133px;
+}
+.form-register .form-btn:hover,
+.form-register .form-btn:active,
+.form-register .form-btn:focus{
+	background-color:#fff;
+	border:0px;
+}
+
+.input-group-addon .fa{
+    width: 1em;
+    text-align: center;
+}
+
+
+
+.form-signin .captcha,
+.form-register .captcha,
+.form-findpassword .captcha,
+.form-resetpassword .captcha{
+	margin-left:-60px;
+}
+
+.form-signin .form-control:focus,.form-register .form-control:focus {
+  z-index: 2;
+}
+
+.msgspan{
+	 color:red;
+	 padding: 0px;
+}
+
+
+.logindiv{
+	/*background:#F3F3F3;*/
+  /*margin-top:180px;
+    margin-left:350px;*/
+	/*height:395px;
+	width:95%;*/
+	border-radius: 15px;
+    padding-bottom: 30px;
+}
+
+@media only screen and (min-width: 768px) {
+	.logindiv{
+		left:50%;
+		top:50%;
+		margin-left:-215px;
+		position:absolute;
+		top:50%;
+		margin-top:-160px;
+        width:380px;
+        height:310px;
+     }
+}
+
+.resetpassword-div{
+	border-radius: 15px;
+	padding-bottom: 30px;
+}
+
+.registerdiv{
+	border-radius: 15px;
+	padding-bottom: 30px;
+}
+
+.registerdiv .nav-container{
+	padding-left:15px;
+	padding-top:20px;
+}
+
+.registerdiv .nav-container a{
+	font-family: "微软雅黑";
+}
+
+
+@media (min-width:768px) {
+	.resetpassword-div{
+	 margin-top:-160px;
+	 margin-left:-215px;
+	 position:absolute;
+	 top:50%;
+	 left:50%;
+	 width:380px;
+	}
+	
+	.registerdiv{
+	  margin-top:60px;
+	  top:50%;
+	  left:50%;
+	  position:absolute;
+	  margin-top:-155px;
+	  margin-left:-210px;
+	  width:450px;
+	}
+	
+	.registerdiv .nav-container{
+		padding-left:20px;
+	}
+}
+
+.form-signin a{
+	padding-bottom: 20px;
+}
+
+.form-logo {
+	padding-top:20px;
+	/*padding-bottom:-20px;*/
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+@media (min-width:768px ) {
+	/*.form-logo {
+		padding-left:75px;
+	}*/
+}
+
+.vcode-input{
+	width:200px;
+}
+
+.vcode-message{
+	position:relative;
+	top:-30px;
+}
+
+.findpassword-div{
+	border-radius: 15px;
+	padding-bottom: 30px;
+}
+
+@media only screen and (min-width: 768px){
+	.findpassword-div{
+		position:absolute;
+		top:50%;
+		left:50%;
+		margin-top:-160px;
+		margin-left:-215px;
+	    width:380px;
+	}
+	
+}
+
+span .error{
+	color: red;
+	font-size: 12px;
+}
+
+span .info{
+	 color:#286090;
+	 font-size:12px;
+}
+
+.usertype-div{
+	/*margin-top:20px;
+	margin-bottom: 20px;
+	font-size:14px;*/
+	height:50px;
+	margin-left:-30px;
+	padding-top:5px;
+}
+
+.usertype-div label{
+	font-size:15px;
+	font-weight: 200;
+	padding-left:10px;
+}
+
+/*.btn-default.active, .btn-default:active,
+.btn-default.active.focus, .btn-default .active:focus,
+.btn-default.active:hover, .btn-default:active.focus,
+.btn-default:active:focus, .btn-default:active:hover
+{
+	background-color: #337ab7;
+	color:#fff;
+}*/
+
+.registerdiv .nav-tabs{
+	border-bottom: 0px;
+	width:380px;
+}
+
+.registerdiv .nav-tabs>li>a{
+	color:#fff;
+	cursor: pointer;
+	background-color:transparent;
+	border: 0px;
+	padding-left:60px;
+	font-size:16px;
+	outline:none; /*去掉ff中获得聚焦后的虚线框*/
+	height:42px;
+}
+
+.registerdiv .nav-tabs>li.active>a, 
+.registerdiv .nav-tabs>li.active>a:focus, 
+.registerdiv .nav-tabs>li.active>a:hover{
+	color:#3498DB;
+	cursor: pointer;
+	background-color:transparent;
+	border: 0px;
+	padding-left:60px;
+	outline:none; /*去掉ff中获得聚焦后的虚线框*/
+}
+
+.registerdiv .nav>li{
+	border-color:transparent;
+	border-bottom:1px solid #FFFFFF;
+	margin-bottom: 20px;
+	width:170px;
+}
+
+.registerdiv .nav>li.active{
+	
+}
+
+.registerdiv .nav .tab-active{
+    position: absolute;
+   /* bottom: -1px;*/
+    background-color: #3498DB;
+    margin-top:42px;
+    margin-left:35px;
+    width: 170px;
+    height: 1px;
+    left:0px;
+    
+    transition: left 0.5s;
+	-moz-transition: left 0.5s; /* Firefox 4 */
+	-webkit-transition: left 0.5s; /* Safari 和 Chrome */
+	-o-transition: left 0.5s; /* Opera */
+}
+
+
+
+.registerdiv .nav .tab-active:before, 
+.registerdiv .nav .tab-active:after{
+    position: absolute;
+    z-index: 2;
+    top: -11px;
+    left: 50%;
+    margin-left: -3px;
+    content: '';
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border: 6px solid transparent;
+    border-bottom-color: #3498DB;
+}
+
+.registerdiv .nav .tab-active:after{
+    z-index: 3;
+    top: -10px;
+    width: 0;
+    margin-left: -3px;
+    height: 0;
+    line-height: 0;
+    border: 6px solid transparent;
+    border-bottom-color: transparent;
+}
+
+.form-heading{
+	font-family: "微软雅黑";
+	font-size:30px;
+	color:#FFFFFF;
+	text-align: center;
+	width:400px;
+	padding-bottom: 20px;
+}
+
+@media only screen and (min-width:768px ) {
+	.form-signin .form-filed-bg{
+		position:absolute;
+
+	}
+}
+
+.form-user-icon{
+	background-image: url(../img/form-whole.png) no-repeat;
+	background-position: -120px,0;
+	width:30px;
+	height:30px;
+}
+
+.form-lock-icon{
+	background:white url(../img/form-password.png) no-repeat;
+	background-position: center;
+	width:30px;
+	height:30px;
+	margin: 0 auto;
+}
+
+.form-vcode-icon{
+	overflow: hidden;
+	background:white url(../img/form-yzm.png) no-repeat;
+	background-position: center;
+	width:30px;
+	height:30px;
+	margin: 0 auto;
+}
+
+.form-mobile-icon{
+	background:white url(../img/form-phone.png) no-repeat;
+	background-position: center;
+	width:30px;
+	height:30px;
+	margin: 0 auto;
+}
+
+.form-envelope-icon{
+	background-image:url(../img/form-whole.png) no-repeat;
+	width:30px;
+	height:30px;
+}
+
+.form-signin .input-group-addon,
+.form-register .input-group-addon,
+.form-findpassword .input-group-addon,
+.form-resetpassword .input-group-addon{
+	background:transparent;
+	border-color:transparent;
+	padding:0px 12px;
+	border-right:2px solid #FFFFF;
+}
+
+.form-signin .form-input,
+.form-register .form-input,
+.form-findpassword .form-input,
+.form-resetpassword .form-input{
+	height:50px;
+	background:transparent;
+    color:#FFFFFF;
+    border-color:transparent;
+    font-size:18px;
+    width:250px;
+    border-radius:10px ;
+}
+
+.form-register .form-input-small,
+.form-findpassword .form-input-small,
+.form-resetpassword .form-input-small,
+.form-signin .form-input-small{
+	height:50px;
+	background:transparent;
+    color:#FFFFFF;
+    border:0px;
+    font-size:18px;
+    width:110px;
+}
+
+input:focus,input:active,
+input:hover{
+	border-color:transparent;
+	outline:none; /*去掉chrome获取焦点后显示的蓝色*/
+}
+
+
+.form-signin fieldset,
+.form-findpassword fieldset,
+.form-resetpassword fieldset{
+	background-color:rgba(255,255,255,0.2);
+	padding-top:30px;
+	padding-left:20px;
+	padding-right:20px;
+	padding-bottom:10px;
+	border-radius: 10px;
+	width:380px;
+}
+
+.form-signin .icon,
+.form-register .icon,
+.form-findpassword .icon,
+.form-resetpassword .icon{
+	margin-top:6px;
+	margin-left:-15px;
+}
+
+.form-signin .form-group,
+.form-register .form-group,
+.form-findpassword .form-group,
+.form-resetpassword .form-group{
+	height:50px;
+}
+
+.form-signin .vertical-divider,
+.form-register .vertical-divider,
+.form-findpassword .vertical-divider,
+.form-resetpassword .vertical-divider
+{
+	border-right: 1px solid #FFFFFF;
+	height:40px;
+	margin-left:5px;
+}
+
+.form-signin .btn,
+.form-findpassword .btn,
+.form-resetpassword .btn
+{
+	margin-top:25px;
+	width:380px;
+	margin-left:-15px;
+}
+
+.form-signin a{
+	text-decoration: none;
+	color:#FFFFFF;
+	font-size:16px;
+}
+
+.form-signin .link-view{
+	width:380px;
+}
+
+.form-signin .link-view .link-findpassword{
+	margin-left:-13px;
+}
+
+.form-signin .link-view .link-register{
+	padding-left:298px;
+	width:380px;
+}
+
+.form-signin .vcode-view{
+	margin-left:-14px;
+	display:none;
+}
+
+.form-register .vcode-view,
+.form-findpassword .vcode-view,
+.form-resetpassword .vcode-view{
+	margin-left:-14px;
+}
+
+.form-signin .msgspan-container{
+	margin-top:-20px;
+	margin-left: -13px;
+    width: 380px;
+
+}
+
+input::-webkit-input-placeholder{
+  font-family: "微软雅黑";
+  font-size:18px;
+  /*color:#FFFFFF;*/
+}
+
+input::-moz-placeholder{
+  font-family: "微软雅黑";
+  font-size:18px;
+  /*color:#FFFFFF;*/
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #6F6F6D;
+    transition: background-color 99999s ease-in-out 0s; //修改chrome自动填充的颜色
+}
+
+
+.form-register .usertype-div .btn{
+	/*border-radius: 5px;*/
+	background-color: transparent;
+	color:#fff;
+	font-size:18px;
+	width:130px;
+	border-color:transparent;
+}
+
+.form-register .usertype-div .btn-default.active, 
+.form-register .usertype-div .btn-default:active,
+.form-register .usertype-div .btn-default.active.focus, 
+.form-register .usertype-div .btn-default .active:focus,
+.form-register .usertype-div .btn-default.active:hover, 
+.form-register .usertype-div .btn-default:active.focus,
+.form-register .usertype-div .btn-default:active:focus, 
+.form-register .usertype-div .btn-default:active:hover
+{
+	background-color: transparent;
+	border-color:transparent;
+}
+
+.form-register .usertype-div .btn-default{
+	background:rgba(255,255,255,0.2);
+	border-color:transparent;
+}
+
+.form-register .usertype-div .btn-bg{
+	width:129px;
+	height:39px;
+	margin-left:0px;
+	background-color:#3498DB;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius:5px;
+	
+	transition: margin-left 0.5s;
+	-moz-transition: margin-left 0.5s; /* Firefox 4 */
+	-webkit-transition: margin-left 0.5s; /* Safari 和 Chrome */
+	-o-transition: margin-left 0.5s; /* Opera */
+}
+
+.registerdiv .container-bg{
+	background-color:rgba(255,255,255,0.2);
+	border-radius: 10px;
+	height:240px;
+	width:380px;
+}
+
+/*.registerdiv .btn-group>.btn:first-child{
+	border-top-left-radius: 5px;
+	border-bottom-left-radius:5px;
+}
+
+.registerdiv .btn-group>.btn:last-child{
+	border-top-right-radius: 5px;
+	border-bottom-right-radius:5px;
+}*/
+
+.registerdiv .btn-group>.btn:not(:first-child):not(:last-child):not(.dropdown-toggle){
+	border-top-right-radius: 5px;
+	border-bottom-right-radius:5px;
+}
+
+.registerdiv .btn-submit{
+	width:380px;
+}
+
+.registerdiv .btn-submit-container{
+	margin-left:-55px;
+}
+
+.registerdiv .btn-submit-container .msgspan{
+	height:30px;
+}
+
+.registerdiv .btn-submit-container a{
+	text-decoration: none;
+	color:#fff;
+	font-size:16px;
+	font-family: "微软雅黑";
+}
+
+.registerdiv .btn-submit-container a:hover,
+.registerdiv .btn-submit-container a:active,
+.registerdiv .btn-submit-container a:focus{
+	color:#3498DB;
+}
+
+.registerdiv .star-icon{
+	color:red;
+	font-size:16px;
+	font-weight: bold;
+}
+
+.registerdiv .desc{
+	font-size:16px;
+	font-family: "微软雅黑";
+	color:#fff;
+	width:380px;
+}
+
+.registerdiv .desc-container{
+	margin-left:-20px;
+	margin-top:20px;
+}
+
+.registerdiv .desc-container a{
+	color:#fff;
+	text-decoration: none;
+}
+
+.registerdiv .desc-container a:hover,
+.registerdiv .desc-container a:active,
+.registerdiv .desc-container a:focus{
+	color:#3498DB;
+}

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yundaren.user.dao.UserExperienceDao">
+	
+	<select id="getEduExpListByUID" parameterType="long" resultType="com.yundaren.user.po.EmployeeEduExperiencePo">
+		SELECT 
+			user_id as userId,
+			school_name as schoolName,
+			discipline as discipline,
+			edu_backgroud as eduBackgroud,
+			graduation_time as graduationTime,
+			ranking as ranking,
+			create_time as createTime
+		FROM employee_edu_experience
+		WHERE user_id = #{uid}
+	</select>
+	
+	<select id="getJobExpListByUID" parameterType="long" resultType="com.yundaren.user.po.EmployeeJobExperiencePo">
+		SELECT 
+			user_id as userId,
+			company_name as companyName,
+			office as office,
+			start_time as startTime,
+			end_time as endTime,
+			description as description,
+			ranking as ranking,
+			create_time as createTime
+		FROM employee_job_experience
+		WHERE user_id = #{uid}
+	</select>
+	
+	<select id="getEmployeeProListByUID" parameterType="long" resultType="com.yundaren.user.po.EmployeeProductPo">
+		SELECT 
+			user_id as userId,
+			title as title,
+			description as description,
+			link as link,
+			ranking as ranking,
+			create_time as createTime
+		FROM employee_product
+		WHERE user_id = #{uid}
+	</select>
+
+	<select id="getTeamProjectListByUID" parameterType="long" resultType="com.yundaren.user.po.EmployeeTeamProjectExperiencePo">
+		SELECT 
+			user_id as userId,
+			project_name as projectName,
+			start_time as startTime,
+			end_time as endTime,
+			link as link,
+			description as description,
+			ranking as ranking,
+			create_time as createTime
+		FROM employee_team_project_experience
+		WHERE user_id = #{uid}
+	</select>
+	<select id="getTeamProjectListByUIDs" parameterType="long" resultType="com.yundaren.user.po.EmployeeTeamProjectExperiencePo">
+		SELECT 
+			user_id as userId,
+			project_name as projectName,
+			start_time as startTime,
+			end_time as endTime,
+			link as link,
+			description as description,
+			ranking as ranking,
+			create_time as createTime
+		FROM employee_team_project_experience
+		WHERE user_id in(select id as uid from user_info where user_type=1
+			<if test='userType!=-1'>
+				and is_disply=1
+			</if>
+		)		
+	</select>
+	<insert id="addEduExperience" parameterType="java.util.Map">
+	    INSERT INTO employee_edu_experience (user_id,school_name,discipline,edu_backgroud,graduation_time,ranking,create_time)
+	    VALUES 
+	    <foreach collection="teamProjectList" item="item" index="index" separator="," >
+	        (#{uid},#{item.schoolName},#{item.discipline},#{item.eduBackgroud},#{item.graduationTime},#{item.ranking},now())
+	    </foreach>
+	</insert>
+	
+	<insert id="addJobExperience" parameterType="java.util.Map">
+	    INSERT INTO employee_job_experience (user_id,company_name,office,start_time,end_time,description,ranking,create_time)
+	    VALUES 
+	    <foreach collection="teamProjectList" item="item" index="index" separator="," >
+	        (#{uid},#{item.companyName},#{item.office},#{item.startTime},#{item.endTime},#{item.description},#{item.ranking},now())
+	    </foreach>
+	</insert>
+	
+	<insert id="addEmployeeProduct" parameterType="java.util.Map">
+	    INSERT INTO employee_product (user_id,title,link,description,ranking,create_time)
+	    VALUES 
+	    <foreach collection="teamProjectList" item="item" index="index" separator="," >
+	        (#{uid},#{item.title},#{item.link},#{item.description},#{item.ranking},now())
+	    </foreach>
+	</insert>
+	
+	<insert id="addTeamProject" parameterType="java.util.Map">
+	    INSERT INTO employee_team_project_experience (user_id,project_name,start_time,end_time,link,description,ranking,create_time)
+	    VALUES 
+	    <foreach collection="teamProjectList" item="item" index="index" separator="," >
+	        (#{uid},#{item.projectName},#{item.startTime},#{item.endTime},#{item.link},#{item.description},#{item.ranking},now())
+	    </foreach>
+	</insert>
+	
+	<delete id="deleteEduExperience" parameterType="java.util.Map">
+	   DELETE from employee_edu_experience
+	    WHERE uid = #{uid} 
+		<if test="ranking!=-1">
+			and ranking = #{ranking}
+	   </if>
+	</delete>
+	
+	<delete id="deleteJobExperience" parameterType="java.util.Map">
+	   DELETE from employee_job_experience
+	    WHERE uid = #{uid} 
+		<if test="ranking!=-1">
+			and ranking = #{ranking}
+	   </if>
+	</delete>
+	
+	<delete id="deleteEmployeeProduct" parameterType="java.util.Map">
+	   DELETE from employee_product
+	   WHERE uid = #{uid} 
+		<if test="ranking!=-1">
+			and ranking = #{ranking}
+	   </if>
+	</delete>
+	
+	<delete id="deleteTeamProject" parameterType="java.util.Map">
+	   DELETE from employee_team_project_experience
+	   WHERE uid = #{uid} 
+	   <if test="ranking!=-1">
+			and ranking = #{ranking}
+	   </if>
+	</delete>
+	
+	<delete id="deleteUserAllExp" parameterType="long">
+	   DELETE from employee_edu_experience where user_id = #{uid};
+	   DELETE from employee_job_experience where user_id = #{uid};
+	   DELETE from employee_product where user_id = #{uid};
+	   DELETE from employee_team_project_experience where user_id = #{uid};
+	</delete>
+	
+	<delete id="deleteAllTeamProjectByUID" parameterType="long">
+	   DELETE  
+	   FROM 
+		   employee_team_project_experience
+	   WHERE user_id = #{uid}
+	</delete>
+</mapper>

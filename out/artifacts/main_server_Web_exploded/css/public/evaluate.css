@@ -1,0 +1,470 @@
+*{
+	padding: 0px;
+	margin: 0px;
+	font-family: "微软雅黑";
+}
+
+body{
+	background: white;
+}
+
+.padding-left{
+	padding-left: 0px;
+}
+
+.padding-right{
+	padding-right: 0px;
+}
+
+.padding{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.banner{
+	background: url(https://static.make8.com/img/banner_assessment.jpg) no-repeat;
+	background-position: center;
+	background-size: cover;
+	height: 360px;
+}
+
+.resultSum{
+	display: none;
+}
+
+.productTypeTitle,.productTypeContent{
+	float: left;
+}
+
+.productController{
+	background: #f7f7f7;
+	padding:30px 0px;
+}
+
+.productType{
+	margin-bottom: 9px;
+}
+
+.option{
+	color: white;
+	text-align: center;
+}
+
+.option_div{
+	background:white;
+	padding: 7px 0px;
+	width: 140px;
+	border: solid 1px #ccc;
+	border-radius: 5px;
+	color: black;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+/*.option div{
+	background:white;
+	padding: 7px 0px;
+	width: 140px;
+	border: solid 1px #ccc;
+	border-radius: 5px;
+	color: black;
+	margin-bottom: 10px;
+}*/
+
+.option_active{
+	color: white !important;
+	background:#3487bd url(../../img/checked.png) no-repeat 4px 10px !important;
+	cursor: default;
+}
+
+.datas{
+	background: white;
+	padding: 30px 0px 60px 0px;
+}
+
+.tableTile{
+	color: white;
+	background: #10a0ff;
+	padding: 0px 24px;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: solid 1px white;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.tableTh div{
+	color: white;
+	padding: 10px;
+	text-align: center;
+	background: #002943;
+	border-right: solid 1px white;
+}
+
+.tableTh div:last-of-type{
+	border-right:none;
+}
+
+.tableTd{
+	text-align: center;
+	border:solid 1px #e6e6e6;
+	border-bottom: none;
+	border-left: none;
+}
+
+.module{
+	margin-top: 40px;
+}
+
+.hide{
+	display: none;
+}
+
+.active{
+	display: block !important;
+}
+
+.module > .tableTr:last-of-type{
+	border-bottom: solid 1px #e6e6e6;
+}
+
+.tableTd > .tableTr{
+	height: 39px;
+	background:#f0f9ff;
+	border-top: solid 1px #e6e6e6;
+}
+
+.tableTd > .tableTr:first-of-type{
+	height: 39px;
+	border: none;
+}
+
+.tableTd > .tableTr:nth-of-type(2n){
+	background: white;
+}
+
+.tableTr:nth-of-type(2n) > .tableTd > .tableTr{
+	background:white;
+}
+
+.tableTr:nth-of-type(2n) > .tableTd > .tableTr:nth-of-type(2n){
+	background: #f0f9ff;
+}
+
+.radioDiv{
+	padding-top: 10px;
+}
+
+.radio{
+	margin: auto;
+	width: 200px;
+}
+
+.number{
+	color: #b3b3b3;
+	text-align: center;
+	margin: 10px auto auto auto;
+	font-size: 12px;
+}
+
+.describe{
+	color: black;
+	text-align: center;
+	margin: 10px auto auto auto;
+	overflow: hidden;
+	height: 100%;
+}
+
+.tableTd_title{
+	border-left: solid 1px #e6e6e6;
+}
+
+.selectAll{
+	width: 120px;
+	margin:0 auto;
+}
+
+.checkBoxBtn,.checkBoxAllBtn{
+	float: left;
+	width: 14px;
+	height: 14px;
+	margin-right: 20px;
+	margin-top: 3px;
+	border:solid 1px #3487bd;
+	border-radius: 3px;
+}
+
+.checkBoxBtn img,.checkBoxAllBtn img{
+	display: none;
+	width: 100%;
+	height: 100%;
+}
+
+.result{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 2;
+    background: rgba(0,0,0,.85);
+    padding-top: 15px;
+    padding-bottom: 17px;
+}
+
+.warning{
+	color: red;
+}
+
+.remind_label{
+	color: #10a0ff;
+}
+
+.remind{
+	color: #a5a4a4;
+	margin-bottom: 16px;
+}
+
+.resultInfo,.resultInfoDiv{
+	color: white;
+	font-size: 18px;
+	font-weight: 100;
+	margin-bottom: 5px;
+}
+
+.assessmentBtn,.assessmentBtnDiv{
+	width: 300px;
+	padding: 7px 8px;
+	font-size: 15px;
+	background: #10a0ff;
+	/*margin-top: 30px;*/
+}
+
+.tabDiv{
+	overflow-x:hidden;
+	width: 120px;
+	transition: all 1s;
+	position: fixed;
+	z-index: 1000;
+	overflow: visible;
+}
+
+.tab{
+	position: absolute;
+	top: 10%;
+	width: 120px;
+	background: #002943;
+	padding-top: 30px;
+	margin-left: 0px;
+	transition: all 1s;
+	overflow: visible;
+}
+
+.tab > div{
+	font-size: 14px;
+	color: white;
+	border-bottom: solid 1px #003a5f;
+	border-left: solid 6px #003a5f;
+	padding:10px 0px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.tab > div:hover{
+	color: black;
+	background: white;
+	border-left: solid 6px #48b7ff;
+}
+
+.tab > div:last-of-type{
+	border-bottom: none;
+	padding:23.5px 0px;
+}
+
+.tab > div:last-of-type:hover{
+	color: none;
+	background: none;
+	border-left: solid 6px #003a5f;
+}
+
+.tab > div:last-of-type a{
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.tab > div:last-of-type a:hover{
+	transition: all 0.5s;
+	/*transform:rotate(7deg);*/
+	transform: rotateY(180deg);
+}
+
+.tab_Active{
+	color: black !important;
+	border-left: solid 6px #48b7ff !important;
+	background: white !important;
+}
+
+.sum{
+	padding: 8px;
+	border:solid 1px #e6e6e6;
+	border-bottom: none;
+}
+
+.sum > span{
+	color: #10a0ff;
+}
+
+/*报价结果*/
+.price{
+	margin-top: 30px;
+	display: none;
+}
+
+.priceTitle{
+	border-radius: 5px 5px 0px 0px;
+	background: #10a0ff;
+	height: 50px;
+	line-height: 50px;
+	color: white;
+	font-size: 18px;
+}
+
+.priceDiv{
+	height: 50px;
+	line-height: 50px;
+	border-bottom: dashed 1px #ccc;
+}
+
+.similarProject{
+	padding: 30px;
+}
+
+.priceContent,.similarProject{
+	border: solid 1px #ccc;
+	border-top:none ;
+}
+
+.priceContent{
+	padding-bottom: 89px;
+    padding-top: 15px;
+}
+
+.similarProjectImg img{
+	display: block;
+	width: 200px;
+	height: 150px;
+	margin: 0 auto;
+}
+
+.similarProjectTitle a{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.similarProject_div{
+    padding: 0px 0px 29px 0px;
+    border-bottom: dashed 1px #ccc;
+    margin-bottom: 30px;
+}
+
+.similarProject .similarProject_div:last-of-type{
+	padding: 0px;
+	border-bottom: none;
+	margin-bottom: 0px;
+}
+
+.similarProjectContent{
+	height: 60px;
+	overflow: hidden;
+	text-indent: 2em;
+	margin: 25px auto;
+}
+
+.price_style{
+	font-size: 16px;
+	color: #10a0ff;
+}
+
+.priceMsg{
+    height: 70px;
+    line-height: 40px;
+}
+
+.resultHide{
+	display: none;
+	overflow: hidden;
+}
+
+/*通用底部css*/
+.tail{
+	margin-top: 0px;
+}
+
+/*clickShow*/
+.clickToShow{
+    position: absolute;
+    z-index: 998;
+    /* height: 100px; */
+   top: 45px;
+}
+
+.clickToShowLeft{
+    width: 14px;
+    height: 14px;
+    background: white;
+    margin-left: 20px;
+    margin-top: -7px;
+    position: absolute;
+    border-top: solid 1px #ccc;
+    border-left: solid 1px #ccc;
+    transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.clickToShowRight{
+	background: white;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+@media screen and (max-width:1200px)
+{
+	.option_div{
+		width: 135px;
+	}
+}
+
+@media screen and (max-width:992px) {
+	.similarProjectTitle{
+		margin-top: 10px;
+		text-align: center;
+	}
+	.price{
+		padding-left: 0px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.tableTh div:first-of-type{
+		border-bottom: solid 1px white;
+		border-right: solid 1px #002943;
+	}
+	.tableTh div:last-of-type{
+		border-right: solid 1px #002943;
+	}
+	.radio{
+		width: 90px;
+	}
+	.tableTd{
+		border-left: solid 1px #e6e6e6;
+	}
+	.resultInfo,.resultInfoDiv{
+		font-size: 14px;
+	}
+	.defaultResult,#productType{
+		display: block;
+	}
+	.assessmentBtn,.assessmentBtnDiv{
+		width: 100px;
+	}
+}

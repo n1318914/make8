@@ -1,0 +1,72 @@
+.col-padding{
+    padding: 0px
+}
+
+.col-padding-left{
+    padding-left: 0px
+}
+
+.col-padding-right{
+    padding-right: 0px
+}
+
+.banner{
+    margin-top: 80px;
+    margin-bottom: 80px
+}
+
+.banner > img{
+    width: 100%
+}
+
+.proServices ul li {
+	/*margin-bottom: 10px;*/
+	height: 179px;
+	border-radius: 3px;
+	margin-bottom: 16px;
+}
+
+.proServices ul li img:first-of-type {
+	display: block;
+	margin: 0 auto;
+	transition: all 0.2s;
+	position: relative;
+	top: -20px;
+}
+
+.proServices ul li p:first-of-type {
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+}
+
+.proServices ul li p:last-of-type {
+	color: #4c4c4c;
+}
+
+.btn-case,.btn-send{
+    padding:7px 0px;
+    width: 300px
+}
+
+.btn-case{
+    background: white;
+    border:solid 1px #4a77ff;
+    color: #4a77ff
+}
+
+
+.btn-send{
+    background: #4a77ff;
+    border:solid 1px #4a77ff;
+    margin-top: 30px;
+    color:white;
+    margin-bottom: 39px
+}
+
+@media screen and (max-width:414px){
+    .btn-send,.btn-case{
+        width: 100%
+    }
+}

@@ -1,0 +1,242 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+body{
+	font-family: "微软雅黑";
+	background:#f5f5f5;
+}
+
+a{
+	text-decoration: none;
+	margin-right:5px;
+}
+
+.banner{
+	background: #68a9ff;
+	margin-top: 80px;
+	height: 300px;
+}
+
+.banner_img{
+	background: url(../../img/infos/banner_img.jpg) no-repeat;
+	background-size: cover;
+	width: 1200px;
+	height: 300px;
+	margin: 0 auto;
+}
+
+.body{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.body_left{
+	margin-top:16px;
+	width: 900px;
+	margin-right: 50px;
+	float: left;
+}
+
+.content{
+	margin-top: 25px;
+	background: white;
+	padding: 40px 100px 90px 100px;
+}
+
+.article{
+	margin-top: 35px;
+}
+
+.article .article_title{
+	/*font-weight: bold;*/
+	font-size: 18px;
+	color:#3498DB;
+}
+
+.article .article_content{
+	margin-top: 20px;
+}
+
+.body_right{
+	margin-top:16px;
+	width: 250px;
+	float: left;
+}
+
+.body_right ul{
+	/*border:solid 1px #dcdcdc;*/
+	list-style: none;
+	width: 250px;
+	text-align: left;
+	/*padding-left:20px;*/
+	font-size: 14px;
+	/*padding-top:5px;*/
+}
+
+.body_right ul li{
+	background: white;
+	width:100%;
+	padding-top:8px;
+	padding-bottom:8px;
+	border-bottom: 2px solid #f5f5f5;
+}
+
+.body_right ul li:last-child{
+	border-bottom: 0px;
+}
+
+.body_right ul li a{
+	color:#535353;
+	text-decoration: none;
+}
+
+.body_right ul li a:hover{
+	color:#3498DB;
+}
+
+.body_right ul li i{
+	color:#3498DB;
+}
+
+.BreadcrumbNavigation{
+	margin: 55px auto auto auto;
+}
+
+.productType{
+	margin:0px auto;
+}
+
+.region div{
+	padding: 10px 10px 10px 0px;
+	color: #3498BD;
+	float: left;
+}
+
+.region a{
+	text-decoration: none;
+	color: black;
+}
+
+.region a:hover{
+	color: #3498DB;
+}
+
+.productType ul,.region ul{
+	width: 1148px;
+	overflow: hidden;
+	list-style: none;
+}
+
+.productType ul li{
+	float: left;
+	padding: 10px;
+}
+
+.region ul li{
+	color: blue;
+	float: left;
+	padding: 10px 5px;
+}
+
+.productType ul li:first-of-type,.region ul li:first-of-type{
+	padding: 10px 10px 10px 0px;
+	color: blue;
+}
+
+.appointment{
+	height:418px;
+	width: 898px;
+	background: white;
+	color: #727171;
+	border:solid 1px white;
+}
+
+.appointmentDiv{
+	width: 700px;
+	height: 345px;
+	background: #f0f6ff;
+	border-radius: 10px;
+	margin:36.5px auto;
+}
+
+.appointment-title{
+	height: 50px;
+	border-bottom: 2px solid white;
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 30px;
+	line-height: 50px;
+	color: #006eff;
+}
+
+.form-control{
+	padding: 10px;
+	border-style: none;
+	border-radius: 5px;
+	resize: none;
+	font-size: 16px;
+	width: 100%;
+}
+
+.form-div{
+	width:440px ;
+	margin: 0 auto;
+	height: 54px;
+}
+
+.form-div div{
+	float: left;
+}
+
+.form-div div:first-of-type{
+	width: 90px;
+	text-align: right;
+}
+
+.form-btn{
+	width: 440px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.warningMsg{
+	color: red;
+	display: none;
+	margin-left: 100px;
+}
+
+.div_radius{
+	margin: 5px 20px auto 20px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #cdcdcd;
+	float: left;
+}
+
+/*.btn{
+	background: #535353;
+	border-style: none;
+	padding:8px 24px;
+	cursor: pointer;
+	color: white;
+}*/
+
+.form-btn .btn{
+	width: 350px;
+	margin-left: 90px;
+	background: #3498BD;
+	border: none;
+}
+
+.form-div div:nth-of-type(2){
+	width: 350px;
+}
+
+@media only screen and (max-width: 1200px) {
+	.banner{
+		width: 1200px;
+	}
+}

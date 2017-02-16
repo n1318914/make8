@@ -1,0 +1,162 @@
+.col-padding{
+    padding: 0px
+}
+
+.col-padding-left{
+    padding-left: 0px
+}
+
+.col-padding-right{
+    padding-right:0px
+}
+
+.banner{
+    background: #dee7f1;
+    padding-bottom: 13px;
+    margin-top: 80px
+}
+
+.partner{
+    font-size: 18px;
+    margin-bottom: 32px
+}
+
+.shop{
+    background: #faffe9
+}
+
+.video{
+    background: #e7ffff;
+    padding: 10px 15px 15px 14px
+}
+
+.btn-shop{
+    background: #45955d;
+    color: white;
+    padding: 7px 0px;
+    width: 200px;
+}
+
+.shop-right,.face-right{
+    display: flex;
+    height: 280px;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.face-right{
+    justify-content: center;
+}
+
+.video-right{
+    display: flex;
+    height: 256px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.shop-title{
+    color: #3b3431;
+    font-size: 30px;
+    margin-bottom: 25px;
+    margin-top: calc((280px - 103px)/2)
+}
+
+.fr-title{
+    color: #3b3431;
+    font-size: 30px;
+    margin-bottom: 25px;
+    margin-top: calc((280px - 165px)/2)  
+}
+
+.ft-title{
+    margin-bottom: 27px;
+    color: #3b3431;
+    font-size: 30px;
+}
+
+.video-title{
+    color: #3b3431;
+    font-size: 30px;
+    margin-bottom: 27px;
+    margin-top: calc((256px - 174px)/2)
+}
+
+.btn-ft{
+    background:#ff6600;
+    color: white;
+    padding: 7px 0px;
+    width: 200px;
+}
+
+.btn-video{
+    background: #15a6b2;
+    color: white;
+    padding: 7px 0px;
+    width: 200px;
+}
+
+.btn-fr{
+    background: #09cfcd;
+    color: white;
+    padding: 7px 0px;
+    width: 200px;
+}
+
+.btn-fr:hover{
+    background: white;
+    color: #09cfcd !important;
+    border: solid 1px #09cfcd    
+}
+
+.btn-ft:hover{
+    background: white;
+    color: #ff6600 !important;
+    border: solid 1px #ff6600    
+}
+
+.btn-video:hover{
+    background: white;
+    color: #15a6b2 !important;
+    border: solid 1px #15a6b2
+}
+
+.btn-shop:hover{
+    background: white;
+    color: #45955d !important;
+    border: solid 1px #45955d;
+}
+
+.fr-title{
+    color: white;
+    font-size: 30px;
+    margin-bottom: 25px   
+}
+
+.face-recognition .partner{
+    font-size: 18px;
+    margin-bottom: 32px;
+    color: white   
+}
+
+@media screen and (max-width:992px){
+    .col-visible-sm{
+        visibility: hidden;
+    }
+}
+
+@media screen and (max-width:768px){
+    .banner img{
+        width: 100%
+    }
+}
+
+@media screen and (max-width:414px){
+    .fr-title,.video-title,.shop-title{
+        margin-top: 0px;
+    }
+
+    .video,.face-recognition,.shop{
+        padding: 54px 15px
+    }
+}

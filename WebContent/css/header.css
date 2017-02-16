@@ -1,0 +1,68 @@
+*{padding: 0px;margin: 0px;font-family: "微软雅黑";}
+ul{list-style: none;}
+/*css end*/
+nav{transition:all .5s;position: fixed;top: 0px;left:0px;z-index: 1000;width: 100%;height:80px;background:white;border-bottom: 1px solid #ccc;-moz-box-shadow: 0 4px 15px 0 rgba(0,0,0,0.1);-webkit-box-shadow: 0 4px 15px 0 rgba(0,0,0,0.1);box-shadow: 0 4px 15px 0 rgba(0,0,0,0.1);}
+.nav-simple{transition:all .5s;position: fixed;top: 0px;left:0px;z-index: 1000;width: 100%;height:80px;background:rgba(255,255,255,0.2);border:0px;}
+nav>div{width: 70%;margin: 0 auto;}
+.menu{display: none;cursor:pointer;}
+.menu{width:100%;height:90px;text-align: right;}
+.menu img{width: 35px;height: 35px;margin-top:25px;}
+nav h1{float: left;text-align: left;display: block;height: 90px;margin: 0 auto;width:20%;padding-top:18px;}
+.nav-ul{float: left;height: 90px;width:70%;margin-left: 10%;}
+.nav-ul li{float: left;width: 11%;text-align: center;padding-top: 38px;}
+.nav-ul>li:last-of-type{width: 23%;padding-top:30px;text-align: right;}
+.nav-ul li a{text-decoration:none !important;color: black;font-weight: bold;}
+.nav-simple .nav-ul li a{text-decoration:none !important;color: black;font-weight: bold;}
+/*.nav-ul li a:hover{color: white;}*/
+.nav-ul li div{transition:all 0.3s;transform-orgin:50% 50%;background:#3498db;width:0px;height: 3px;position: relative;margin:0 auto;z-index: 1000px;}
+.login{background-color:#3498db;padding: 6px 25px;color: white;}
+.login:hover{background-color:white;border:solid 1px #3498db;color: #3498db;}
+.join{background-color:#76d03b ;padding: 6px 25px;color: white;}
+.join:hover{background-color:white;border:solid 1px #76d03b;color: #76d03b;}
+.use{border-radius: 3px;background: white;border:solid 1px #ccc;color: black;display: block;width:135px;margin: 0 auto;text-align: center;height:35px;overflow: hidden;cursor: pointer;transition:all .5s;}
+.use li{height: 35px;width:135px !important;padding-top: 0px !important;line-height: 35px;border-bottom:solid 1px #e1e1e1;}
+.use li i{font-style: normal;}
+.use li:first-of-type span{line-height:15px;display:inline-block;position:relative !important;background:red !important;height:15px !important;top: -8px;width:15px !important;font-size:8px;border-radius:50%;color:white;}
+.use li i:last-of-type{font-size: 8px;}
+
+/*new*/
+.new{display: block;position: absolute;left: 65px;top: 15px;}
+.newDiv{display:block;position:relative;}
+
+.admin{border-radius: 3px;background: white;border:solid 1px #ccc;color: black;display: block;margin: -6px auto 0 auto;text-align: center;height:35px;overflow: hidden;cursor: pointer;transition:all .5s;}
+.admin li{height: 35px;padding-top: 0px !important;line-height: 35px;border-bottom:solid 1px #e1e1e1;width: 100%;}
+.admin li i{font-style: normal;}
+.admin li:first-of-type span{display: inline-block;line-height: 15px;position:relative !important;background:red !important;height:15px !important;top: -8px;width:15px !important;font-size:8px;border-radius:50%;color:white;}
+.admin li i:last-of-type{font-size: 8px;}
+/*nav end*/
+@media screen and (min-width:1366px) {
+	.nav-ul>li:last-of-type{width:23%;padding-top:30px;text-align:center;}
+}
+@media screen and (max-width:1200px) {
+	.new{left:53%;top: -5px;}
+	.admin li{line-height: 0px;width: 20% !important;float: left;height: 35px;line-height: 35px;}
+	.appointment{display: none;}
+	.headImg{height:500px;}
+	nav{overflow: hidden;}
+	.nav-ul{display:block;width:100%;margin-left: 0px;text-align: center;margin: 0 auto;}
+	.nav-ul>li{float:none;text-align: center;width: 100% !important;padding-top:10px !important;}
+	.nav-ul>li:last-of-type{width:30%;padding-top:30px;text-align:center;}
+	.use{width: 100%;background:transparent;border: none;}
+	.use li{width: 20% !important;padding: 0px !important;float: left;background: white;}
+	.use li:nth-of-type(1){margin:0px 0px 0px 5%!important;}
+	.use li:nth-of-type(2){margin:0px 5% !important;}
+	.use li:nth-of-type(3){margin:0px 5% 0px 0px!important;}
+	
+	.menu{display: block;};
+}
+@media screen and (max-width:768px) {
+	.new{left:60%;top: -5px;}
+	.data div{padding:50px}
+}
+@media screen and (max-width:360px) {
+	nav>div{width:95%;}
+	.head-Font-bg{font-size:24px;color: white;}
+	.head-Font-sm{font-size: 8px;color: white;margin-top:55px;}
+	.menu img{width: 35px;height: 35px;margin-top:25px;}
+	nav > img{width: 100px;}
+}
